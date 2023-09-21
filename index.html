@@ -146,7 +146,21 @@
         <div id="cornerChallenge" class="topLeftCorner show">Daily Challenge <span id="cornerChallengeNumber"></span></div>
 
         <!-- 코드 에디터 -->
-        <div id="editor" style="visibility: hidden">setInterval(() => {}, 100);</div>
+        <div id="editor" style="visibility: hidden">newInterval = setInterval(() => {
+    if (lander.getAngle() > 0) {
+        lander.stopRightRotation();
+        lander.rotateLeft();
+    } else {
+        lander.stopLeftRotation();
+        lander.rotateRight();
+    }
+    if (lander.getHeight() < 300) {
+        lander.engineOn();
+    } else {
+        lander.engineOff();
+    }
+}, 1);
+    </div>
 
         <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
         <script src="index.js" type="module"></script>
