@@ -71,6 +71,24 @@ setInterval(() => {
     cnt++;
 }, 100);
 */
+
+/* 
+<다한거>
+코드에디터 + 코드 적용
+
+<할거>
+로켓 API Docs 페이지 맹글기
+	<get>
+	1. 로켓 각도
+	2. 로켓 속도 lander.getVelocity().x / lander.getVelocity().x
+	3. 로켓 고도
+	<set>
+	1. 발사 lander.engineOn();
+	2. 좌 lander.rotateLeft();
+	3. 우 lander.rotateRight();
+
+  */
+
 export function applyCode(userCode) {
     eval(userCode);
 }
