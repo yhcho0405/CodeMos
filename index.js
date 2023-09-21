@@ -63,13 +63,18 @@ const toyLanderControls = makeControls(appState, toyLander, audioManager);
 const lander = makeLander(appState, onGameEnd);
 const landerControls = makeControls(appState, lander, audioManager);
 const tally = makeTallyManger();
-
+/*
 var cnt = 0;
 setInterval(() => {
     if (cnt % 2) lander.engineOn();
     else lander.engineOff();
     cnt++;
 }, 100);
+*/
+export function applyCode(userCode) {
+    eval(userCode);
+}
+window.applyCode = applyCode;
 
 let sendAsteroid = seededRandomBool(seededRandom);
 let asteroidCountdown = seededRandomBetween(2000, 15000, seededRandom);
