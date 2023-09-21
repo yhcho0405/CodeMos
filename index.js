@@ -88,9 +88,12 @@ setInterval(() => {
 	3. 우 lander.rotateRight();
 
   */
-
+var newInterval;
+var isFirst = true;
 export function applyCode(userCode) {
+    if (!isFirst) clearInterval(newInterval);
     eval(userCode);
+    isFirst = false;
 }
 window.applyCode = applyCode;
 
