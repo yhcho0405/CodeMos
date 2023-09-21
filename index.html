@@ -27,6 +27,23 @@
             bottom: 0;
             left: 60%;
         }
+
+        .floating-btn {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .floating-btn:hover {
+            background-color: #0056b3;
+        }
     </style>
     <body>
         <div class="game"></div>
@@ -111,14 +128,26 @@
         </div>
         <div id="cornerChallenge" class="topLeftCorner show">Daily Challenge <span id="cornerChallengeNumber"></span></div>
 
-        <div id="editor">function foo(items) { var x = "All this is syntax highlighted"; return x; }</div>
+        <!-- 코드 에디터 -->
+        <div id="editor" style="visibility: hidden">function foo(items) { var x = "All this is syntax highlighted"; return x; }</div>
 
         <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
         <script>
             var editor = ace.edit("editor");
             editor.setTheme("ace/theme/monokai");
             editor.session.setMode("ace/mode/javascript");
+
+            function toggleVisibility() {
+                var btn1 = document.getElementById("editor");
+                if (btn1.style.visibility === "hidden") {
+                    btn1.style.visibility = "visible";
+                } else {
+                    btn1.style.visibility = "hidden";
+                }
+            }
         </script>
+
+        <button class="floating-btn" onclick="toggleVisibility()">Code</button>
 
         <div id="tally" class="topRightCorner">L<span id="landingTotal"></span> C<span id="crashTotal"></span></div>
         <script src="index.js" type="module"></script>
