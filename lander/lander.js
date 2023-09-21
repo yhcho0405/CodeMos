@@ -429,7 +429,8 @@ export const makeLander = (state, onGameEnd) => {
         getDisplayPosition: () => _displayPosition,
         getVelocity: () => _velocity,
         getAngle: () => getAngleDeltaUprightWithSign(_angle).toFixed(1), // added, TODO: 검증필요
-        getHeigth: () => heightInFeet(_position.y, _groundedHeight), // added, TODO: 검증필요
+        getHeight: () => heightInFeet(_position.y, _groundedHeight), // added, TODO: 검증필요
+        getRotationVelocity: () => _rotationVelocity, // added, TODO: 검증필요
         engineOn: () => (_engineOn = true),
         engineOff: () => (_engineOn = false),
         rotateLeft: () => (_rotatingLeft = true),
