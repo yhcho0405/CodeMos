@@ -1,20 +1,30 @@
 newInterval = setInterval(() => {
-    if (lander.getAngle() > 0) {
+    if (lander.getAngle() > -lander.getRotationVelocity() * 4) {
         lander.stopRightRotation();
         lander.rotateLeft();
+        if (lander.getVelocity().x < 0) {
+            lander.engineOn();
+        } else {
+            lander.engineOff();
+        }
     } else {
         lander.stopLeftRotation();
-        lander.rotateRight();
+        lander.rotateRight();       
+        if (lander.getVelocity().x > 0) {
+            lander.engineOn();
+        } else {
+            lander.engineOff();
+        }
     }
-    if (lander.getHeight() < 300) {
+    if (lander.getVelocity().y > (Number(lander.getHeight()) + 20.0) / 100) {
         lander.engineOn();
-    } else {
+    } else if (Math.abs(lander.getAngle()) < 1) {
         lander.engineOff();
     }
 }, 1);
 
 newInterval = setInterval(() => {
-    console.log(lander.getRotationVelocity());
+    console.log((lander.getHeight() + 20.0) / 100);
 }, 100);
 
 /*
@@ -33,3 +43,6 @@ lander.rotateRight()            // 오른쪽 엔진 켜기
 lander.stopRightRotation()      // 오른쪽 엔진 끄기
 
 */
+newInterval = setInterval(() => {
+
+}, 1);

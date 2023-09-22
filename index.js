@@ -87,12 +87,16 @@ setInterval(() => {
 	2. 좌 lander.rotateLeft();
 	3. 우 lander.rotateRight();
 
-  */
+    쓰면 안되는 변수
+    주석 문제
+    */
 var newInterval;
 var isFirst = true;
 export function applyCode(userCode) {
     if (!isFirst) clearInterval(newInterval);
+    //
     eval(userCode);
+    //
     isFirst = false;
 }
 window.applyCode = applyCode;

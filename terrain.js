@@ -53,7 +53,7 @@ export const makeTerrain = (state) => {
     // Ensure the surface is no wider than the zone
     const widthInPoints = Math.min(
       minWidthInPoints * widthUnit,
-      landingZoneWidth
+      //landingZoneWidth // XXX:
     );
 
     // Only create an offset startPoint if there's enough width to render
@@ -84,8 +84,7 @@ export const makeTerrain = (state) => {
   const reGenerate = () => {
     generateLandingZoneSpans();
     landingSurfaces = [
-      generateLandingSurface(3, "largeLandingSurface"),
-      generateLandingSurface(1, "smallLandingSurface"),
+      generateLandingSurface(1000, "largeLandingSurface"),
     ];
 
     terrainPathArray = generateTerrainY(
@@ -119,6 +118,44 @@ export const makeTerrain = (state) => {
     terrainPath2D = terrainPath;
   };
 
+  // NOTE: 평평
+// const reGenerate = () => {
+//     // Instead of using generateLandingZoneSpans() and generateLandingSurface(), 
+//     // you can manually set landingSurfaces to span the whole terrain.
+//     landingSurfaces = [{
+//       startPoint: 0,
+//       widthInPoints: numPoints,
+//       height: targetHeight,
+//       name: "fullLandingSurface",
+//     }];
+
+//     terrainPathArray = generateTerrainY(
+//       numPoints,
+//       targetHeight,
+//       canvasHeight / 10,
+//       0.75,
+//       seededRandom
+//     ).map((y, index) => {
+//       // Since the whole terrain is now a landing zone, you can always return the landing surface height.
+//       return {
+//         x: index * (canvasWidth / numPoints),
+//         y: targetHeight,
+//       };
+//     });
+//     terrainPathArray[0] = { x: 0, y: targetHeight };
+//     terrainPathArray[numPoints] = { x: canvasWidth, y: targetHeight };
+
+//     const terrainPath = new Path2D();
+//     terrainPath.moveTo(0, canvasHeight);
+//     terrainPathArray.forEach(({ x, y }) => terrainPath.lineTo(x, y));
+//     terrainPath.lineTo(canvasWidth, canvasHeight);
+//     terrainPath.closePath();
+
+//     terrainPath2D = terrainPath;
+// };
+
+  
+  
   reGenerate();
 
   const draw = () => {
@@ -216,3 +253,9 @@ function generateTerrainY(width, height, displace, roughness, seededRandom) {
 
   return points;
 }
+
+// NOTE: 평평
+// function generateTerrainY(width, height) {
+//   return new Array(width).fill(height);
+// }
+
