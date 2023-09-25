@@ -1,30 +1,53 @@
+var landAlt = -70;
+function engineCtr(hrzCtr) {
+    if ((!hrzCtr || lander.getVelocity().x < 0) && lander.getVelocity().y > 
+        (Number(lander.getHeight()) - landAlt) / 100) lander.engineOn();
+    else if (Math.abs(lander.getAngle()) < 1) lander.engineOff();
+}
 newInterval = setInterval(() => {
-    if (lander.getAngle() > -lander.getRotationVelocity() * 4) {
+    if (lander.getAngle() > 
+        (-lander.getRotationVelocity() * 40)
+        - (lander.getVelocity().x) * 45) {
         lander.stopRightRotation();
         lander.rotateLeft();
-        if (lander.getVelocity().x < 0) {
-            lander.engineOn();
-        } else {
-            lander.engineOff();
-        }
+        engineCtr(true)
     } else {
         lander.stopLeftRotation();
         lander.rotateRight();       
-        if (lander.getVelocity().x > 0) {
-            lander.engineOn();
-        } else {
-            lander.engineOff();
-        }
+        engineCtr(true)
     }
-    if (lander.getVelocity().y > (Number(lander.getHeight()) + 20.0) / 100) {
-        lander.engineOn();
-    } else if (Math.abs(lander.getAngle()) < 1) {
-        lander.engineOff();
+    engineCtr(false);
+}, 1);
+
+
+
+var landAlt = -70;
+var startH = -9999;
+var hrzSens = 100;
+function engineCtr(hrzCtr) {
+    if ((!hrzCtr || lander.getVelocity().x < 0) && lander.getVelocity().y > 
+        (Number(lander.getHeight()) - landAlt) / 100) lander.engineOn();
+    else if (Math.abs(lander.getAngle()) < 1) lander.engineOff();
+}
+newInterval = setInterval(() => {
+    if (startH == -9999) startH = lander.getHeight();
+    if (lander.getHeight() < (landAlt + startH) / 2) hrzSens = 40;
+    if (lander.getAngle() >
+        (-lander.getRotationVelocity() * hrzSenc)
+        - (lander.getVelocity().x) * 60) {
+        lander.stopRightRotation();
+        lander.rotateLeft();
+        engineCtr(true)
+    } else {
+        lander.stopLeftRotation();
+        lander.rotateRight();       
+        engineCtr(true)
     }
+    engineCtr(false);
 }, 1);
 
 newInterval = setInterval(() => {
-    console.log((lander.getHeight() + 20.0) / 100);
+    lander.getPosition().y;
 }, 100);
 
 /*

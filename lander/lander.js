@@ -43,7 +43,8 @@ export const makeLander = (state, onGameEnd) => {
 
     const resetProps = () => {
         const seededRandom = state.get("seededRandom");
-
+        // const seededRandom = Math.random(); // XXX: 
+        console.log(seededRandom);
         _position = {
             x: seededRandomBetween(canvasWidth * 0.33, canvasWidth * 0.66, seededRandom),
             y: LANDER_HEIGHT * 2,

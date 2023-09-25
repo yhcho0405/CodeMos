@@ -207,6 +207,7 @@ function onGameEnd(data) {
 
 function onResetGame() {
     gameEnded = false;
+    lander.resetProps(); // added, replay시 리셋
     landerControls.attachEventListeners();
     seededRandom.setDailyChallengeSeed();
     randomConfetti = [];

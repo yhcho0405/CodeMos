@@ -72,11 +72,12 @@ export const makeTerrain = (state) => {
     return {
       startPoint,
       widthInPoints,
-      height: seededRandomBetween(
-        landingMinHeight,
-        landingMaxHeight,
-        seededRandom
-      ),
+      height: landingMinHeight, // XXX:
+      // height: seededRandomBetween(
+      //   landingMinHeight,
+      //   landingMaxHeight,
+      //   seededRandom
+      // ),
       name,
     };
   };
