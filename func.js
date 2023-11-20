@@ -49,9 +49,9 @@ var newInterval;
 var isFirst = true;
 export function applyCode(userCode) {
     if (!isFirst) clearInterval(newInterval);
-    //
-    eval(userCode);
-    //
+    (function() {
+        eval(userCode);
+    })();
     isFirst = false;
 }
 window.applyCode = applyCode;

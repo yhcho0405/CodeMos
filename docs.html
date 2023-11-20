@@ -2,40 +2,55 @@
 <html>
 <head>
     <title>API Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/monokai.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: rgb(255, 255, 255);
+            background-color: rgb(1, 7, 29); /* 어두운 배경색 */
+            color: #ffffff; /* 흰색 글자색 */
             padding: 20px;
         }
+        a:link, a:visited {
+            color: #4DAF7C; /* 링크 기본 색상 */
+        }
+        a:hover, a:active {
+            color: #D9853B; /* 링크 활성화/호버 시 색상 */
+        }
         .api-function {
-            border: 1px solid #ddd;
+            border: 1px solid #444; /* 어두운 테두리 색상 */
+            background-color: #0a1f44; /* 함수 박스 배경색 */
             padding: 15px;
             margin-bottom: 20px;
         }
         .function-title {
             font-size: 20px;
-            color: #333;
+            color: #FFD700; /* 함수 제목 색상 */
         }
         .function-description, .function-example {
             font-size: 16px;
-            color: #666;
+            color: #B0C4DE; /* 설명 및 예제 코드 색상 */
         }
     </style>
 </head>
 <body>
-    <h1>CodeMos API Documentation</h1>
-    <hr>
+    <h1>CodeMos API Documentation</h1>    
     <div>
         CodeMos는 추락하는 우주선을 안전하게 착륙시키는 게임입니다.<br>
-        우주선의 정보를 얻을 수 있는 함수와, 우주선을 조작하는 함수를 이용해 어떠한 상황에서도 범용적으로 안전하게 착륙하는 알고리즘을 작성해보세요.<br>
-        CodeMos 행성은 대기가 없어 중력(G: 0.48) 외에는 어떠한 힘도 작용하지 않습니다.<br>
+        어떠한 상황에서도 안전하게 착륙하는 알고리즘을 작성해보세요.<br>
+        CodeMos 행성은 중력(G: 0.48) 외에는 어떠한 힘도 작용하지 않습니다.<br>
+    </div>
+    <hr>
+    <h2>TMI</h2>
+    <div>
+        1. JS ES6의 모든 문법을 사용해 CodeMos 우주선 알고리즘을 작성할 수 있습니다.<br>
+        2. 코드가 작동하지 않는다면 f12를 눌러 콘솔창을 확인해 보세요.<br>
+        3. 버그가 발견되었다면 이스터에그입니다.<br>
     </div>
     <h2>목차</h2>
     <ul>
+        <li><a href="#start">Getting Started</a>
         <li><a href="#get">Get Methods</a>
             <ul>
                 <li><a href="#getVelocityX">getVelocityX</a></li>
@@ -62,6 +77,60 @@
         </li>
     </ul>
 
+    <h2 id="start">Getting Started</h2>
+    <div class="api-function" id="">
+        <h2 class="function-title">main loop</h2>
+        <p class="function-description">
+            CodeMos 알고리즘에서 main loop는 아래와 같이 "newInterval"에 할당되어야 합니다.<br>
+            "newInterval"에 할당하지 않고 setInterval을 호출할 시 초기화 오류가 발생할 수 있습니다.<br>
+            interval은 기호에 맞게 조정해도 됩니다.<br>
+        </p>
+        <div class="function-example">
+            <pre><code class="language-javascript">
+// TODO: 
+newInterval = setInterval(() => {
+    // TODO: 
+}, 1); // 1ms loop
+// TODO: 
+            </code></pre>
+            <pre><code class="language-javascript">
+// 잘못된 예시
+
+setInterval(() => {
+    // 어쩌구 저쩌구
+}, 1);
+            </code></pre>
+        </div>
+        <h2 class="function-title">알고리즘 작성 예시</h2>
+        <p class="function-description">
+            전역 스코프에서 함수와 변수를 정의할 수 있습니다.<br>
+            예시를 위한 알고리즘으로 잘 착륙하지 않습니다.<br>
+        </p>
+        <div class="function-example">
+            <pre><code class="language-javascript">
+var targetHeight = 0; // 착륙 고도
+
+function engineCtrl() { // 고도에 따라 엔진 control
+    if (getVelocityY() > 
+        (getHeight() - targetHeight) / 100)
+        engineOn();
+    else
+        engineOff();
+}
+
+newInterval = setInterval(() => { // main loop
+    if (getAngle() > 0) { // 우주선 각도 조정
+        stopRightRotation();
+        rotateLeft();
+    } else {
+        stopLeftRotation();
+        rotateRight();
+    }
+    engineCtrl();
+}, 1);
+            </code></pre>
+        </div>
+    </div>
     <h2 id="get">Get Methods</h2>
     <div class="api-function" id="getVelocityX">
         <h2 class="function-title">getVelocityX</h2>

@@ -153,17 +153,17 @@
 
         <!-- 코드 에디터 -->
         <div id="editor" style="visibility: hidden">newInterval = setInterval(() => {
-    if (lander.getAngle() > 0) {
-        lander.stopRightRotation();
-        lander.rotateLeft();
+    if (getAngle() > 0) {
+        stopRightRotation();
+        rotateLeft();
     } else {
-        lander.stopLeftRotation();
-        lander.rotateRight();
+        stopLeftRotation();
+        rotateRight();
     }
-    if (lander.getHeight() < 300) {
-        lander.engineOn();
+    if (getHeight() < 300) {
+        engineOn();
     } else {
-        lander.engineOff();
+        engineOff();
     }
 }, 1);
         </div>
