@@ -17,7 +17,8 @@ const createRandomNumberGenerator = (seed) => {
 export const makeSeededRandom = () => {
   const today = new Date(Date.now());
   const seed = parseInt(
-    `${today.getDay()}${today.getMonth()}${today.getYear()}`
+    //`${today.getDay()}${today.getMonth()}${today.getYear()}`
+    `${Math.random()}${today.getDay()}${today.getMonth()}${today.getYear()}` // XXX: random
   );
   let seededRandom;
 

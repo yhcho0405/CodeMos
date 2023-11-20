@@ -44,7 +44,8 @@ export const randomBool = (probability = 0.5) => Math.random() >= probability;
 export const randomBetween = (min, max) => Math.random() * (max - min) + min;
 
 export const seededRandomBetween = (min, max, seededRandom) =>
-  seededRandom.getSeededRandom() * (max - min) + min;
+  // seededRandom.getSeededRandom() * (max - min) + min;
+  Math.floor(Math.random() * (max - min + 1)) + min; // XXX: 바꿔야됨
 
 export const seededRandomBool = (seededRandom, probability = 0.5) =>
   seededRandom.getSeededRandom() >= probability;
