@@ -11,9 +11,9 @@ export const makeTerrain = (state) => {
   const canvasHeight = state.get("canvasHeight");
   const seededRandom = state.get("seededRandom");
 
-  const targetHeight = canvasHeight * 0.8;
+  const targetHeight = canvasHeight * 0.9;
   const landingMaxHeight = targetHeight;
-  const landingMinHeight = canvasHeight - 20;
+  const landingMinHeight = targetHeight;
   const numPoints = Math.max(Math.round(canvasWidth / 60), 20);
   let landingZoneSpans = [];
   let landingSurfaces = [];
@@ -72,12 +72,12 @@ export const makeTerrain = (state) => {
     return {
       startPoint,
       widthInPoints,
-      height: landingMinHeight, // XXX:
-      // height: seededRandomBetween(
-      //   landingMinHeight,
-      //   landingMaxHeight,
-      //   seededRandom
-      // ),
+      //height: landingMinHeight, // XXX:
+      height: seededRandomBetween(
+        landingMinHeight,
+        landingMaxHeight,
+        seededRandom
+      ),
       name,
     };
   };
@@ -85,7 +85,7 @@ export const makeTerrain = (state) => {
   const reGenerate = () => {
     generateLandingZoneSpans();
     landingSurfaces = [
-      generateLandingSurface(1000, "largeLandingSurface"),
+      generateLandingSurface(10000, "largeLandingSurface"),
     ];
 
     terrainPathArray = generateTerrainY(
@@ -104,7 +104,7 @@ export const makeTerrain = (state) => {
 
       return {
         x: index * (canvasWidth / numPoints),
-        y: landingSurface ? landingSurface.height : y,
+        y: targetHeight,
       };
     });
     terrainPathArray[0] = { x: 0, y: targetHeight };
