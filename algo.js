@@ -19,12 +19,12 @@ newInterval = setInterval(() => {
     engineCtr(false);
 }, 1);
 
-var landAlt = -70;
+var landAlt = -0;
 var startH = -9999;
 var hrzSens = 100;
 function engineCtr(hrzCtr) {
     if ((!hrzCtr || getVelocityX() < 0) && getVelocityY() > 
-        (Number(getHeight()) - landAlt) / 100) engineOn();
+        (getHeight() - landAlt) / 100) engineOn();
     else if (Math.abs(getAngle()) < 1) engineOff();
 }
 newInterval = setInterval(() => {

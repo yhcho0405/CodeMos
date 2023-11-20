@@ -152,20 +152,11 @@
         <div id="cornerChallenge" class="topLeftCorner show">Daily Challenge <span id="cornerChallengeNumber"></span></div>
 
         <!-- 코드 에디터 -->
-        <div id="editor" style="visibility: hidden">newInterval = setInterval(() => {
-    if (getAngle() > 0) {
-        stopRightRotation();
-        rotateLeft();
-    } else {
-        stopLeftRotation();
-        rotateRight();
-    }
-    if (getHeight() < 300) {
-        engineOn();
-    } else {
-        engineOff();
-    }
+        <div id="editor" style="visibility: hidden">// TODO: 
+newInterval = setInterval(() => {
+    // TODO: 
 }, 1);
+// TODO:
         </div>
 
         <div id="docs" style="visibility: hidden">
@@ -198,7 +189,7 @@
             }
 
             function applyCodeHandler() {
-                code = document.querySelector("#editor > div.ace_scroller > div").textContent;
+                code = editor.getValue();
                 applyCode(code);
             }
         </script>
