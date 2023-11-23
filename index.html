@@ -25,16 +25,16 @@
             top: 0;
             right: 0;
             bottom: 0;
-            left: 60%;
+            left: 50%;
         }
         #docs {
             position: absolute;
             top: 0;
-            right: 60%;
+            right: 50%;
             bottom: 0;
             left: 0;
         }
-        .floating-btn {
+        .code-btn {
             position: fixed;
             bottom: 10px;
             right: 10px;
@@ -47,7 +47,7 @@
             z-index: 1000;
         }
 
-        .floating-btn:hover {
+        .code-btn:hover {
             background-color: #0056b3;
         }
 
@@ -67,6 +67,35 @@
         .apply-btn:hover {
             background-color: #0056b3;
         }
+
+        .docs-btn {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .docs-btn:hover {
+            background-color: #0056b3;
+        }
+
+        #drag-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 50%;
+            width: 60px;
+            cursor: ew-resize;
+            z-index: 999;
+            visibility: hidden;
+        }
+
     </style>
     <body>
         <div class="game"></div>
@@ -151,6 +180,8 @@
         </div>
         <div id="cornerChallenge" class="topLeftCorner show">Daily Challenge <span id="cornerChallengeNumber"></span></div>
 
+        <div id="drag-handle"></div>
+
         <!-- 코드 에디터 -->
         <div id="editor" style="visibility: hidden">// TODO: 
 newInterval = setInterval(() => {
@@ -169,58 +200,102 @@ newInterval = setInterval(() => {
         <script src="func.js" type="module">
         </script>
         <script>
+            
             var editor = ace.edit("editor");
             editor.setTheme("ace/theme/monokai");
             editor.session.setMode("ace/mode/javascript");
 
             function toggleVisibility() {
                 var editor = document.getElementById("editor");
+                var handle = document.getElementById("drag-handle");
                 if (editor.style.visibility === "hidden") {
                     editor.style.visibility = "visible";
+                    checkHandleVisibility();
                 } else {
                     editor.style.visibility = "hidden";
-                }
-                var docs = document.getElementById("docs");
-                if (docs.style.visibility === "hidden") {
-                    docs.style.visibility = "visible";
-                } else {
-                    docs.style.visibility = "hidden";
+                    checkHandleVisibility();
                 }
             }
 
+            function apiDocsToggle() {
+                var docs = document.getElementById("docs");
+                var handle = document.getElementById("drag-handle");
+                if (docs.style.visibility === "hidden") {
+                    docs.style.visibility = "visible";
+                    checkHandleVisibility();
+                } else {
+                    docs.style.visibility = "hidden";
+                    checkHandleVisibility();
+                }
+            }
+
+            function checkHandleVisibility() {
+                var editorC = document.getElementById("editor");
+                var docs = document.getElementById("docs");
+                var handle = document.getElementById("drag-handle");
+
+                if (editorC.style.visibility === "visible" || docs.style.visibility === "visible") {
+                    handle.style.visibility = "visible";
+                } else {
+                    handle.style.visibility = "hidden";
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                var handle = document.getElementById('drag-handle');
+                var docs = document.getElementById('docs');
+                var editorC = document.getElementById('editor');
+                var isResizing = false;
+                loadCode();
+                handle.addEventListener('mousedown', function(e) {
+                    isResizing = true;
+                    e.preventDefault();
+                });
+
+                document.addEventListener('mousemove', function(e) {
+                    if (!isResizing) return;
+                    var offsetRight = document.body.offsetWidth - e.pageX;
+                    var offsetLeft = e.pageX;
+
+                    handle.style.left = offsetLeft - 50 + 'px';
+                    docs.style.right = offsetRight + 'px';
+                    editorC.style.left = offsetLeft + 'px';
+                });
+
+                document.addEventListener('mouseup', function(e) {
+                    isResizing = false;
+                });
+            });
+            
             function applyCodeHandler() {
-                code = editor.getValue();
+                var code = editor.getValue();
                 applyCode(code);
+                saveCode(code);
+            }
+
+            function saveCode(code) {
+                localStorage.setItem('myCodemosCode', code);
+                console.log('코드가 저장되었습니다.');
+            }
+
+            function loadCode() {
+                var code = localStorage.getItem('myCodemosCode');
+                var editorElement = document.getElementById('editor');
+                if (code) {
+                    editor.setValue(code)
+                } else {
+                    editor.setValue('// TODO: \nnewInterval = setInterval(() => {\n    // TODO: \n}, 1);\n// TODO:');
+                }
             }
         </script>
 
-        <button class="floating-btn" onclick="toggleVisibility()">Code</button>
+        <button class="docs-btn" onclick="apiDocsToggle()">Docs</button>
+        <button class="code-btn" onclick="toggleVisibility()">Code</button>
         <button class="apply-btn" onclick="applyCodeHandler()">Apply</button>
 
         <div id="tally" class="topRightCorner">L<span id="landingTotal"></span> C<span id="crashTotal"></span></div>
         <script>
-            (function (h, o, u, n, d) {
-                h = h[d] = h[d] || {
-                    q: [],
-                    onReady: function (c) {
-                        h.q.push(c);
-                    },
-                };
-                d = o.createElement(u);
-                d.async = 1;
-                d.src = n;
-                n = o.getElementsByTagName(u)[0];
-                n.parentNode.insertBefore(d, n);
-            })(window, document, "script", "https://www.datadoghq-browser-agent.com/datadog-rum-v4.js", "DD_RUM");
-            DD_RUM.onReady(function () {
-                DD_RUM.init({
-                    clientToken: "pub29b4ec61338ff64383116ae4bf1b2e48",
-                    applicationId: "4c09e9e3-7012-4576-bbeb-9a81a5c7b9e7",
-                    site: "datadoghq.com",
-                    sessionSampleRate: 100,
-                    trackUserInteractions: true,
-                });
-            });
+
         </script>
     </body>
 </html>
