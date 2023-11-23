@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lander</title>
+        
+</head>
+<style>
+    body {
+        --stats-font-size: clamp(12px, 2vmin, 16px);
+        margin: 0;
+        background: #010516;
+        user-select: none;
+        -webkit-user-select: none;
+        overflow: hidden;
+        font: 400 18px/1.5 -apple-system, BlinkMacSystemFont, sans-serif;
+        color: #fff;
+        padding: 10px;
+    }
+    body #board table{
+        border-collapse: collapse;
+        color: #fff;
+        margin: 10px 0;
+    }
+    body button {
+        margin: 1px 3px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    body button:hover {
+        background-color: #0056b3;
+    }
+    body .btns{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 2px;
+    }
+    .load div{
+        display: flex;
+        width: 50%;
+    }
+    #board td, #board th{
+        width: 20%;
+        text-align: center;
+    }
+    #board tr{
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    #board .row:hover{
+        background-color: #00244b;
+    }
+    .details{
+        background-color: #0f0f25;
+        display: table-row;
+        margin: 0 auto;
+        padding: 4px;
+        opacity: 1;
+        overflow: hidden;
+    }
+    .details p{
+        text-align: left;
+        margin: 10px 10px;
+    }
+    .details p p{
+        margin: 0px 10px
+    }
+    .details-hide{
+        display: none;
+    }
+</style>
+<body>
+    <div>
+        <h1 style="text-align: center;">Leader Board</h1>
+    </div>
+    <div id="board"></div>
+    <div class="btns">
+        <button class="page-lbtn" onclick="toLeft()">&lt;&lt;</button>
+        <button class="page-rbtn" onclick="toRight()">&gt;&gt;</button>
+    </div>
+    <div class="btns search" style="margin: 20px 2px;">
+        <input type="text" id="search-box" placeholder="Search by Name" style="margin: 0 15px;">
+        <button id="search-btn">Search</button>
+    </div>
+    <div class="btns load" style="margin: 30px 2px;">
+        <div style="justify-content: right;"><button class="load-btn" onclick="loadBoard()">Reload</button></div>
+        <div style="justify-content: left;"><button class="load-btn" onclick="history.back()">Go Back</button></div>
+    </div>
+    
+    <script src="leader.js"></script>
+</body>
+</html>
