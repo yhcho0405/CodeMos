@@ -51,15 +51,15 @@ const bonusPointsManager = makeBonusPointsManager(appState);
 appState.set("bonusPointsManager", bonusPointsManager);
 
 const stars = makeStarfield(appState);
-const instructions = manageInstructions(onCloseInstructions);
-const toyLander = makeToyLander(
-    appState,
-    () => instructions.setEngineDone(),
-    () => instructions.setLeftRotationDone(),
-    () => instructions.setRightRotationDone(),
-    () => instructions.setEngineAndRotationDone()
-);
-const toyLanderControls = makeControls(appState, toyLander, audioManager);
+//const instructions = manageInstructions(onCloseInstructions);
+// const toyLander = makeToyLander(
+//     appState,
+//     () => instructions.setEngineDone(),
+//     () => instructions.setLeftRotationDone(),
+//     () => instructions.setRightRotationDone(),
+//     () => instructions.setEngineAndRotationDone()
+// );
+//const toyLanderControls = makeControls(appState, toyLander, audioManager);
 const lander = makeLander(appState, onGameEnd);
 const landerControls = makeControls(appState, lander, audioManager);
 const tally = makeTallyManger();
@@ -141,14 +141,10 @@ let gameEnded = false;
 
 // INSTRUCTIONS SHOW/HIDE
 
-if (!instructions.hasClosedInstructions()) {
-    instructions.show();
-    toyLanderControls.attachEventListeners();
-} else {
+
     landerControls.attachEventListeners();
     challengeManager.populateCornerInfo();
     terrain.setShowLandingSurfaces();
-}
 
 // MAIN ANIMATION LOOP
 
@@ -165,7 +161,7 @@ const animationObject = animate((timeSinceStart, deltaTime) => {
     terrain.draw();
     CTX.restore();
 
-    if (instructions.hasClosedInstructions()) {
+    if (1||instructions.hasClosedInstructions()) {
         landerControls.drawTouchOverlay();
 
         bonusPointsManager.draw(lander.getPosition().y < TRANSITION_TO_SPACE);
@@ -212,17 +208,19 @@ function onCloseInstructions() {
     challengeManager.populateCornerInfo();
     terrain.setShowLandingSurfaces();
 }
-
+let totalScore = 0; // ***********************************
+let cnt = 0; // ***********************************
 function onGameEnd(data) {
     gameEnded = true;
     landerControls.detachEventListeners();
     bonusPointsManager.hide();
 
     const finalScore = data.landerScore + bonusPointsManager.getTotalPoints();
+    totalScore += finalScore; // ***********************************
     const scoreDescription = data.landed ? landingScoreDescription(finalScore) : data.struckByAsteroid ? destroyedDescription() : crashScoreDescription(finalScore);
     const scoreForDisplay = Intl.NumberFormat().format(finalScore.toFixed(1));
-
-    showStatsAndResetControl(appState, lander, animationObject, { ...data, scoreDescription, scoreForDisplay }, landerControls.getHasKeyboard(), onResetGame);
+    
+    showStatsAndResetControl(cnt++, appState, lander, animationObject, { ...data, totalScore, scoreDescription, scoreForDisplay }, landerControls.getHasKeyboard(), onResetGame);
 
     if (data.landed) {
         audioManager.playLanding();

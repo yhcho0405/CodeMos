@@ -1,14 +1,29 @@
 export const manageInstructions = (onCloseInstructions) => {
-  let _engineDone = false;
-  let _leftRotationDone = false;
-  let _rightRotationDone = false;
-  let _engineAndRotationDone = false;
+  
+  let _engineDone = true;
+  let _leftRotationDone = true;
+  let _rightRotationDone = true;
+  let _engineAndRotationDone = true;
 
+  const checkDone = () => {
+    if (
+      _engineDone &&
+      _leftRotationDone &&
+      _rightRotationDone &&
+      _engineAndRotationDone
+    ) {
+      const closeTimeout = () => setTimeout(close, 1);
+      const options = { once: true };
+      document.addEventListener("touchend", closeTimeout, options);
+      document.addEventListener("keyup", closeTimeout, options);
+    }
+  };
+  
   let _hasClosedInstructionsVar = (() => {
     try {
       return localStorage.getItem("closedInstructions");
     } catch {
-      return false;
+      return true;
     }
   })();
 
@@ -40,19 +55,7 @@ export const manageInstructions = (onCloseInstructions) => {
     }
   }
 
-  const checkDone = () => {
-    if (
-      _engineDone &&
-      _leftRotationDone &&
-      _rightRotationDone &&
-      _engineAndRotationDone
-    ) {
-      const closeTimeout = () => setTimeout(close, 1000);
-      const options = { once: true };
-      document.addEventListener("touchend", closeTimeout, options);
-      document.addEventListener("keyup", closeTimeout, options);
-    }
-  };
+
 
   const setEngineDone = () => {
     _engineDone = true;

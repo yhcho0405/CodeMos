@@ -1,4 +1,5 @@
 export const showStatsAndResetControl = (
+  cnt,
   state,
   lander,
   animationObject,
@@ -18,7 +19,7 @@ export const showStatsAndResetControl = (
     .get("challengeManager")
     .getChallengeNumber()}
 ${data.scoreForDisplay} point ${data.landed ? "landing" : "crash"}
-
+Total Score: ${data.totalScore.toFixed(1)} points
 ${data.scoreDescription}
 https://ehmorris.com/lander/
 
@@ -156,4 +157,19 @@ ${data.speed}mph | ${data.angle}° | ${data.rotationsFormatted} flip${
   populateStats(data);
   showStats();
   attachEventListeners();
+
+  // *********************
+  if (cnt < 10) {
+    lander.resetProps();
+    animationObject.resetStartTime();
+    resetMeter("speed");
+    resetMeter("angle");
+    hideStats();
+    detachEventListeners();
+    onReset();
+    console.log(shareText);
+    console.log(cnt);
+    console.log(data.scoreForDisplay);
+    console.log(data.durationInSeconds);
+  }
 };
