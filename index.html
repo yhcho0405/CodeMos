@@ -84,6 +84,22 @@
         .docs-btn:hover {
             background-color: #0056b3;
         }
+        .leader-btn {
+            position: fixed;
+            bottom: 10px;
+            right: 190px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .leader-btn:hover {
+            background-color: #0056b3;
+        }
 
         #drag-handle {
             position: absolute;
@@ -292,6 +308,7 @@ newInterval = setInterval(() => {
         <button class="docs-btn" onclick="apiDocsToggle()">Docs</button>
         <button class="code-btn" onclick="toggleVisibility()">Code</button>
         <button class="apply-btn" onclick="applyCodeHandler()">Apply</button>
+        <button class="leader-btn" onclick="window.location.href='/leader.html'">Leaderboard</button>
 
         <div id="tally" class="topRightCorner">L<span id="landingTotal"></span> C<span id="crashTotal"></span></div>
         <script>
