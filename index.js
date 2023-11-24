@@ -209,14 +209,18 @@ function onCloseInstructions() {
     terrain.setShowLandingSurfaces();
 }
 let totalScore = 0; // ***********************************
-let cnt = 0; // ***********************************
+let cnt = 1; // ***********************************
 function onGameEnd(data) {
     gameEnded = true;
     landerControls.detachEventListeners();
     bonusPointsManager.hide();
 
+    // ***********************************
     const finalScore = data.landerScore + bonusPointsManager.getTotalPoints();
-    totalScore += finalScore; // ***********************************
+    if (data.landed) {
+        totalScore += finalScore;
+    }
+    // totalScore += finalScore; // ***********************************
     const scoreDescription = data.landed ? landingScoreDescription(finalScore) : data.struckByAsteroid ? destroyedDescription() : crashScoreDescription(finalScore);
     const scoreForDisplay = Intl.NumberFormat().format(finalScore.toFixed(1));
     

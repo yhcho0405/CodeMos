@@ -1,3 +1,6 @@
+let totalLandingTime = 0; // 총 착륙 시간 합 (성공했을 때)
+let successfulLandings = 0; // 착륙 성공 횟수
+
 export const showStatsAndResetControl = (
   cnt,
   state,
@@ -160,6 +163,13 @@ ${data.speed}mph | ${data.angle}° | ${data.rotationsFormatted} flip${
 
   // *********************
   if (cnt < 10) {
+    if (data.landed) {
+      totalLandingTime += Number(data.durationInSeconds);
+      successfulLandings++;
+    }
+    console.log("총 착륙 시간 : " + totalLandingTime);
+    console.log("총 착륙 성공 횟수 : " + successfulLandings);
+
     lander.resetProps();
     animationObject.resetStartTime();
     resetMeter("speed");
@@ -169,7 +179,10 @@ ${data.speed}mph | ${data.angle}° | ${data.rotationsFormatted} flip${
     onReset();
     console.log(shareText);
     console.log(cnt);
-    console.log(data.scoreForDisplay);
-    console.log(data.durationInSeconds);
+    
+  }
+  if (cnt == 10) { // 다 끝났을 때 성공한 경우의 평균 착륙 시간
+    const averageLandingTime = successfulLandings > 0 ? totalLandingTime / successfulLandings : 0;
+    console.log(`Average Landing Time: ${averageLandingTime.toFixed(2)} seconds`);
   }
 };
