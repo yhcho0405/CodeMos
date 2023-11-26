@@ -35,6 +35,13 @@
     body button:hover {
         background-color: #0056b3;
     }
+    .load-btn{
+        background-color: #0e3c6d;
+    }
+    .load-btn:hover{
+        background-color: #37506b;
+    }
+    
     body .btns{
         display: flex;
         flex-direction: row;
@@ -42,6 +49,7 @@
         align-items: center;
         margin: 2px;
     }
+    
     .load div{
         display: flex;
         width: 50%;
@@ -82,15 +90,15 @@
     </div>
     <div id="board"></div>
     <div class="btns">
-        <button class="page-lbtn" onclick="toLeft()">&lt;&lt;</button>
-        <button class="page-rbtn" onclick="toRight()">&gt;&gt;</button>
+        <button class="page-lbtn" onclick="loadBoard(urls[0])">&lt;&lt;</button>
+        <button class="page-rbtn" onclick="loadBoard(urls[0])">&gt;&gt;</button>
     </div>
     <div class="btns search" style="margin: 20px 2px;">
-        <input type="text" id="search-box" placeholder="Search by Name" style="margin: 0 15px;">
-        <button id="search-btn">Search</button>
+        <input type="search" id="search-box" placeholder="Search by Name" oninput="search()" style="margin: 0 15px;">
+        <!--<button id="search-btn" onclick="search()">Search</button>-->
     </div>
     <div class="btns load" style="margin: 30px 2px;">
-        <div style="justify-content: right;"><button class="load-btn" onclick="loadBoard()">Reload</button></div>
+        <div style="justify-content: right;"><button class="load-btn" onclick="loadBoard(urls[0])">Reload</button></div>
         <div style="justify-content: left;"><button class="load-btn" onclick="history.back()">Go Back</button></div>
     </div>
     
