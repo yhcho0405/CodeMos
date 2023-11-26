@@ -181,14 +181,14 @@ const animationObject = animate((timeSinceStart, deltaTime) => {
                 spaceAsteroids.push(makeSpaceAsteroid(appState, lander.getVelocity, lander.getDisplayPosition, onAsteroidImpact));
             }
 
-            spaceAsteroids.forEach((a) => a.draw(deltaTime));
+            //spaceAsteroids.forEach((a) => a.draw(deltaTime));
         }
 
         // Move asteroids as lander flies high
         CTX.save();
         CTX.translate(0, transition(0, terrain.getLandingData().terrainHeight, clampedProgress(TRANSITION_TO_SPACE, 0, lander.getPosition().y)));
         if (sendAsteroid && timeSinceStart > asteroidCountdown) {
-            asteroids.forEach((a) => a.draw(deltaTime));
+            //asteroids.forEach((a) => a.draw(deltaTime));
         }
         CTX.restore();
 

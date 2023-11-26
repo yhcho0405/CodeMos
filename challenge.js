@@ -5,9 +5,9 @@ export const makeChallengeManager = () => {
   };
 
   const populateCornerInfo = () => {
-    document.querySelector("#cornerChallengeNumber").textContent =
-      getChallengeNumber();
-    document.querySelector("#cornerChallenge").classList.add("show");
+    //document.querySelector("#cornerChallengeNumber").textContent =
+      //getChallengeNumber();
+    //document.querySelector("#cornerChallenge").classList.add("show");
   };
 
   return {

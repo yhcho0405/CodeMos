@@ -40,9 +40,9 @@ export const makeTallyManger = () => {
   };
 
   const updateDisplay = () => {
-    document.querySelector("#landingTotal").textContent =
-      getLandingTotalStorage();
-    document.querySelector("#crashTotal").textContent = getCrashTotalStorage();
+    //document.querySelector("#landingTotal").textContent =
+      //getLandingTotalStorage();
+    //document.querySelector("#crashTotal").textContent = getCrashTotalStorage();
   };
   updateDisplay();
 
