@@ -6,7 +6,7 @@ export const manageInstructions = (onCloseInstructions) => {
 
   let _hasClosedInstructionsVar = (() => {
     try {
-      return localStorage.getItem("closedInstructions");
+      return false; // localStorage.getItem("closedInstructions");
     } catch {
       return false;
     }

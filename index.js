@@ -16,7 +16,7 @@ import { makeChallengeManager } from "./challenge.js";
 import { makeSeededRandom } from "./helpers/seededrandom.js";
 import { makeBonusPointsManager } from "./bonuspoints.js";
 import { makeTheme } from "./theme.js";
-import { TRANSITION_TO_SPACE } from "./helpers/constants.js";
+import { TRANSITION_TO_SPACE, VELOCITY_MULTIPLIER  } from "./helpers/constants.js";
 import { landingScoreDescription, crashScoreDescription, destroyedDescription } from "./helpers/scoring.js";
 
 // SETUP
@@ -65,11 +65,11 @@ const landerControls = makeControls(appState, lander, audioManager);
 const tally = makeTallyManger();
 
 export function getVelocityX() {
-    return lander.getVelocity().x
+    return lander.getVelocity().x * VELOCITY_MULTIPLIER
 }
 
 export function getVelocityY() {
-    return lander.getVelocity().y
+    return lander.getVelocity().y * VELOCITY_MULTIPLIER
 }
 
 export function getAngle() {
@@ -256,21 +256,21 @@ function onAsteroidImpact(asteroidVelocity) {
 
 // EXTRAS
 
-document.addEventListener("keydown", ({ key }) => {
-    if (key === "c") {
-        randomConfetti.push(
-            makeConfetti(appState, 10, {
-                x: randomBetween(0, canvasWidth),
-                y: randomBetween(0, canvasHeight),
-            })
-        );
-    }
-});
+// document.addEventListener("keydown", ({ key }) => {
+//     if (key === "c") {
+//         randomConfetti.push(
+//             makeConfetti(appState, 10, {
+//                 x: randomBetween(0, canvasWidth),
+//                 y: randomBetween(0, canvasHeight),
+//             })
+//         );
+//     }
+// });
 
-document.addEventListener("keydown", ({ key }) => {
-    if (key === "m") {
-        sendAsteroid = true;
-        asteroidCountdown = 0;
-        asteroids.push(makeAsteroid(appState, lander.getPosition, onAsteroidImpact));
-    }
-});
+// document.addEventListener("keydown", ({ key }) => {
+//     if (key === "m") {
+//         sendAsteroid = true;
+//         asteroidCountdown = 0;
+//         asteroids.push(makeAsteroid(appState, lander.getPosition, onAsteroidImpact));
+//     }
+// });

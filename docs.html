@@ -8,51 +8,54 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: rgb(1, 7, 29); /* 어두운 배경색 */
-            color: #ffffff; /* 흰색 글자색 */
+            background-color: rgb(1, 7, 29);
+            color: #ffffff;
             padding: 20px;
         }
         a:link, a:visited {
-            color: #4DAF7C; /* 링크 기본 색상 */
+            color: #4DAF7C; 
         }
         a:hover, a:active {
-            color: #D9853B; /* 링크 활성화/호버 시 색상 */
+            color: #D9853B;
         }
         .api-function {
-            border: 1px solid #444; /* 어두운 테두리 색상 */
-            background-color: #0a1f44; /* 함수 박스 배경색 */
+            border: 1px solid #444;
+            background-color: #0a1f44;
             padding: 15px;
             margin-bottom: 20px;
         }
         .function-title {
             font-size: 20px;
-            color: #FFD700; /* 함수 제목 색상 */
+            color: #FFD700;
         }
         .function-description, .function-example {
             font-size: 16px;
-            color: #B0C4DE; /* 설명 및 예제 코드 색상 */
+            color: #B0C4DE;
         }
         ::-webkit-scrollbar {
             display: none;
         }
+        .desc {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <h1>CodeMos API Documentation</h1>    
-    <div>
-        CodeMos는 추락하는 우주선을 안전하게 착륙시키는 게임입니다.<br>
-        어떠한 상황에서도 안전하게 착륙하는 알고리즘을 작성해보세요.<br>
-        CodeMos 행성은 중력(G: 0.48) 외에는 어떠한 힘도 작용하지 않습니다.<br>
+    <div class="desc">
+        <h1>CodeMos API Documentation</h1>    
+        <div>
+            CodeMos는 추락하는 우주선을 안전하게 착륙시키는 게임입니다.<br>
+            어떠한 상황에서도 안전하게 착륙하는 알고리즘을 작성해보세요.<br>
+        </div>
+        </div>
     </div>
+    
     <hr>
-    <h2>TMI</h2>
-    <div>
-        1. JS ES6의 모든 문법을 사용해 CodeMos 우주선 알고리즘을 작성할 수 있습니다.<br>
-        2. 코드가 작동하지 않는다면 f12를 눌러 콘솔창을 확인해 보세요.<br>
-        3. 버그가 발견되었다면 이스터에그입니다.<br>
-    </div>
-    <h2>목차</h2>
+
+    <h2>INDEX</h2>
     <ul>
+        <li><a href="#description">Description</a>
+        <li><a href="#tip">Tip</a>
         <li><a href="#start">Getting Started</a>
         <li><a href="#get">Get Methods</a>
             <ul>
@@ -78,15 +81,28 @@
                 <li><a href="#logging">logging</a></li>
             </ul>
         </li>
+        <li><a href="#tmi">TMI</a>
     </ul>
-
+    <h2 id="description">Description</h2>
+    <div>
+        - 하단의 버튼으로 API 페이지와 코드 에디터를 열고 닫을 수 있습니다.<br>
+        - 코드를 모두 작성한 뒤, Apply 버튼을 눌러, 우주선에 착륙 알고리즘을 주입할 수 있습니다.<br>
+        - 착륙 속도 12.0 MPH, 착륙 각도 11.0° 미만일 때 착륙으로 간주합니다.<br>
+        - 키보드 방향키로 우주선을 작동시켜 볼 수 있습니다. 단, 키보드로 착륙한 결과는 순위표에 등재되지 않습니다.<br>
+    </div>
+    <h2 id="tip">Tip</h2>
+    <div>
+        1. JS ES6의 모든 문법을 사용해 CodeMos 우주선 알고리즘을 작성할 수 있습니다.<br>
+        2. 알고리즘이 작동하지 않는다면 코드를 잘못 짠게 아닐지 고민해 보세요.<br>
+        3. 버그가 발견되었다면 이스터에그입니다.<br>
+    </div>
     <h2 id="start">Getting Started</h2>
     <div class="api-function" id="">
         <h2 class="function-title">main loop</h2>
         <p class="function-description">
             CodeMos 알고리즘에서 main loop는 아래와 같이 "newInterval"에 할당되어야 합니다.<br>
             "newInterval"에 할당하지 않고 setInterval을 호출할 시 초기화 오류가 발생할 수 있습니다.<br>
-            interval은 기호에 맞게 조정해도 됩니다.<br>
+            interval 간격은 수정할 수 있습니다.<br>
         </p>
         <div class="function-example">
             <pre><code class="language-javascript">
@@ -107,15 +123,15 @@ setInterval(() => {
         <h2 class="function-title">알고리즘 작성 예시</h2>
         <p class="function-description">
             전역 스코프에서 함수와 변수를 정의할 수 있습니다.<br>
-            아래는 예시를 위한 알고리즘으로 잘 착륙하지 않습니다.<br>
+            아래는 착륙 알고리즘 예제 입니다.(고득점 불가)<br>
         </p>
         <div class="function-example">
             <pre><code class="language-javascript">
 var targetHeight = 0; // 착륙 고도
 
 function engineCtrl() { // 고도에 따라 엔진 control
-    if (getVelocityY() > 
-        (getHeight() - targetHeight) / 100)
+    if (getVelocityY() * 5 > 
+        (getHeight() - targetHeight))
         engineOn();
     else
         engineOff();
@@ -133,10 +149,12 @@ newInterval = setInterval(() => { // main loop
 }, 1);
             </code></pre>
         </div>
-        <h2 class="function-title">올바른 착륙 알고리즘 예시</h2>
+        <h2 class="function-title">잘 짠 착륙 알고리즘 예시</h2>
         <p class="function-description">
             by 조영효<br>
-            (코드는 비공개)
+            <pre><code class="language-javascript">
+// 비밀~
+            </code></pre>
         </p>
         <img src="images/landing_sample.gif" width="100%">
     </div>
@@ -184,7 +202,7 @@ getAngle()
         <h2 class="function-title">getHeight</h2>
         <p class="function-description">
 이 함수는 우주선의 현재 고도(FT)를 정수형으로 반환합니다.<br>
-평지 모드에서 착륙지점의 고도는 0FT 입니다.
+평지 모드에서 착륙지점의 고도는 0FT 입니다.<br>
         </p>
         <div class="function-example">
             <pre><code class="language-javascript">
@@ -210,6 +228,7 @@ getRotationVelocity()
         <h2 class="function-title">engineOn</h2>
         <p class="function-description">
 이 함수를 호출하면 우주선의 주 엔진을 작동시킵니다.<br>
+        <img src="images/docs_u.png" width="25%">
         </p>
         <div class="function-example">
             <pre><code class="language-javascript">
@@ -221,7 +240,7 @@ engineOn()
     <div class="api-function" id="engineOff">
         <h2 class="function-title">engineOff</h2>
         <p class="function-description">
-이 함수를 호출하면 우주선의 주 엔진을 정지합니다.
+이 함수를 호출하면 우주선의 주 엔진을 정지합니다.<br>
         </p>
         <div class="function-example">
             <pre><code class="language-javascript">
@@ -234,7 +253,9 @@ engineOff()
         <h2 class="function-title">rotateLeft</h2>
         <p class="function-description">
 이 함수를 호출하면 우주선의 좌측 추진체을 작동합니다.<br>
-(우주선의 각속도가 증가합니다.)
+(우주선의 각속도가 증가합니다.)<br>
+
+        <img src="images/docs_r.png" width="40%">
         </p>
         <div class="function-example">
             <pre><code class="language-javascript">
@@ -246,7 +267,7 @@ rotateLeft()
     <div class="api-function" id="stopLeftRotation">
         <h2 class="function-title">stopLeftRotation</h2>
         <p class="function-description">
-이 함수를 호출하면 우주선의 좌측 추진체을 정지합니다.
+이 함수를 호출하면 우주선의 좌측 추진체을 정지합니다.<br>
         </p>
         <div class="function-example">
             <pre><code class="language-javascript">
@@ -259,7 +280,8 @@ stopLeftRotation()
         <h2 class="function-title">rotateRight</h2>
         <p class="function-description">
 이 함수를 호출하면 우주선의 우측 추진체을 작동합니다.<br>
-(우주선의 각속도가 감소합니다.)
+(우주선의 각속도가 감소합니다.)<br>
+        <img src="images/docs_l.png" width="40%">
         </p>
         <div class="function-example">
             <pre><code class="language-javascript">
@@ -271,7 +293,7 @@ rotateRight()
     <div class="api-function" id="stopRightRotation">
         <h2 class="function-title">stopRightRotation</h2>
         <p class="function-description">
-이 함수를 호출하면 우주선의 우측 추진체을 정지합니다.
+이 함수를 호출하면 우주선의 우측 추진체을 정지합니다.<br>
         </p>
         <div class="function-example">
             <pre><code class="language-javascript">
@@ -288,8 +310,24 @@ stopRightRotation()
         <div class="function-example">
             <pre><code class="language-javascript">
 logging()
+/*
+f12 -> [console output]
+
+getVelocityX()        : 1.943
+getVelocityY()        : 2.9252924999999856
+getAngle()            : 123.7
+getHeight()           : 0
+getRotationVelocity() : -0.2
+*/
             </code></pre>
         </div>
     </div>
+    <h2 id="tmi">TMI</h2>
+    <div>
+        1. CodeMos 행성은 중력(4.29158 m/s²) 외에는 어떠한 힘도 작용하지 않습니다.<br>
+        2. 주 엔진 thrust : Δ10.729 m/s<br>
+        3. 좌, 우측 엔진 thrust: Δ1.2 각속도/s<br>
+    </div>
+    <br><br><br><br><br>
 </body>
 </html>

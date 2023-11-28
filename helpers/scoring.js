@@ -85,13 +85,13 @@ export const destroyedDescription = () => {
 
 // Perfect land:
 // angle: 0
-// speed: 1
+// speed: 0
 //
 // Worst possible landing:
 // angle: 11
 // speed: 12
 export const scoreLanding = (angle, speed) => {
-  const bestPossibleCombo = 1;
+  const bestPossibleCombo = 0; // max : 100
   const worstPossibleCombo = CRASH_ANGLE + CRASH_VELOCITY * VELOCITY_MULTIPLIER;
   return (
     progress(
