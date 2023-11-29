@@ -109,6 +109,23 @@
             background-color: #0056b3;
         }
 
+        .login-btn {
+            position: fixed;
+            bottom: 10px;
+            right: 300px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .login-btn:hover {
+            background-color: #0056b3;
+        }
+
         #drag-handle {
             position: absolute;
             top: 0;
@@ -332,6 +349,7 @@ newInterval = setInterval(() => {
         <button class="code-btn" onclick="toggleVisibility()">Code</button>
         <button class="apply-btn" onclick="applyCodeHandler()">Apply</button>
         <button class="leader-btn" onclick="leaderToggle()">리더보드</button>
+        <button class="login-btn" onclick="window.location.href='login.html'">로그인</button>
 
         <!-- <div id="tally" class="topRightCorner">L<span id="landingTotal"></span> C<span id="crashTotal"></span></div> -->
         <script>
