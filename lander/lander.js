@@ -41,6 +41,8 @@ export const makeLander = (state, onGameEnd) => {
     let _heightMilestone;
     let _babySoundPlayed;
 
+    let _isPressKeyVal;
+
     const resetProps = () => {
         const seededRandom = state.get("seededRandom");
         // const seededRandom = Math.random(); // XXX: 
@@ -73,6 +75,8 @@ export const makeLander = (state, onGameEnd) => {
         _maxHeight = _position.y;
         _heightMilestone = 0;
         _babySoundPlayed = false;
+
+        _isPressKeyVal = false;
     };
     resetProps();
 
@@ -80,6 +84,7 @@ export const makeLander = (state, onGameEnd) => {
 
     const _setGameEndData = (landed, struckByAsteroid = false) => {
         gameEndData = {
+            isPressKey: _isPressKeyVal,
             landed,
             struckByAsteroid,
             speed: velocityInMPH(_velocity),
@@ -92,7 +97,6 @@ export const makeLander = (state, onGameEnd) => {
             speedPercent: percentProgress(0, CRASH_VELOCITY, getVectorVelocity(_velocity)),
             anglePercent: percentProgress(0, CRASH_ANGLE, getAngleDeltaUpright(_angle)),
         };
-
         if (landed) {
             const score = scoreLanding(getAngleDeltaUpright(_angle), getVectorVelocity(_velocity));
 
@@ -438,5 +442,6 @@ export const makeLander = (state, onGameEnd) => {
         rotateRight: () => (_rotatingRight = true),
         stopLeftRotation: () => (_rotatingLeft = false),
         stopRightRotation: () => (_rotatingRight = false),
+        setIsPressKey: () => (_isPressKeyVal = true)
     };
 };

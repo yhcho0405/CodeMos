@@ -222,6 +222,9 @@ function onGameEnd(data) {
     const scoreDescription = data.landed ? landingScoreDescription(finalScore) : data.struckByAsteroid ? destroyedDescription() : crashScoreDescription(finalScore);
     const scoreForDisplay = Intl.NumberFormat().format(finalScore.toFixed(1));
 
+    if (!data.isPressKey)
+        console.log(data.landed ? finalScore : -finalScore);
+
     showStatsAndResetControl(appState, lander, animationObject, { ...data, scoreDescription, scoreForDisplay }, landerControls.getHasKeyboard(), onResetGame);
 
     if (data.landed) {
