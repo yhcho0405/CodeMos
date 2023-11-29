@@ -1,4 +1,4 @@
-const serverAddress = "http://127.0.0.1:3000"
+const serverAddress = "http://13.114.181.168:8080"
 
 var page = 1
 var saved
@@ -6,7 +6,7 @@ var saved
 const urls = [
     "/api/ranking",
     "/leaderboard?pageno="
-    //코드 검색용 url
+    //코드 가져오기용 url
     //이름 검색용 url
 ]
 
@@ -45,14 +45,11 @@ function getBoard(url){
             return response.json()
         })
         .then((data) => {
-            saved = data
-            data.sort((a,b) => a.score - b.score)
+            saved = data.content
+            //data.sort((a,b) => a.score - b.score)
             console.log("Received data:")
-            console.log(data)
-            if('pageNumber' in data && data.pageNumber != 0){
-                page = data.pageNumber
-            }
-            resolve(data)
+            console.log(data.content)
+            resolve(data.content)
         })
         .catch((error) => {
             reject(error)
@@ -101,25 +98,29 @@ function setBoard(boardData, reset){
             var toggle = document.createElement('tr')
             toggle.classList.add('details')
             toggle.classList.add('details-hide')
-            toggle.setAttribute('num', i)
+            toggle.setAttribute('id', boardData[i].id)
             toggle.classList.add
             tbody.appendChild(toggle)
-            var detail = document.createElement('td')
-            toggle.appendChild(detail)
-            detail.colSpan = 4
-            /*var code = document.createElement('p')
-            detail.appendChild(code)
-            code.textContent = "Codes"
-            var codes = document.createElement('p')
-            code.appendChild(codes)
-            codes.textContent = `${boardData[i].codes}`
-            var date = document.createElement('p')
-            detail.appendChild(date)
-            date.textContent = `Date: ${boardData[i].date}`
             tr.addEventListener('click', function () {
                 const details = this.nextElementSibling
                 details.classList.toggle('details-hide')
-            })*/
+                codeID = details.getAttribute('id')
+                getBoard(urls[2] + codeID).then(result => {
+                    var detail = document.createElement('td')
+                    details.appendChild(detail)
+                    detail.colSpan = 4
+                    var code = document.createElement('p')
+                    detail.appendChild(code)
+                    code.textContent = "Codes"
+                    var codes = document.createElement('p')
+                    code.appendChild(codes)
+                    codes.textContent = `${result.codes}`
+                    var date = document.createElement('p')
+                    detail.appendChild(date)
+                    date.textContent = `Date: ${result.date}` 
+                })
+                
+            })
             //detail 누르면 그 때 코드 받아오도록 하는 설정
         }        
     }
@@ -129,10 +130,10 @@ function loadBoard(urlNum, pageV){
     if (urlNum == 1) apiUrl += String(page + pageV)
     //if url 설정에 페이지 관련 있음 => 현재 페이지 맞춰서 apiUrl 새로 만들어 전달
     getBoard(apiUrl).then(result => {
-        if (result.length != 0 && urlNum == 1){
-            page += pageV
+        if (result.length == 0 && urlNum == 1){
             return
         }
+        page += pageV
         //if result가 있고 url이 페이지 설정이면 페이지 값 증가/감소(url 값에 따라서), 없다면 페이지 값 그대로
         setBoard(result, true)
     })
@@ -142,6 +143,15 @@ function loadBoard(urlNum, pageV){
 }
 function search(){
     var input = document.getElementById('search-box').value
+    if (input === '' && saved != null){
+        setBoard(saved, true)
+        return
+    } else if (input === ''){
+        loadBoard(page, 0)
+    }
+
+    var url = urls[3] + input
+    loadBoard(url)
     //if input === '' && 현재 저장해둔 데이터 있음(typeof가 undefined가 아니거나 값이 null이 아니거나)
     // => 저장해둔 값 호출, 저장해둔 건 없다면 현재 페이지 loadboard(), return
 
