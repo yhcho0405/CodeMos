@@ -265,7 +265,8 @@ function onGameEnd(data) {
                         },
                         body: JSON.stringify({ 
                             score: parseInt((data.landed ? finalScore : -finalScore) * 100000), 
-                            code: _code
+                            code: _code,
+                            time: data.durationInSeconds.toString()
                         })
                     })
                     .then((response) => {
