@@ -90,15 +90,15 @@
     </div>
     <div id="board"></div>
     <div class="btns">
-        <button class="page-lbtn" onclick="loadBoard(urls[0])">&lt;&lt;</button>
-        <button class="page-rbtn" onclick="loadBoard(urls[0])">&gt;&gt;</button>
+        <button class="page-lbtn" onclick="loadBoard(1, -1)">&lt;&lt;</button>
+        <button class="page-rbtn" onclick="loadBoard(1, 1)">&gt;&gt;</button>
     </div>
     <div class="btns search" style="margin: 20px 2px;">
         <input type="search" id="search-box" placeholder="Search by Name" oninput="search()" style="margin: 0 15px;">
         <!--<button id="search-btn" onclick="search()">Search</button>-->
     </div>
     <div class="btns load" style="margin: 30px 2px;">
-        <div style="justify-content: right;"><button class="load-btn" onclick="loadBoard(urls[0])">Reload</button></div>
+        <div style="justify-content: right;"><button class="load-btn" onclick="loadBoard(1, 0)">Reload</button></div>
         <div style="justify-content: left;"><button class="load-btn" onclick="history.back()">Go Back</button></div>
     </div>
     

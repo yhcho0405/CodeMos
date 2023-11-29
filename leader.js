@@ -5,8 +5,9 @@ var saved
 
 const urls = [
     "/api/ranking",
-    //페이지 증가/감소용 설정
-    //검색용 url
+    "/leaderboard?pageno="
+    //코드 검색용 url
+    //이름 검색용 url
 ]
 
 var getData
@@ -40,9 +41,12 @@ function getBoard(url){
         })
         .then((data) => {
             saved = data
-            data.sort((a,b) => a.rank - b.rank)
+            data.sort((a,b) => a.score - b.score)
             console.log("Received data:")
             console.log(data)
+            if('pageNumber' in data && data.pageNumber != 0){
+                page = data.pageNumber
+            }
             resolve(data)
         })
         .catch((error) => {
@@ -82,10 +86,10 @@ function setBoard(boardData, reset){
         tr.appendChild(td3)
         var td4 = document.createElement('td')
         tr.appendChild(td4)
-        td1.textContent = boardData[i].rank
-        td2.textContent = boardData[i].uid
+        td1.textContent = i + 1
+        td2.textContent = boardData[i].nickname
         td3.textContent = boardData[i].score
-        td4.textContent = boardData[i].time + " s"
+        //td4.textContent = boardData[i].time + " s"
 
         // show codes of each row
         if(boardData[i].rank > 10){
@@ -98,7 +102,7 @@ function setBoard(boardData, reset){
             var detail = document.createElement('td')
             toggle.appendChild(detail)
             detail.colSpan = 4
-            var code = document.createElement('p')
+            /*var code = document.createElement('p')
             detail.appendChild(code)
             code.textContent = "Codes"
             var codes = document.createElement('p')
@@ -110,15 +114,20 @@ function setBoard(boardData, reset){
             tr.addEventListener('click', function () {
                 const details = this.nextElementSibling
                 details.classList.toggle('details-hide')
-            })
+            })*/
+            //detail 누르면 그 때 코드 받아오도록 하는 설정
         }        
     }
 }
-function loadBoard(url){
-    var apiUrl
-    if (true) apiUrl = url
+function loadBoard(urlNum, pageV){
+    var apiUrl = urls[urlNum]
+    if (urlNum == 1) apiUrl += String(page + pageV)
     //if url 설정에 페이지 관련 있음 => 현재 페이지 맞춰서 apiUrl 새로 만들어 전달
     getBoard(apiUrl).then(result => {
+        if (result.length != 0 && urlNum == 1){
+            page += pageV
+            return
+        }
         //if result가 있고 url이 페이지 설정이면 페이지 값 증가/감소(url 값에 따라서), 없다면 페이지 값 그대로
         setBoard(result, true)
     })
@@ -136,4 +145,4 @@ function search(){
     // 입력값을 urls[search 관련]과 합쳐서 loadBoard 호출
 }
 
-loadBoard(urls[0])
+loadBoard(1, 0)
