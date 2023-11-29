@@ -10,7 +10,7 @@
     body {
         --stats-font-size: clamp(12px, 2vmin, 16px);
         margin: 0;
-        background: #010516;
+        background: #02071e;
         user-select: none;
         -webkit-user-select: none;
         overflow: hidden;
@@ -36,10 +36,10 @@
         background-color: #0056b3;
     }
     .load-btn{
-        background-color: #0e3c6d;
+        background-color: #124b89;
     }
     .load-btn:hover{
-        background-color: #37506b;
+        background-color: #396798;
     }
     
     body .btns{
@@ -52,7 +52,8 @@
     
     .load div{
         display: flex;
-        width: 50%;
+        width: 100%;
+        justify-content: center;
     }
     #board td, #board th{
         width: 20%;
@@ -98,8 +99,7 @@
         <!--<button id="search-btn" onclick="search()">Search</button>-->
     </div>
     <div class="btns load" style="margin: 30px 2px;">
-        <div style="justify-content: right;"><button class="load-btn" onclick="loadBoard(1, 0)">Reload</button></div>
-        <div style="justify-content: left;"><button class="load-btn" onclick="history.back()">Go Back</button></div>
+        <div><button class="load-btn" onclick="loadBoard(1, 0)">Reload</button></div>
     </div>
     
     <script src="leader.js"></script>

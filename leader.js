@@ -25,6 +25,11 @@ table.appendChild(tbody)
 
 thead.innerHTML = "<tr><td>Rank</td><td>Name</td><td>Score</td><td>Time</td></tr>"
 
+document.addEventListener('DOMContentLoaded', function () {
+    var currentPath = window.location.pathname
+    history.pushState(null, null, currentPath.replace('.html', ''))
+})
+
 function getBoard(url){
     return new Promise((resolve, reject) => {
         fetch(serverAddress + url,{
