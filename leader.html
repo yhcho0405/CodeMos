@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/monokai.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <title>CodeMos</title>
 </head>
 <style>
@@ -54,7 +57,7 @@
         width: 100%;
         justify-content: center;
     }
-    #board td, #board th{
+    #board tbody > td, #board th{
         width: 20%;
         text-align: center;
     }
@@ -73,12 +76,9 @@
         opacity: 1;
         overflow: hidden;
     }
-    .details p{
+    .details pre{
         text-align: left;
         margin: 10px 10px;
-    }
-    .details p p{
-        margin: 0px 10px
     }
     .details-hide{
         display: none;

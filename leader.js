@@ -1,13 +1,12 @@
 const serverAddress = "http://13.114.181.168:8080"
 
-var page = 1
+var page = 0
 var saved
 
 const urls = [
     "/api/ranking",
-    "/leaderboard?pageno="
-    //코드 가져오기용 url
-    //이름 검색용 url
+    "/leaderboard?pageno=",
+    "/leaderboard/",
 ]
 
 var getData
@@ -40,11 +39,25 @@ function getBoard(url){
             if(!response.ok){
                 throw new Error(response.status)
             }
+            const contentType = response.headers.get('Content-Type');
             console.log('response:')
-            console.log(response)
-            return response.json()
+            console.log(contentType)
+            //console.log(response.text())
+            if(!contentType){
+                throw new Error('no content type')
+            } else if (contentType.includes('application/json')){
+                return response.json()
+            } else if (contentType.includes('text/plain')){
+                return response.text()
+            } else {
+                throw new Error('cannot handle response')
+            } 
         })
         .then((data) => {
+            console.log(typeof(data))
+            if(typeof(data) == 'string'){
+                resolve(data)
+            }
             leaderBoards = data.content
             for(var i = 0; i < leaderBoards.length; i++){
                 leaderBoards[i].score /= 100000 
@@ -92,13 +105,13 @@ function setBoard(boardData, reset){
         tr.appendChild(td3)
         var td4 = document.createElement('td')
         tr.appendChild(td4)
-        td1.textContent = (page - 1) * 10 + i + 1
+        td1.textContent = (page) * 10 + i + 1
         td2.textContent = boardData[i].nickname
         td3.textContent = boardData[i].score
-        //td4.textContent = boardData[i].time + " s"
+        td4.textContent = boardData[i].time + " s"
 
         // show codes of each row
-        if((page - 1) * 10 + i + 1 > 10){
+        if((page) * 10 + i + 1 > 0){
             var toggle = document.createElement('tr')
             toggle.classList.add('details')
             toggle.classList.add('details-hide')
@@ -109,20 +122,23 @@ function setBoard(boardData, reset){
                 const details = this.nextElementSibling
                 details.classList.toggle('details-hide')
                 codeID = details.getAttribute('id')
-                /*getBoard(urls[2] + codeID).then(result => {
+                if(details.children.length > 0){
+                    return
+                }
+                getBoard(urls[2] + codeID).then(result => {
                     var detail = document.createElement('td')
                     details.appendChild(detail)
                     detail.colSpan = 4
-                    var code = document.createElement('p')
-                    detail.appendChild(code)
-                    code.textContent = "Codes"
-                    var codes = document.createElement('p')
-                    code.appendChild(codes)
-                    codes.textContent = `${result.codes}`
-                    var date = document.createElement('p')
-                    detail.appendChild(date)
-                    date.textContent = `Date: ${result.date}` 
-                })*/
+                    var codeTitle = document.createElement('p')
+                    detail.appendChild(codeTitle)
+                    codeTitle.textContent = "Codes"
+                    var codes = document.createElement('pre')
+                    detail.appendChild(codes)
+                    var code = document.createElement('code')
+                    codes.appendChild(code)
+                    code.classList.add('language-javascript')
+                    code.textContent = result.slice(1, -1);
+                })
                 
             })
             //detail 누르면 그 때 코드 받아오도록 하는 설정
@@ -131,13 +147,21 @@ function setBoard(boardData, reset){
 }
 function loadBoard(urlNum, pageV){
     var apiUrl = urls[urlNum]
-    if (urlNum == 1) apiUrl += String(page + pageV)
+    if (urlNum == 1) {
+        num = page + pageV
+        if(num > 9) num = 9
+        if(num < 0) num = 0
+        apiUrl += String(num)
+    }
     //if url 설정에 페이지 관련 있음 => 현재 페이지 맞춰서 apiUrl 새로 만들어 전달
     getBoard(apiUrl).then(result => {
         if (result.length == 0 && urlNum == 1){
+            console.log('page is empty')
             return
         }
         page += pageV
+        if(page > 9) page = 9
+        if(page < 0) page = 0
         //if result가 있고 url이 페이지 설정이면 페이지 값 증가/감소(url 값에 따라서), 없다면 페이지 값 그대로
         setBoard(result, true)
     })
@@ -146,4 +170,4 @@ function loadBoard(urlNum, pageV){
     })   
 }
 
-loadBoard(1, 0)
+loadBoard(page, 0)
