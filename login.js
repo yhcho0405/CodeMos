@@ -27,7 +27,7 @@ function login(){
         return response.json()
     }).then((token) => {
         console.log('Login!')
-        sessionStorage.setItem('jwtToken', token);
+        sessionStorage.setItem('jwtToken', token.accessToken);
     })
     .catch((err) => {
         console.log("Cannot register", err)
