@@ -45,11 +45,15 @@ function getBoard(url){
             return response.json()
         })
         .then((data) => {
-            saved = data.content
+            leaderBoards = data.content
+            for(var i = 0; i < leaderBoards.length; i++){
+                leaderBoards[i].score /= 100000 
+            }
+            saved = leaderBoards
             //data.sort((a,b) => a.score - b.score)
             console.log("Received data:")
-            console.log(data.content)
-            resolve(data.content)
+            console.log(leaderBoards)
+            resolve(leaderBoards)
         })
         .catch((error) => {
             reject(error)
@@ -88,13 +92,13 @@ function setBoard(boardData, reset){
         tr.appendChild(td3)
         var td4 = document.createElement('td')
         tr.appendChild(td4)
-        td1.textContent = i + 1
+        td1.textContent = (page - 1) * 10 + i + 1
         td2.textContent = boardData[i].nickname
-        td3.textContent = boardData[i].score / 100000
+        td3.textContent = boardData[i].score
         //td4.textContent = boardData[i].time + " s"
 
         // show codes of each row
-        if(boardData[i].rank > 10){
+        if((page - 1) * 10 + i + 1 > 10){
             var toggle = document.createElement('tr')
             toggle.classList.add('details')
             toggle.classList.add('details-hide')
