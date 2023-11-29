@@ -90,7 +90,7 @@ function setBoard(boardData, reset){
         tr.appendChild(td4)
         td1.textContent = i + 1
         td2.textContent = boardData[i].nickname
-        td3.textContent = boardData[i].score
+        td3.textContent = boardData[i].score / 100000
         //td4.textContent = boardData[i].time + " s"
 
         // show codes of each row
@@ -105,7 +105,7 @@ function setBoard(boardData, reset){
                 const details = this.nextElementSibling
                 details.classList.toggle('details-hide')
                 codeID = details.getAttribute('id')
-                getBoard(urls[2] + codeID).then(result => {
+                /*getBoard(urls[2] + codeID).then(result => {
                     var detail = document.createElement('td')
                     details.appendChild(detail)
                     detail.colSpan = 4
@@ -118,7 +118,7 @@ function setBoard(boardData, reset){
                     var date = document.createElement('p')
                     detail.appendChild(date)
                     date.textContent = `Date: ${result.date}` 
-                })
+                })*/
                 
             })
             //detail 누르면 그 때 코드 받아오도록 하는 설정
@@ -151,7 +151,7 @@ function search(){
     }
 
     var url = urls[3] + input
-    loadBoard(url)
+    //loadBoard(url)
     //if input === '' && 현재 저장해둔 데이터 있음(typeof가 undefined가 아니거나 값이 null이 아니거나)
     // => 저장해둔 값 호출, 저장해둔 건 없다면 현재 페이지 loadboard(), return
 
