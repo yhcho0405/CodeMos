@@ -233,6 +233,27 @@ function onGameEnd(data) {
     }
 
     tally.updateDisplay();
+
+    var personalBest = localStorage.getItem('personalBestScore');
+
+    if (!data.isPressKey && !personalBest) {
+        localStorage.setItem('personalBestScore', -9999999);
+    }
+
+    setTimeout(() => {
+        if (!data.isPressKey) {        
+            console.log(data.landed ? finalScore : -finalScore);
+            if (personalBest < data.landed ? finalScore : -finalScore) {
+                var isConfirm = confirm("개인 최고기록 " + (data.landed ? finalScore : -finalScore) + "점을 리더보드에 등록할까여");
+                if (isConfirm) {
+                    // TODO: 서버로 요청
+                    localStorage.setItem('personalBestScore', data.landed ? finalScore : -finalScore);
+                    console.log(data.landed ? finalScore : -finalScore);
+                }
+            }
+        }
+    }, "1700");
+
 }
 
 function onResetGame() {

@@ -88,7 +88,6 @@
         - 하단의 버튼으로 API 페이지와 코드 에디터를 열고 닫을 수 있습니다.<br>
         - 코드를 모두 작성한 뒤, Apply 버튼을 눌러, 우주선에 착륙 알고리즘을 주입할 수 있습니다.<br>
         - 착륙 속도 12.0 MPH, 착륙 각도 11.0° 미만일 때 착륙으로 간주합니다.<br>
-        - 착륙 속도 0.0 MPH, 착륙 각도 0.0° 일 때, 100점을 획득합니다.<br>
         - 키보드 방향키로 우주선을 작동시켜 볼 수 있습니다. 단, 키보드로 착륙한 결과는 순위표에 등재되지 않습니다.<br>
     </div>
     <h2 id="tip">Tip</h2>
@@ -152,12 +151,14 @@ newInterval = setInterval(() => { // main loop
         </div>
         <h2 class="function-title">잘 짠 착륙 알고리즘 예시</h2>
         <p class="function-description">
-            by 조영효<br>
             <pre><code class="language-javascript">
 // 비밀~
             </code></pre>
         </p>
-        <img src="images/landing_sample.gif" width="100%">
+        <img src="images/landing_sample.gif" width="100%"><br>
+        <p class="function-description">
+            by 조영효<br>
+        </p>
     </div>
     <h2 id="get">Get Methods</h2>
     <div class="api-function" id="getVelocityX">
@@ -329,6 +330,7 @@ getRotationVelocity() : 0.37505750000014804
         1. CodeMos 행성은 중력(4.29158 m/s²) 외에는 어떠한 힘도 작용하지 않습니다.<br>
         2. 주 엔진 thrust : Δ10.729 m/s<br>
         3. 좌, 우측 엔진 thrust: Δ1.2 각속도/s<br>
+        4. 착륙 속도 0.0 MPH, 착륙 각도 0.0° 일 때, 100점을 획득합니다.<br>
     </div>
     <br><br><br><br><br>
 </body>

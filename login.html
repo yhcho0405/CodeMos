@@ -13,50 +13,57 @@
         background: #02071e;
         font: 400 18px/1.5 -apple-system, BlinkMacSystemFont, sans-serif;
         text-align: center;
+        overflow-y: auto;
     }
-    .login-container {
-            max-width: 300px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-        }
+    .login-container, .register-container {
+        max-width: 300px;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+    .form-group {
+        margin-bottom: 20px;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
+    label {
+        display: block;
+        margin-bottom: 8px;
+    }
 
-        input {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
+    input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
 
-        button {
-            background-color: #4caf50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #2b632e; /* Darker shade for hover effect */
-        }
+    button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #2b632e; /* Darker shade for hover effect */
+    }
+    .home {
+        padding: 2%;
+    }
+    .hidden {
+        display: none;
+    }
 </style>
 <body>
     <div class="login-container">
         <h2>Login</h2>
         <form action="#" method="post">
             <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id" required>
             </div>
 
             <div class="form-group">
@@ -64,8 +71,32 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <button type="submit" onclick="return login()">Login</button>
-            <button id="register-btn" type="button" onclick="">Register</button>
+            <button id="register-btn" type="button" onclick="pageToggle()">Register</button>
         </form>
+    </div>
+    <div class="register-container hidden">
+        <h2>Register</h2>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="Username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="id">ID:</label>
+                <input type="text" id="reg-id" name="id" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="reg-password" name="password" required>
+            </div>
+            <button type="submit" onclick="return register()">Register</button>
+            <button id="back" type="button" onclick="pageToggle()">Back To Login</button>
+        </form>
+    </div>
+    <div class="home">
+        <button id="home" type="button" onclick=history.back()>Back</button>
     </div>
     <script src="login.js"></script>
 </body>
