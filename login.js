@@ -5,6 +5,10 @@ const serverAddress = "http://13.114.181.168:8080"
 
 //const appState = makeStateManager()
 //const theme = makeTheme(appState)
+document.addEventListener('DOMContentLoaded', function () {
+    var currentPath = window.location.pathname
+    history.pushState(null, null, currentPath.replace('.html', ''))
+})
 function login(){
     var userid = document.getElementById('id').value;
     var password = document.getElementById('password').value;
