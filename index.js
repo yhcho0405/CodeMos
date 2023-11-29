@@ -247,6 +247,29 @@ function onGameEnd(data) {
                 var isConfirm = confirm("개인 최고기록 " + (data.landed ? finalScore : -finalScore) + "점을 리더보드에 등록할까여");
                 if (isConfirm) {
                     // TODO: 서버로 요청
+
+                    const serverAddress = "http://13.114.181.168:8080"
+                    fetch(serverAddress+'/api/v1/leaderBoard/create', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
+                        },
+                        body: JSON.stringify({ 
+                            score: parseInt((data.landed ? finalScore : -finalScore) * 100000), 
+                            code: "testcode--"
+                        })
+                    })
+                    .then((response) => {
+                        if(!response.ok){
+                            throw new Error(response.status)
+                        }
+                        return response.json()
+                    })
+                    .catch((err) => {
+                        console.log("err: ", err)
+                    })
+
                     localStorage.setItem('personalBestScore', data.landed ? finalScore : -finalScore);
                     console.log(data.landed ? finalScore : -finalScore);
                 }
