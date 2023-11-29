@@ -47,7 +47,7 @@ export const makeToyLander = (
   const draw = (deltaTime) => {
     const deltaTimeMultiplier = deltaTime / INTERVAL;
 
-    if ((_engineOn && _rotatingLeft) || (_engineOn && _rotatingRight)) {
+    if ((_engineOn && _rotatingLeft) || (_engineOn && _rotatingRight) || (_rotatingLeft && _rotatingRight)) {
       onEngineAndRotation();
     }
 

@@ -6,68 +6,76 @@ import {
 import { progress } from "./helpers.js";
 
 export const landingScoreDescription = (score) =>
-  score >= 120
-    ? "So. Much. Bonus. And you landed?? Incredible"
+    score == 100
+    ? "완벽한 착륙!!!"    
+    :score >= 99.9
+    ? "완벽에 가까운 착륙!!"    
+    :score >= 99.8
+    ? "완벽에 근접한 착륙!"
+    :score >= 99.7
+    ? "완벽에 가까울 뻔한 착륙"
+    :score >= 99.6
+    ? "거의 완벽할 뻔한 착륙"
+    :score >= 99.5
+    ? "아쉽게 완벽하지 못한 착륙"
     : score >= 99
-    ? "Perfect landing, incredible, you can’t get better than this"
+    ? "매우 부드러운 착륙"
     : score >= 95
-    ? "Near-perfect landing, super smooth"
+    ? "부드러운 착륙"
     : score >= 90
-    ? "Very nice landing, amazing"
+    ? "훌륭한 착륙"
     : score >= 85
-    ? "Pretty good landing, keep going!"
+    ? "좋은 착륙"
     : score >= 80
-    ? "A good landing, keep trying"
+    ? "나쁘지 않은 착륙"
     : score >= 75
-    ? "Just shy of a good landing"
+    ? "좋을 뻔한 착륙"
     : score >= 70
-    ? "A solid “C” landing"
+    ? "그럭저럭 착륙"
     : score >= 65
-    ? "You landed but it could have been slower and straighter"
+    ? "어찌저찌 착륙"
     : score >= 60
-    ? "Not the worst landing, but not very good either"
+    ? "어쩌다보니 착륙"
     : score >= 55
-    ? "Pretty bad landing, but it could be worse"
+    ? "휀다가 휘어버린 착륙"
     : score >= 55
-    ? "Not great"
+    ? "거의 박살난 착륙"
     : score >= 40
-    ? "Basically a fender bender, but you landed"
+    ? "사실상 추락"
     : score >= 30
-    ? "A near-crash, way too fast"
-    : "Terrible landing, you need to land slow and straight";
+    ? "착륙 후 조종사 사망"
+    : "끔찍한 착륙";
 
 export const crashScoreDescription = (score) =>
-  score >= 120
-    ? "So much bonus. So much crash."
-    : score >= 100
-    ? "Unbelievable, the crater is visible from Earth"
+    score >= 100
+    ? "개개개개개개객개개개박살"
     : score >= 95
-    ? "Ludicrous crash! The debris has entered orbit"
+    ? "개개개개개객개개박살"
     : score >= 90
-    ? "Incredible crash, the lander has vaporized"
+    ? "개개개개개개박살"
     : score >= 85
-    ? "Impressive speed, impressive angle - you crashed with style"
+    ? "개개개개박살"
     : score >= 80
-    ? "A fast crash, but it could be faster"
+    ? "개박살"
     : score >= 75
-    ? "I think you meant to do that"
+    ? "박살"
     : score >= 70
-    ? "You definitely did not land…"
+    ? "박살"
     : score >= 65
-    ? "I think there’s a problem with the lander"
+    ? "박살"
     : score >= 60
-    ? "Sick crash!"
+    ? "박살"
     : score >= 50
-    ? "Were you trying to land, or…"
+    ? "그냥 박살"
     : score >= 40
-    ? "A bad crash, but it could be worse"
+    ? "우주선 반토막"
     : score >= 30
-    ? "I don’t think we’re getting back to Earth"
+    ? "덜 부드럽게 충돌"
     : score >= 20
-    ? "A smooth… wait… you crashed"
+    ? "부드럽게 충돌"
     : score >= 10
-    ? "The lander has been… damaged"
-    : "So, so close to a landing, but still a crash";
+    ? "안타까운 충돌"
+    : "아쉽게도 충돌";
 
 export const destroyedDescription = () => {
   const remarks = [

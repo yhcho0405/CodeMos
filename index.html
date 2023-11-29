@@ -180,16 +180,16 @@
         <div id="instructions" class="fullSizeContainer instructions">
             <div>
                 <h1>How to play</h1>
-                <p>Land on a white landing pad. Pointy end goes up. Try doing a flip.</p>
+                <p>착륙 알고리즘을 작성해 착륙 지점에 우주선을 안전하게 착륙시켜야 합니다</p>
             </div>
             <div class="instructionsControls">
-                <h2>Test the controls</h2>
+                <h2>키보드 방향키로 API 함수 테스트</h2>
                 <div id="forKeyboard">
                     <ul>
-                        <li id="engineCheck"><input type="checkbox" /> Up arrow (the main engine)</li>
-                        <li id="rightRotationCheck"><input type="checkbox" />Left arrow</li>
-                        <li id="leftRotationCheck"><input type="checkbox" />Right arrow</li>
-                        <li id="engineAndRotationCheck"><input type="checkbox" /> Hold the up arrow while pressing the left or right arrows</li>
+                        <li id="engineCheck"><input type="checkbox" /> 위쪽 방향키(주 엔진), engineOn()</li>
+                        <li id="rightRotationCheck"><input type="checkbox" />왼쪽 방향키(오른쪽 추진체), rotateLeft()</li>
+                        <li id="leftRotationCheck"><input type="checkbox" />오른쪽 방향키(왼쪽 추진체), rotateRight()</li>
+                        <li id="engineAndRotationCheck"><input type="checkbox" /> 방향키 동시에 누르기, 모든 함수는 동시에 호출될 수 있습니다.</li>
                     </ul>
                 </div>
                 <div id="forTouch">

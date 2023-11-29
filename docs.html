@@ -88,6 +88,7 @@
         - 하단의 버튼으로 API 페이지와 코드 에디터를 열고 닫을 수 있습니다.<br>
         - 코드를 모두 작성한 뒤, Apply 버튼을 눌러, 우주선에 착륙 알고리즘을 주입할 수 있습니다.<br>
         - 착륙 속도 12.0 MPH, 착륙 각도 11.0° 미만일 때 착륙으로 간주합니다.<br>
+        - 착륙 속도 0.0 MPH, 착륙 각도 0.0° 일 때, 100점을 획득합니다.<br>
         - 키보드 방향키로 우주선을 작동시켜 볼 수 있습니다. 단, 키보드로 착륙한 결과는 순위표에 등재되지 않습니다.<br>
     </div>
     <h2 id="tip">Tip</h2>
@@ -201,8 +202,8 @@ getAngle()
     <div class="api-function" id="getHeight">
         <h2 class="function-title">getHeight</h2>
         <p class="function-description">
-이 함수는 우주선의 현재 고도(FT)를 정수형으로 반환합니다.<br>
-평지 모드에서 착륙지점의 고도는 0FT 입니다.<br>
+이 함수는 우주선의 현재 고도(ft, 피트)를 정수형으로 반환합니다.<br>
+착륙지점의 고도는 0ft 입니다.<br>
         </p>
         <div class="function-example">
             <pre><code class="language-javascript">
@@ -310,14 +311,15 @@ stopRightRotation()
         <div class="function-example">
             <pre><code class="language-javascript">
 logging()
+
 /*
 f12 -> [console output]
 
-getVelocityX()        : 1.943
-getVelocityY()        : 2.9252924999999856
-getAngle()            : 123.7
-getHeight()           : 0
-getRotationVelocity() : -0.2
+getVelocityX()        : 11.39214005489352
+getVelocityY()        : 27.95145243876781
+getAngle()            : -60.2
+getHeight()           : 239
+getRotationVelocity() : 0.37505750000014804
 */
             </code></pre>
         </div>
