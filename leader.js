@@ -145,23 +145,5 @@ function loadBoard(urlNum, pageV){
         console.log('Error', error)
     })   
 }
-function search(){
-    var input = document.getElementById('search-box').value
-    if (input === '' && saved != null){
-        setBoard(saved, true)
-        return
-    } else if (input === ''){
-        loadBoard(page, 0)
-    }
-
-    var url = urls[3] + input
-    //loadBoard(url)
-    //if input === '' && 현재 저장해둔 데이터 있음(typeof가 undefined가 아니거나 값이 null이 아니거나)
-    // => 저장해둔 값 호출, 저장해둔 건 없다면 현재 페이지 loadboard(), return
-
-    //var url = urls[] ~~~ + input
-    //loadBoard(url)
-    // 입력값을 urls[search 관련]과 합쳐서 loadBoard 호출
-}
 
 loadBoard(1, 0)

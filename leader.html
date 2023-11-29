@@ -7,7 +7,6 @@
 </head>
 <style>
     body {
-        --stats-font-size: clamp(12px, 2vmin, 16px);
         margin: 0;
         background: #02071e;
         user-select: none;
@@ -16,6 +15,7 @@
         font: 400 18px/1.5 -apple-system, BlinkMacSystemFont, sans-serif;
         color: #fff;
         padding: 10px;
+        overflow-y: auto;
     }
     body #board table{
         border-collapse: collapse;
@@ -92,10 +92,6 @@
     <div class="btns">
         <button class="page-lbtn" onclick="loadBoard(1, -1)">&lt;&lt;</button>
         <button class="page-rbtn" onclick="loadBoard(1, 1)">&gt;&gt;</button>
-    </div>
-    <div class="btns search" style="margin: 20px 2px;">
-        <input type="search" id="search-box" placeholder="Search by Name" oninput="search()" style="margin: 0 15px;">
-        <!--<button id="search-btn" onclick="search()">Search</button>-->
     </div>
     <div class="btns load" style="margin: 30px 2px;">
         <div><button class="load-btn" onclick="loadBoard(1, 0)">Reload</button></div>
