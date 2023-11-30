@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/monokai.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <title>CodeMos</title>
 </head>
 <style>
     body {
-        --stats-font-size: clamp(12px, 2vmin, 16px);
         margin: 0;
-        background: #010516;
+        background: #02071e;
         user-select: none;
         -webkit-user-select: none;
         overflow: hidden;
         font: 400 18px/1.5 -apple-system, BlinkMacSystemFont, sans-serif;
         color: #fff;
         padding: 10px;
+        overflow-y: auto;
     }
     body #board table{
         border-collapse: collapse;
@@ -35,10 +38,10 @@
         background-color: #0056b3;
     }
     .load-btn{
-        background-color: #0e3c6d;
+        background-color: #124b89;
     }
     .load-btn:hover{
-        background-color: #37506b;
+        background-color: #396798;
     }
     
     body .btns{
@@ -51,9 +54,10 @@
     
     .load div{
         display: flex;
-        width: 50%;
+        width: 100%;
+        justify-content: center;
     }
-    #board td, #board th{
+    #board tbody > td, #board th{
         width: 20%;
         text-align: center;
     }
@@ -72,12 +76,9 @@
         opacity: 1;
         overflow: hidden;
     }
-    .details p{
+    .details pre{
         text-align: left;
         margin: 10px 10px;
-    }
-    .details p p{
-        margin: 0px 10px
     }
     .details-hide{
         display: none;
@@ -89,16 +90,11 @@
     </div>
     <div id="board"></div>
     <div class="btns">
-        <button class="page-lbtn" onclick="loadBoard(urls[0])">&lt;&lt;</button>
-        <button class="page-rbtn" onclick="loadBoard(urls[0])">&gt;&gt;</button>
-    </div>
-    <div class="btns search" style="margin: 20px 2px;">
-        <input type="search" id="search-box" placeholder="Search by Name" oninput="search()" style="margin: 0 15px;">
-        <!--<button id="search-btn" onclick="search()">Search</button>-->
+        <button class="page-lbtn" onclick="loadBoard(1, -1)">&lt;&lt;</button>
+        <button class="page-rbtn" onclick="loadBoard(1, 1)">&gt;&gt;</button>
     </div>
     <div class="btns load" style="margin: 30px 2px;">
-        <div style="justify-content: right;"><button class="load-btn" onclick="loadBoard(urls[0])">Reload</button></div>
-        <div style="justify-content: left;"><button class="load-btn" onclick="history.back()">Go Back</button></div>
+        <div><button class="load-btn" onclick="loadBoard(1, 0)">Reload</button></div>
     </div>
     
     <script src="leader.js"></script>

@@ -1,16 +1,13 @@
-const serverAddress = "http://127.0.0.1:3000"
+const serverAddress = "http://13.114.181.168:8080"
 
-var page = 1
-var saved
+var page = 0
+var savedBoard
 
 const urls = [
     "/api/ranking",
-    //페이지 증가/감소용 설정
-    //검색용 url
+    "/leaderboard?pageno=",
+    "/leaderboard/",
 ]
-
-var getData
-
 var board = document.getElementById("board");
 var table = document.createElement('table');
 table.style.width = "60%";
@@ -24,6 +21,11 @@ table.appendChild(tbody)
 
 thead.innerHTML = "<tr><td>Rank</td><td>Name</td><td>Score</td><td>Time</td></tr>"
 
+document.addEventListener('DOMContentLoaded', function () {
+    var currentPath = window.location.pathname
+    history.pushState(null, null, currentPath.replace('.html', ''))
+})
+
 function getBoard(url){
     return new Promise((resolve, reject) => {
         fetch(serverAddress + url,{
@@ -34,16 +36,34 @@ function getBoard(url){
             if(!response.ok){
                 throw new Error(response.status)
             }
+            const contentType = response.headers.get('Content-Type');
             console.log('response:')
-            console.log(response)
-            return response.json()
+            console.log(contentType)
+            //console.log(response.text())
+            if(!contentType){
+                throw new Error('no content type')
+            } else if (contentType.includes('application/json')){
+                return response.json()
+            } else if (contentType.includes('text/plain')){
+                return response.text()
+            } else {
+                throw new Error('cannot handle response')
+            } 
         })
         .then((data) => {
-            saved = data
-            data.sort((a,b) => a.rank - b.rank)
+            console.log(typeof(data))
+            if(typeof(data) == 'string'){
+                resolve(data)
+            }
+            leaderboards = data.content
+            for(var i = 0; i < leaderboards.length; i++){
+                leaderboards[i].score /= 100000 
+            }
+            savedBoard = leaderboards
+            //data.sort((a,b) => a.score - b.score)
             console.log("Received data:")
-            console.log(data)
-            resolve(data)
+            console.log(leaderboards)
+            resolve(leaderboards)
         })
         .catch((error) => {
             reject(error)
@@ -82,58 +102,68 @@ function setBoard(boardData, reset){
         tr.appendChild(td3)
         var td4 = document.createElement('td')
         tr.appendChild(td4)
-        td1.textContent = boardData[i].rank
-        td2.textContent = boardData[i].uid
+        td1.textContent = (page) * 10 + i + 1
+        td2.textContent = boardData[i].nickname
         td3.textContent = boardData[i].score
         td4.textContent = boardData[i].time + " s"
 
         // show codes of each row
-        if(boardData[i].rank > 10){
+        if((page) * 10 + i + 1 > 0){
             var toggle = document.createElement('tr')
             toggle.classList.add('details')
             toggle.classList.add('details-hide')
-            toggle.setAttribute('num', i)
+            toggle.setAttribute('id', boardData[i].id)
             toggle.classList.add
             tbody.appendChild(toggle)
-            var detail = document.createElement('td')
-            toggle.appendChild(detail)
-            detail.colSpan = 4
-            var code = document.createElement('p')
-            detail.appendChild(code)
-            code.textContent = "Codes"
-            var codes = document.createElement('p')
-            code.appendChild(codes)
-            codes.textContent = `${boardData[i].codes}`
-            var date = document.createElement('p')
-            detail.appendChild(date)
-            date.textContent = `Date: ${boardData[i].date}`
             tr.addEventListener('click', function () {
                 const details = this.nextElementSibling
                 details.classList.toggle('details-hide')
+                codeID = details.getAttribute('id')
+                if(details.children.length > 0){
+                    return
+                }
+                getBoard(urls[2] + codeID).then(result => {
+                    details.innerHTML = `<td colspan = "4">
+                    <p>Codes</p>
+                    <pre><code class='language-javascript'>${result}</code></pre>
+                    </td>`
+                    /*var detail = document.createElement('td')
+                    details.appendChild(detail)
+                    detail.colSpan = 4
+                    var codeTitle = document.createElement('p')
+                    detail.appendChild(codeTitle)
+                    codeTitle.textContent = "Codes"
+                    var codes = document.createElement('pre')
+                    detail.appendChild(codes)
+                    var code = document.createElement('code')
+                    codes.appendChild(code)
+                    code.classList.add('language-javascript')
+                    code.textContent = result.slice(1, -1);*/
+                })
+                
             })
+            //detail 누르면 그 때 코드 받아오도록 하는 설정
         }        
     }
 }
-function loadBoard(url){
-    var apiUrl
-    if (true) apiUrl = url
-    //if url 설정에 페이지 관련 있음 => 현재 페이지 맞춰서 apiUrl 새로 만들어 전달
+function loadBoard(urlOp, pageMoveBy){
+    var apiUrl = urls[urlOp]
+    if (urlOp == 1) {
+        newPage = page + pageMoveBy
+        if(newPage > 9 || newPage < 0) return
+        apiUrl += String(newPage)
+    }
     getBoard(apiUrl).then(result => {
-        //if result가 있고 url이 페이지 설정이면 페이지 값 증가/감소(url 값에 따라서), 없다면 페이지 값 그대로
+        if (result.length == 0 && urlOp == 1){
+            console.log('page is empty')
+            return
+        }
+        page += pageMoveBy
         setBoard(result, true)
     })
     .catch(error => {
         console.log('Error', error)
     })   
 }
-function search(){
-    var input = document.getElementById('search-box').value
-    //if input === '' && 현재 저장해둔 데이터 있음(typeof가 undefined가 아니거나 값이 null이 아니거나)
-    // => 저장해둔 값 호출, 저장해둔 건 없다면 현재 페이지 loadboard(), return
 
-    //var url = urls[] ~~~ + input
-    //loadBoard(url)
-    // 입력값을 urls[search 관련]과 합쳐서 loadBoard 호출
-}
-
-loadBoard(urls[0])
+loadBoard(page, 0)

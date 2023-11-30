@@ -112,11 +112,11 @@ ${data.speed}mph | ${data.angle}° | ${data.rotationsFormatted} flip${
     if (canShowShareSheet) {
       document
         .querySelector("#share")
-        .addEventListener("click", showShareSheet);
+        .addEventListener("click", ()=>{window.open('./leader.html', '_blank')});
     } else if (canCopyText) {
       document
         .querySelector("#copyText")
-        .addEventListener("click", copyShareStats);
+        .addEventListener("click", ()=>{window.open('./leader.html', '_blank')});
     }
 
     if (hasKeyboard) {
