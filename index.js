@@ -213,6 +213,14 @@ function onCloseInstructions() {
     terrain.setShowLandingSurfaces();
 }
 
+let _code;
+
+export function setSaveCode(code) {
+    _code = code
+}
+
+window.setSaveCode = setSaveCode;
+
 function onGameEnd(data) {
     gameEnded = true;
     landerControls.detachEventListeners();
@@ -257,7 +265,8 @@ function onGameEnd(data) {
                         },
                         body: JSON.stringify({ 
                             score: parseInt((data.landed ? finalScore : -finalScore) * 100000), 
-                            code: "testcode--"
+                            code: _code,
+                            time: data.durationInSeconds.toString()
                         })
                     })
                     .then((response) => {
