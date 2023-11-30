@@ -1,16 +1,13 @@
 const serverAddress = "http://13.114.181.168:8080"
 
 var page = 0
-var saved
+var savedBoard
 
 const urls = [
     "/api/ranking",
     "/leaderboard?pageno=",
     "/leaderboard/",
 ]
-
-var getData
-
 var board = document.getElementById("board");
 var table = document.createElement('table');
 table.style.width = "60%";
@@ -58,15 +55,15 @@ function getBoard(url){
             if(typeof(data) == 'string'){
                 resolve(data)
             }
-            leaderBoards = data.content
-            for(var i = 0; i < leaderBoards.length; i++){
-                leaderBoards[i].score /= 100000 
+            leaderboards = data.content
+            for(var i = 0; i < leaderboards.length; i++){
+                leaderboards[i].score /= 100000 
             }
-            saved = leaderBoards
+            savedBoard = leaderboards
             //data.sort((a,b) => a.score - b.score)
             console.log("Received data:")
-            console.log(leaderBoards)
-            resolve(leaderBoards)
+            console.log(leaderboards)
+            resolve(leaderboards)
         })
         .catch((error) => {
             reject(error)
@@ -126,7 +123,11 @@ function setBoard(boardData, reset){
                     return
                 }
                 getBoard(urls[2] + codeID).then(result => {
-                    var detail = document.createElement('td')
+                    details.innerHTML = `<td colspan = "4">
+                    <p>Codes</p>
+                    <pre><code class='language-javascript'>${result}</code></pre>
+                    </td>`
+                    /*var detail = document.createElement('td')
                     details.appendChild(detail)
                     detail.colSpan = 4
                     var codeTitle = document.createElement('p')
@@ -137,7 +138,7 @@ function setBoard(boardData, reset){
                     var code = document.createElement('code')
                     codes.appendChild(code)
                     code.classList.add('language-javascript')
-                    code.textContent = result.slice(1, -1);
+                    code.textContent = result.slice(1, -1);*/
                 })
                 
             })
@@ -145,24 +146,19 @@ function setBoard(boardData, reset){
         }        
     }
 }
-function loadBoard(urlNum, pageV){
-    var apiUrl = urls[urlNum]
-    if (urlNum == 1) {
-        num = page + pageV
-        if(num > 9) num = 9
-        if(num < 0) num = 0
-        apiUrl += String(num)
+function loadBoard(urlOp, pageMoveBy){
+    var apiUrl = urls[urlOp]
+    if (urlOp == 1) {
+        newPage = page + pageMoveBy
+        if(newPage > 9 || newPage < 0) return
+        apiUrl += String(newPage)
     }
-    //if url 설정에 페이지 관련 있음 => 현재 페이지 맞춰서 apiUrl 새로 만들어 전달
     getBoard(apiUrl).then(result => {
-        if (result.length == 0 && urlNum == 1){
+        if (result.length == 0 && urlOp == 1){
             console.log('page is empty')
             return
         }
-        page += pageV
-        if(page > 9) page = 9
-        if(page < 0) page = 0
-        //if result가 있고 url이 페이지 설정이면 페이지 값 증가/감소(url 값에 따라서), 없다면 페이지 값 그대로
+        page += pageMoveBy
         setBoard(result, true)
     })
     .catch(error => {
