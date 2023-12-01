@@ -24,6 +24,27 @@
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     }
 
+    .success-message {
+        display: none;
+        position: fixed;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #4caf50;
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+        animation: fadeInOut 2s ease-in-out; /* Customize the animation duration */
+    }
+    @keyframes fadeInOut {
+        0%, 100% {
+            opacity: 0;
+        }
+        20%, 80% {
+            opacity: 1;
+        }
+    }
+
     .form-group {
         margin-bottom: 20px;
     }
@@ -58,6 +79,7 @@
     }
 </style>
 <body>
+    <div class="success-message" id="successMessage">회원가입 성공!</div>
     <div class="login-container">
         <h2>Login</h2>
         <form action="#" method="post">
