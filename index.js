@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json', // Adjust as needed
+                    'Content-Type': 'application/json',
                 },
             })
             .then(response =>{
