@@ -57,13 +57,12 @@
             flex-wrap: nowrap;
         }
 
-        @media screen and (max-width: 1080px){
+        @media screen and (max-width: 1080px) {
             .menus {
                 display: flex;
                 flex-wrap: wrap;
             }
         }
-
 
         .buttons {
             width: 100%;
@@ -84,10 +83,11 @@
     <body>
         <div>
             <div class="mainpage">
-                <img src="images/main-symbol.png" width="100px"/><br>
-                <img src="images/main-logo.png" width="250px"/>
+                <img src="images/main-symbol.png" width="100px" /><br />
+                <img src="images/main-logo.png" width="250px" />
             </div>
             <div class="menus">
+                <iframe src="minigame.html" width="100%" height="800px" style="border: none; "></iframe>
                 <div class="buttons">
                     <a href="login.html" class="button login-btn">로그인</a>
                     <a style="display: none" onclick="logout()" class="button logout-btn">로그아웃</a>

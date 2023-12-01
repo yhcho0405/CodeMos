@@ -160,7 +160,7 @@
     </style>
     <body>
         <div class="game"></div>
-        <div id="endGameStats" class="fullSizeContainer">
+        <div id="endGameStats" class="fullSizeContainer" style="display: none;">
             <h1 id="description"></h1>
             <div class="scoreContainer"><span id="score"></span> point <span id="type"></span></div>
             <div class="meterAndLabel">
@@ -214,7 +214,7 @@
                 </div>
             </div>
         </div>
-        <div id="instructions" class="fullSizeContainer instructions">
+        <div id="instructions" class="fullSizeContainer instructions" style="display: none;">
             <div>
                 <h1>CodeMos</h1>
                 <p>착륙 알고리즘을 작성해 착륙 지점에 우주선을 안전하게 착륙시켜야 합니다</p>
@@ -254,7 +254,7 @@
         </div>
 
         <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-        <script src="index.js" type="module"></script>
+        <script src="minigameIndex.js" type="module"></script>
         <script src="func.js" type="module"></script>
         <script>
             var editor = ace.edit("editor");
@@ -352,12 +352,6 @@
             }
         </script>
 
-        <button class="docs-btn" onclick="apiDocsToggle()">Docs</button>
-        <button class="code-btn" onclick="toggleVisibility()">Code</button>
-        <button class="apply-btn" onclick="applyCodeHandler()">Apply</button>
-        <button class="login-btn" onclick="window.location.href='login.html'">Login</button>
-        <button class="logout-btn" style="display: none" onclick="logout()">Logout</button>
-        <button class="home-btn" onclick="window.location.href='index.html'">HOME</button>
 
         <!-- <div id="tally" class="topRightCorner">L<span id="landingTotal"></span> C<span id="crashTotal"></span></div> -->
         <script></script>
