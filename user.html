@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>CodeMos Tutorial</title>
+        <title>CodeMos</title>
         <meta property="og:title" content="CodeMos" />
         <meta name="description" content="Can you successfully pilot the lander to the surface? Play instantly from your phone or computer." />
         <meta property="og:description" content="Can you successfully pilot the lander to the surface?" />
@@ -19,50 +19,178 @@
     </head>
     <style type="text/css" media="screen">
         body {
-            margin: 100px;
-            background: #02071e;
-            font: 400 18px/1.5 -apple-system, BlinkMacSystemFont, sans-serif;
-            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #02071e;
+            color: white;
+            margin: 0;
+            padding: 0;
             overflow-y: auto;
         }
 
-        h1{
-            color: antiquewhite;
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
         }
-        h2{
-            color: antiquewhite;
+
+        .logo img {
+            max-width: 15%;
+            margin-top: 3%;
+
+            height: auto;
         }
-        .home-btn {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            padding: 10px 20px;
-            background-color: #0168a4;
-            color: #fff;
-            border: none;
+
+        .profile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .user-info-block {
+            display: flex; /* Flexbox 사용 */
+            align-items: center; /* 수직 중앙 정렬 */
+            background-color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 60%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+
+        .profile-icon {
+            width: 100px;
+            height: 100px;
+            background-image: url("images/dol.jpg"); /* 이 부분은 실제 프로필 이미지로 대체 가능 */
+            border-radius: 50%;
+            margin-right: 20px; /* 아이콘과 나머지 정보 사이의 간격 */
+            background-size: cover; /* 이미지가 컨테이너를 완전히 덮도록 */
+            background-position: center; /* 이미지를 중앙에 배치 */
+            background-repeat: no-repeat; /* 이미지 반복 방지 */
+        }
+
+        .user-details {
+            text-align: left;
+            display: flex;
+            flex-direction: column; /* 세로 방향 정렬 */
+        }
+
+        .user-details h2 {
+            margin: 5px 0; /* 상하 여백 */
+        }
+
+        .user-details .nickname {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .user-info-block .small-text {
+            font-size: 0.8em; /* 아이디와 역할의 글자 크기를 작게 */
+        }
+        .code-entities {
+            margin-top: 20px;
+            /* 동적인 코드 엔티티 목록 스타일링 */
+        }
+        .code{
             border-radius: 5px;
+            padding: 5px;
             cursor: pointer;
-            z-index: 1009;
+            text-align: left;
         }
-        .home-btn:hover {
-            background-color: #00408e;
+        .code:hover {
+            background-color: #3f48cc;
+        }
+        code{
+            max-width: 100%;
         }
     </style>
     <body>
-        <div>
-            <div class="mainpage">
-                <img src="images/favicon-120x120.png" />
-                <h1>CodeMos</h1>
-                <h2>게임 방법</h2>
+        <div class="container">
+            <div class="logo">
+                <!-- 로고 이미지 경로를 'logo.png'로 가정합니다. 실제 경로로 변경하세요. -->
+                <img src="images/main-symbol.png" alt="Logo">
             </div>
-            <button class="home-btn" onclick="window.location.href='index.html'">HOME</button>
+            <div class="profile">
+                <div class="user-info-block">
+                    <div class="profile-icon"></div>
+                    <div class="user-details">
+                        <h2 class="nickname">닉네임</h2>
+                        <h2 class="small-text">ID: </h2>
+                        <h2 class="small-text">ROLE: </h2>
+                    </div>
+                </div>
+                          
+            </div>
+            <div class="code-entities">
+                <div id="code-buttons"></div>
+                <pre id="display-code"></pre>
+            </div>
         </div>
     </body>
 
     <script>
+        var serverAddress = "http://18.179.38.25:8080"
+        var codeList
         document.addEventListener("DOMContentLoaded", function () {
             var currentPath = window.location.pathname;
             history.replaceState(null, null, currentPath.replace(".html", ""));
+
+            var token = sessionStorage.getItem('jwtToken')
+            if (token == null){
+                var profile = document.querySelector('.profile')
+                profile.innerHTML = `<div>Bad Access</div>`
+                setTimeout(() => {
+                    history.back()
+                }, 2000);
+            } else {
+                fetch(serverAddress + '/user/mypage', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                .then(response => {
+                    return response.json()
+                })
+                .then(data => {
+                    console.log(data)
+                    updateUserInfo(data);
+                    createCodeButtons(data.leaderBoards);
+                })
+                .catch(error => console.error('Error:', error));
+            }
         });
+
+        // 사용자 정보 업데이트
+        function updateUserInfo(data) {
+            document.querySelector('.nickname').innerText = data.nickname;
+            var smallTextElements = document.querySelectorAll('.small-text');
+            if (smallTextElements.length >= 2) {
+                smallTextElements[0].innerText = 'ID: ' + data.loginId;
+                smallTextElements[1].innerText = 'ROLE: ' + data.role;
+            }
+        }
+
+        // 코드 엔티티에 대한 버튼 생성
+        function createCodeButtons(leaderboards) {
+            codeList = leaderboards
+            var buttonsContainer = document.getElementById('code-buttons');
+            leaderboards.forEach(board => {
+                var button = document.createElement('div');
+                button.classList.add('code')
+                button.innerText = 'Code ' + board.leaderBoardId;
+                button.addEventListener('click', function(){
+                    this.classList.toggle("show")
+                    if(this.classList.contains("show")){
+                        this.innerHTML += `<pre><code style ="white-space: pre-wrap;
+      overflow-wrap: break-word;"></code></pre>`
+                        this.querySelector('code').innerText = board.code                   
+                    } else {
+                        this.querySelector('pre').remove()
+                    }
+                })
+                buttonsContainer.appendChild(button);
+            });
+        }
     </script>
 </html>
