@@ -56,12 +56,13 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error('Error Code:', error);
         });
     }
-    }, 500);
+    }, 100);
 })
+
 export function logout(){
     sessionStorage.removeItem('jwtToken')
-    document.querySelector('.login-btn').style.display = "none"
-    document.querySelector('.logout-btn').style.display = "block"
+    document.querySelector('.login-btn').style.display = "block"
+    document.querySelector('.logout-btn').style.display = "none"
 
     var alertBox = document.createElement('div')
     alertBox.textContent = "로그아웃됨"

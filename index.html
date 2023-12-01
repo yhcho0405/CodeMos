@@ -3,10 +3,8 @@
     <head>
         <title>CodeMos</title>
         <meta property="og:title" content="CodeMos" />
-        <!-- <meta property="og:url" content="https://ehmorris.com/lander/" /> -->
         <meta name="description" content="Can you successfully pilot the lander to the surface? Play instantly from your phone or computer." />
         <meta property="og:description" content="Can you successfully pilot the lander to the surface?" />
-        <!-- <meta property="og:image" content="https://ehmorris.com/lander/images/oembed.png" /> -->
         <meta property="og:image:width" content="700" />
         <meta property="og:image:height" content="700" />
         <link rel="icon" type="image/png" href="./images/favicon-16x16.png" sizes="16x16" />
@@ -54,18 +52,11 @@
             box-shadow: 0 0 20px #2e9cca;
         }
 
-        .menus {
+        .test {
             display: flex;
             flex-wrap: nowrap;
         }
 
-        @media screen and (max-width: 1080px){
-            .menus {
-                display: flex;
-                flex-wrap: wrap;
-            }
-        }
-        
         .buttons {
             margin: 0px auto 0px auto;
         }
@@ -87,9 +78,10 @@
                 <img src="images/favicon-120x120.png" />
                 <h1>CodeMos</h1>
             </div>
-            <div class="menus">
+            <div class="test">
                 <div class="buttons">
-                    <a href="login.html" class="button">로그인</a>
+                    <a href="login.html" class="button login-btn">로그인</a>
+                    <a style="display: none" onclick="logout()" class="button logout-btn">로그아웃</a>
                     <a href="tutorial.html" class="button">게임 설명</a>
                     <a href="game.html" class="button">게임 시작</a>
                     <a href="leader.html" target="_blank" class="button">리더보드</a>
@@ -100,6 +92,49 @@
                     <script src="leader.js"></script>
                     <script>
                         loadBoard(1, 0);
+
+                        document.addEventListener("DOMContentLoaded", () => {
+                            //로그인 확인
+                            setTimeout(() => {
+                                console.log(sessionStorage.getItem("jwtToken"));
+                                if (sessionStorage.getItem("jwtToken") == null) {
+                                    console.log("no token");
+                                    document.querySelector(".login-btn").style.display = "block";
+                                    document.querySelector(".logout-btn").style.display = "none";
+                                    return;
+                                } else {
+                                    document.querySelector(".login-btn").style.display = "none";
+                                    document.querySelector(".logout-btn").style.display = "block";
+                                    var token = sessionStorage.getItem("jwtToken");
+                                    fetch(serverAddress + "/api/verify-token", {
+                                        method: "GET",
+                                        headers: {
+                                            Authorization: `Bearer ${token}`,
+                                            "Content-Type": "application/json",
+                                        },
+                                    })
+                                        .then((response) => {
+                                            if (!response.ok) {
+                                                throw new Error(response.status);
+                                            }
+                                            if (response.text() == "Invalid token.") {
+                                                sessionStorage.removeItem("jwtToken");
+                                                document.quereySelector(".login-btn").style.display = "block";
+                                                document.querySelector(".logout-btn").style.display = "none";
+                                            }
+                                            return response.json();
+                                        })
+                                        .catch((error) => {
+                                            console.error("Error Code:", error);
+                                        });
+                                }
+                            }, 100);
+                        });
+                        function logout() {
+                            sessionStorage.removeItem("jwtToken");
+                            document.querySelector(".login-btn").style.display = "block";
+                            document.querySelector(".logout-btn").style.display = "none";
+                        }
                     </script>
                 </div>
             </div>
