@@ -10,9 +10,15 @@ const urls = [
 ]
 var board = document.getElementById("board");
 var table = document.createElement('table');
-table.style.width = "60%";
+table.style.width = "500px";
 table.style.marginLeft = "auto"
 table.style.marginRight = "auto"
+table.style.backgroundColor = "#0a0f1c"; // 어두운 네이비 색상
+table.style.color = "#fff"; // 흰색 텍스트
+table.style.borderRadius = "10px"; // 둥근 모서리
+table.style.borderCollapse = "collapse"; // 테두리 겹침 방지
+table.style.border = "1px solid white";
+
 board.appendChild(table)
 var thead = document.createElement('thead')
 var tbody = document.createElement('tbody')
@@ -20,7 +26,12 @@ table.appendChild(thead)
 table.appendChild(tbody)
 
 thead.innerHTML = "<tr><td>순위</td><td>이름</td><td>점수</td><td>걸린 시간</td></tr>"
-
+var ths = thead.getElementsByTagName("td");
+for (var i = 0; i < ths.length; i++) {
+    ths[i].style.border = "1px solid #2e9cca"; // 네온 스타일 테두리
+    ths[i].style.backgroundColor = "#1c223a"; // 어두운 배경색
+    ths[i].style.padding = "5px"; // 셀 패딩
+}
 loadBoard(page, 0)
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -95,14 +106,23 @@ function setBoard(boardData, reset){
         tr.style.cursor = 'pointer'
         tr.setAttribute('num', i)
         tr.classList.add('row')
+        tr.style.border = "1px solid white";
         tbody.appendChild(tr)
         var td1 = document.createElement('td')
+        td1.style.border = "1px solid #2e9cca"; // 네온 스타일 테두리
+        td1.style.padding = "5px"; // 셀 패딩
         tr.appendChild(td1)
         var td2 = document.createElement('td')
+        td2.style.border = "1px solid #2e9cca"; // 네온 스타일 테두리
+        td2.style.padding = "5px"; // 셀 패딩
         tr.appendChild(td2)
         var td3 = document.createElement('td')
+        td3.style.border = "1px solid #2e9cca"; // 네온 스타일 테두리
+        td3.style.padding = "5px"; // 셀 패딩
         tr.appendChild(td3)
         var td4 = document.createElement('td')
+        td4.style.border = "1px solid #2e9cca"; // 네온 스타일 테두리
+        td4.style.padding = "5px"; // 셀 패딩
         tr.appendChild(td4)
         td1.textContent = (page) * 10 + i + 1
         td2.textContent = boardData[i].nickname
@@ -167,3 +187,4 @@ function loadBoard(urlOp, pageMoveBy){
         console.log('Error', error)
     })   
 }
+
