@@ -6,7 +6,7 @@ export const showStatsAndResetControl = (
   hasKeyboard,
   onReset
 ) => {
-  const buttonDelayTime = 500;
+  const buttonDelayTime = 1500;
   const canShowShareSheet = navigator.canShare;
   const showStats = () => {
     document.querySelector("#endGameStats").classList.add("show");

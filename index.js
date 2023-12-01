@@ -248,6 +248,7 @@ function onGameEnd(data) {
         localStorage.setItem('personalBestScore', -9999999);
     }
 
+    // 만약 로그인 된 상태라면
     setTimeout(() => {
         if (!data.isPressKey) {        
             console.log(data.landed ? finalScore : -finalScore);
@@ -284,7 +285,7 @@ function onGameEnd(data) {
                 }
             }
         }
-    }, "1700");
+    }, "1500");
 
 }
 
