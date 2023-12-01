@@ -101,8 +101,22 @@
             font-size: 0.8em; /* 아이디와 역할의 글자 크기를 작게 */
         }
 
+        .reg-btn{
+            align-items: center;
+            margin: 10px 0;
+            justify-content: center;
+            height: 40px;
+            width: 50px;
+            color: #fff;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;                    
+            border-radius: 2px;
+            padding: 0 4px;
+            background-color: #189f2a;
+        }
         .reg-btn:hover{
-            background-color: #158d25;
+            background-color: #0d5b17;
         }
 
         #deleteAccount{
@@ -131,7 +145,7 @@
             text-align: left;
         }
         .code:hover {
-            background-color: #3f48cc;
+            background-color: #0a0f58;
         }
         code{
             max-width: 100%;
@@ -231,19 +245,6 @@
                 })
                 var regButton = document.createElement('button')
                 regButton.classList.add("reg-btn")
-                regButton.style.cssText=`
-                    align-items: center;
-                    margin: 10px 0;
-                    justify-content: center;
-                    height: 40px;
-                    width: 50px;
-                    color: #fff;
-                    font-size: 12px;
-                    cursor: pointer;
-                    border: none;
-                    background-color: #1cca33;
-                    border-radius: 2px;
-                    padding: 0 4px;`
                 regButton.innerText = '등록'
                 regButton.addEventListener('click', registerCode)
                 codebox.insertAdjacentElement('afterend', regButton)
@@ -267,7 +268,6 @@
             let codeNumber
             if (matches) {
                 codeNumber = parseInt(matches[1], 10);
-                console.log(codeNumber);
             } else {
                 console.log("No code number found");
                 return
