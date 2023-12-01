@@ -57,12 +57,13 @@
             flex-wrap: nowrap;
         }
 
-        @media screen and (max-width: 1080px) {
+        @media screen and (max-width: 1080px){
             .menus {
                 display: flex;
                 flex-wrap: wrap;
             }
         }
+
 
         .buttons {
             width: 100%;
@@ -79,18 +80,55 @@
             margin: 0px 30px;
             color: white;
         }
+        .home-login-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            background-color: #dc5e07;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration-line: none;
+        }
+        .home-logout-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            background-color: #dc5e07;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .home-mypage-btn {
+            position: fixed;
+            top: 10px;
+            left: 150px;
+            padding: 10px 20px;
+            background-color: #dc5e07;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
     <body>
+        <a href="login.html" class="home-login-btn">로그인</a>
+        <a style="display: none" onclick="logout()" class="home-logout-btn">로그아웃</a>
+        <a style="display: none" href="leader.html" class="home-mypage-btn">마이페이지</a>
+        
         <div>
             <div class="mainpage">
-                <img src="images/main-symbol.png" width="100px" /><br />
-                <img src="images/main-logo.png" width="250px" />
+                <img src="images/main-symbol.png" width="100px"/><br>
+                <img src="images/main-logo.png" width="250px"/>
             </div>
             <div class="menus">
                 <iframe src="minigame.html" width="100%" height="800px" style="border: none; "></iframe>
                 <div class="buttons">
-                    <a href="login.html" class="button login-btn">로그인</a>
-                    <a style="display: none" onclick="logout()" class="button logout-btn">로그아웃</a>
+                    <a style="display: none" onclick="logout()" class="button home-logout-btn">로그아웃</a>
                     <a href="tutorial.html" class="button">게임 설명</a>
                     <a href="game.html" class="button">게임 시작</a>
                     <a href="leader.html" target="_blank" class="button">리더보드</a>
@@ -108,12 +146,15 @@
                                 console.log(sessionStorage.getItem("jwtToken"));
                                 if (sessionStorage.getItem("jwtToken") == null) {
                                     console.log("no token");
-                                    document.querySelector(".login-btn").style.display = "block";
-                                    document.querySelector(".logout-btn").style.display = "none";
+                                    document.querySelector(".home-login-btn").style.display = "block";
+                                    document.querySelector(".home-logout-btn").style.display = "none";
+                                    document.querySelector(".home-mypage-btn").style.display = "none";
+                                    
                                     return;
                                 } else {
-                                    document.querySelector(".login-btn").style.display = "none";
-                                    document.querySelector(".logout-btn").style.display = "block";
+                                    document.querySelector(".home-login-btn").style.display = "none";
+                                    document.querySelector(".home-logout-btn").style.display = "block";
+                                    document.querySelector(".home-mypage-btn").style.display = "block";
                                     var token = sessionStorage.getItem("jwtToken");
                                     fetch(serverAddress + "/api/verify-token", {
                                         method: "GET",
@@ -128,8 +169,9 @@
                                             }
                                             if (response.text() == "Invalid token.") {
                                                 sessionStorage.removeItem("jwtToken");
-                                                document.quereySelector(".login-btn").style.display = "block";
-                                                document.querySelector(".logout-btn").style.display = "none";
+                                                document.quereySelector(".home-login-btn").style.display = "block";
+                                                document.querySelector(".home-logout-btn").style.display = "none";
+                                                document.querySelector(".home-mypage-btn").style.display = "none";
                                             }
                                             return response.json();
                                         })
@@ -141,8 +183,9 @@
                         });
                         function logout() {
                             sessionStorage.removeItem("jwtToken");
-                            document.querySelector(".login-btn").style.display = "block";
-                            document.querySelector(".logout-btn").style.display = "none";
+                            document.querySelector(".home-login-btn").style.display = "block";
+                            document.querySelector(".home-logout-btn").style.display = "none";
+                            document.querySelector(".home-mypage-btn").style.display = "none";
                         }
                     </script>
                 </div>
