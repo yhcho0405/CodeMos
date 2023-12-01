@@ -1,10 +1,9 @@
-const serverAddress = "http://18.179.38.25:8080"
+serverAddress = "http://18.179.38.25:8080"
 
 var page = 0
 var savedBoard
 
 const urls = [
-    "/api/ranking",
     "/leaderboard?pageno=",
     "/leaderboard/",
 ]
@@ -32,11 +31,11 @@ for (var i = 0; i < ths.length; i++) {
     ths[i].style.backgroundColor = "#1c223a"; // 어두운 배경색
     ths[i].style.padding = "5px"; // 셀 패딩
 }
-loadBoard(page, 0)
+loadBoard(0, 0)
 
 document.addEventListener('DOMContentLoaded', function () {
     var currentPath = window.location.pathname
-    history.pushState(null, null, currentPath.replace('.html', ''))
+    history.replaceState(null, null, currentPath.replace('.html', ''))
 })
 
 function getBoard(url){
@@ -50,9 +49,6 @@ function getBoard(url){
                 throw new Error(response.status)
             }
             const contentType = response.headers.get('Content-Type');
-            console.log('response:')
-            console.log(contentType)
-            //console.log(response.text())
             if(!contentType){
                 throw new Error('no content type')
             } else if (contentType.includes('application/json')){
@@ -64,7 +60,6 @@ function getBoard(url){
             } 
         })
         .then((data) => {
-            console.log(typeof(data))
             if(typeof(data) == 'string'){
                 resolve(data)
             }
@@ -74,8 +69,6 @@ function getBoard(url){
             }
             savedBoard = leaderboards
             //data.sort((a,b) => a.score - b.score)
-            console.log("Received data:")
-            console.log(leaderboards)
             resolve(leaderboards)
         })
         .catch((error) => {
@@ -84,11 +77,8 @@ function getBoard(url){
     })
         
 }
-function setBoard(boardData, reset){
-    console.log("Process for: ")
-    console.log(boardData)
-
-    if(reset) tbody.innerHTML = ""
+function setBoard(boardData){
+    tbody.innerHTML = ""
 
     if(boardData.length == 0){
         var tr = document.createElement('tr')
@@ -144,44 +134,31 @@ function setBoard(boardData, reset){
                 if(details.children.length > 0){
                     return
                 }
-                getBoard(urls[2] + codeID).then(result => {
+                getBoard(urls[1] + codeID).then(result => {
                     details.innerHTML = `<td colspan = "4">
                     <p>코드</p>
                     <pre><code class='language-javascript'>${result}</code></pre>
                     </td>`
-                    /*var detail = document.createElement('td')
-                    details.appendChild(detail)
-                    detail.colSpan = 4
-                    var codeTitle = document.createElement('p')
-                    detail.appendChild(codeTitle)
-                    codeTitle.textContent = "Codes"
-                    var codes = document.createElement('pre')
-                    detail.appendChild(codes)
-                    var code = document.createElement('code')
-                    codes.appendChild(code)
-                    code.classList.add('language-javascript')
-                    code.textContent = result.slice(1, -1);*/
                 })
                 
             })
-            //detail 누르면 그 때 코드 받아오도록 하는 설정
         }        
     }
 }
 function loadBoard(urlOp, pageMoveBy){
     var apiUrl = urls[urlOp]
-    if (urlOp == 1) {
+    if (urlOp == 0) {
         newPage = page + pageMoveBy
         if(newPage > 9 || newPage < 0) return
         apiUrl += String(newPage)
     }
     getBoard(apiUrl).then(result => {
-        if (result.length == 0 && urlOp == 1){
+        if (result.length == 0 && urlOp == 0){
             console.log('page is empty')
             return
         }
         page += pageMoveBy
-        setBoard(result, true)
+        setBoard(result)
     })
     .catch(error => {
         console.log('Error', error)

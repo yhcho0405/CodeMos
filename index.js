@@ -334,7 +334,7 @@ function onGameEnd(data) {
                 if (isConfirm) {
                     // TODO: 서버로 요청
 
-                    const serverAddress = "http://18.179.38.25:8080"
+                    serverAddress = "http://18.179.38.25:8080"
                     fetch(serverAddress+'/api/v1/leaderBoard/create', {
                         method: 'POST',
                         headers: {

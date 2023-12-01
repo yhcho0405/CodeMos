@@ -1,4 +1,4 @@
-const serverAddress = "http://18.179.38.25:8080"
+serverAddress = "http://18.179.38.25:8080"
 
 //import { makeTheme } from "./theme.js";
 //import { makeStateManager } from "./helpers/state.js";
