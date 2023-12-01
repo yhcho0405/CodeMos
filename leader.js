@@ -1,4 +1,4 @@
-const serverAddress = "http://13.114.181.168:8080"
+const serverAddress = "http://18.179.38.25:8080"
 
 var page = 0
 var savedBoard
@@ -110,7 +110,7 @@ function setBoard(boardData, reset){
         td4.textContent = boardData[i].time + " s"
 
         // show codes of each row
-        if((page) * 10 + i + 1 > 0){
+        if((page) * 10 + i + 1 > 10){
             var toggle = document.createElement('tr')
             toggle.classList.add('details')
             toggle.classList.add('details-hide')

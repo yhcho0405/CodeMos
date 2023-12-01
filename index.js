@@ -19,42 +19,46 @@ import { makeTheme } from "./theme.js";
 import { TRANSITION_TO_SPACE, VELOCITY_MULTIPLIER  } from "./helpers/constants.js";
 import { landingScoreDescription, crashScoreDescription, destroyedDescription } from "./helpers/scoring.js";
 
-var serverAddress = "http://13.114.181.168:8080"
+var serverAddress = "http://18.179.38.25:8080"
 var checkLoginID
 document.addEventListener("DOMContentLoaded", () => {
     //로그인 확인
+    setTimeout(() => {
+        console.log(sessionStorage.getItem('jwtToken'))
     if(sessionStorage.getItem('jwtToken') == null){
+        console.log("no token")
         document.querySelector('.login-btn').style.display = "block"
         document.querySelector('.logout-btn').style.display = "none"
         return
     } else {
         document.querySelector('.login-btn').style.display = "none"
         document.querySelector('.logout-btn').style.display = "block"
-        checkLoginID = setInterval(()=>{
-            var token = sessionStorage.getItem('jwtToken')
-            fetch(serverAddress + "/api/ranking", {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then(response =>{
-                if (response.status == 401) {
-                    sessionStorage.removeItem('jwtToken')
-                } else {
-                    throw new Error(response.status);
-                }
-                return response.json();
-            })
-            .catch(error => {
-                console.error('Error Code:', error);
-            });
-        }
-        , 10000);
-    }   
+        var token = sessionStorage.getItem('jwtToken')
+        fetch(serverAddress + "/api/verify-token", {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response =>{
+            if(!response.ok){
+                throw new Error(response.status)
+            }
+            if (response.text() == "Invalid token.") {
+                sessionStorage.removeItem('jwtToken')
+                document.quereySelector('.login-btn').style.display = "block"
+                document.querySelector('.logout-btn').style.display = "none"
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error Code:', error);
+        });
+    }
+    }, 500);
 })
-function logout(){
+export function logout(){
     sessionStorage.removeItem('jwtToken')
     document.querySelector('.login-btn').style.display = "none"
     document.querySelector('.logout-btn').style.display = "block"
@@ -90,7 +94,7 @@ function logout(){
         styleElement.remove()
     }, 2000);
 }
-
+window.logout = logout;
 // SETUP
 
 const audioManager = makeAudioManager();
@@ -329,7 +333,7 @@ function onGameEnd(data) {
                 if (isConfirm) {
                     // TODO: 서버로 요청
 
-                    const serverAddress = "http://13.114.181.168:8080"
+                    const serverAddress = "http://18.179.38.25:8080"
                     fetch(serverAddress+'/api/v1/leaderBoard/create', {
                         method: 'POST',
                         headers: {
