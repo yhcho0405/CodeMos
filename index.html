@@ -20,300 +20,43 @@
         <link rel="stylesheet" type="text/css" href="./style.css" />
     </head>
     <style type="text/css" media="screen">
-        #editor {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 50%;
+        body {
+            margin: 100px;
+            background: #02071e;
+            font: 400 18px/1.5 -apple-system, BlinkMacSystemFont, sans-serif;
+            text-align: center;
+            overflow-y: auto;
         }
-        #docs {
-            position: absolute;
-            top: 0;
-            right: 50%;
-            bottom: 0;
-            left: 0;
+
+        h1 {
+            color: antiquewhite;
         }
-        .code-btn {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
+        .button {
+            background-color: #4caf50;
+            color: white;
+            padding: 40px 60px;
+            font-size: 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
-            z-index: 1000;
+            display: block;
+            margin: 10px auto;
+            text-decoration: none;
+            text-align: center;
+            width: 300px;
         }
 
-        .code-btn:hover {
-            background-color: #0056b3;
+        .button:hover {
+            background-color: #2b632e;
         }
-
-        .apply-btn {
-            position: fixed;
-            bottom: 10px;
-            right: 100px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1000;
-        }
-
-        .apply-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .docs-btn {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1000;
-        }
-
-        .docs-btn:hover {
-            background-color: #0056b3;
-        }
-        
-        .login-btn {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            padding: 10px 20px;
-            background-color: #dc5e07;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1000;
-        }
-        .login-btn:hover {
-            background-color: #95430b;
-        }
-
-        #drag-handle {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 50%;
-            width: 60px;
-            cursor: ew-resize;
-            z-index: 999;
-            visibility: hidden;
-        }
-
     </style>
     <body>
-        <div class="game"></div>
-        <div id="endGameStats" class="fullSizeContainer">
-            <h1 id="description"></h1>
-            <div class="scoreContainer"><span id="score"></span> point <span id="type"></span></div>
-            <div class="meterAndLabel">
-                <div class="label">Speed</div>
-                <div class="meter" data-stat-name="speed">
-                    <div class="cursor" data-percent-position=""><span data-value=""></span><span class="unit">&nbsp;MPH</span></div>
-                </div>
-            </div>
-            <div class="meterAndLabel">
-                <div class="label">Angle</div>
-                <div class="meter" data-stat-name="angle">
-                    <div class="cursor" data-percent-position=""><span data-value=""></span> <span class="unit">&#176;</span></div>
-                </div>
-            </div>
-            <div class="statsTable">
-                <div class="tableRow">
-                    <span class="tableLabel">Time</span>
-                    <span class="tableValue"><span id="duration"></span> seconds</span>
-                </div>
-                <div class="tableRow">
-                    <span class="tableLabel">Flips</span>
-                    <span class="tableValue" id="rotations"></span>
-                </div>
-                <div class="tableRow">
-                    <span class="tableLabel">Max Speed</span>
-                    <span class="tableValue"><span id="maxSpeed"></span> MPH</span>
-                </div>
-                <div class="tableRow">
-                    <span class="tableLabel">Max Height</span>
-                    <span class="tableValue"><span id="maxHeight"></span> FT</span>
-                </div>
-            </div>
-            <div class="buttonContainer">
-                <div class="button loading" id="tryAgain">
-                    <span id="tryAgainText">Play Again</span>
-                    <svg class="buttonAnimatedBorder">
-                        <rect width="100%" height="100%"></rect>
-                    </svg>
-                </div>
-                <div class="button" id="share">
-                    <span>Leaderboard</span>
-                    <svg class="buttonBorder">
-                        <rect width="100%" height="100%"></rect>
-                    </svg>
-                </div>
-                <div class="button" id="copyText">
-                    <span>Leaderboard</span>
-                    <svg class="buttonBorder">
-                        <rect width="100%" height="100%"></rect>
-                    </svg>
-                </div>
-            </div>
-        </div>
-        <div id="instructions" class="fullSizeContainer instructions">
-            <div>
-                <h1>How to play</h1>
-                <p>착륙 알고리즘을 작성해 착륙 지점에 우주선을 안전하게 착륙시켜야 합니다</p>
-            </div>
-            <div class="instructionsControls">
-                <h2>키보드 방향키로 API 함수 테스트</h2>
-                <div id="forKeyboard">
-                    <ul>
-                        <li id="engineCheck"><input type="checkbox" /> 위쪽 방향키(주 엔진), engineOn()</li>
-                        <li id="rightRotationCheck"><input type="checkbox" />왼쪽 방향키(오른쪽 추진체), rotateLeft()</li>
-                        <li id="leftRotationCheck"><input type="checkbox" />오른쪽 방향키(왼쪽 추진체), rotateRight()</li>
-                        <li id="engineAndRotationCheck"><input type="checkbox" /> 방향키 동시에 누르기, 모든 함수는 동시에 호출될 수 있습니다.</li>
-                    </ul>
-                </div>
-                <div id="forTouch">
-                    <ul>
-                        <li id="engineCheck"><input type="checkbox" /> Tap the center of the screen</li>
-                        <li id="rightRotationCheck"><input type="checkbox" /> Tap the left side</li>
-                        <li id="leftRotationCheck"><input type="checkbox" /> Tap the right side</li>
-                        <li id="engineAndRotationCheck"><input type="checkbox" /> Hold down on the center while you tap the sides</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- <div id="cornerChallenge" class="topLeftCorner show">Daily Challenge <span id="cornerChallengeNumber"></span></div> -->
+        <h1>CodeMos</h1>
+        <a href="login.html" class="button">로그인</a>
+        <a href="game.html" class="button">게임 설명</a>
+        <a href="game.html" class="button">게임 시작</a>
+        <a href="leader.html" class="button">리더보드</a>
 
-        <div id="drag-handle"></div>
-
-        <!-- 코드 에디터 -->
-        <div id="editor" style="visibility: hidden">
-        </div>
-
-        <div id="docs" style="visibility: hidden">
-            <iframe src="docs.html" width="100%" height="100%"></iframe>
-        </div>
-
-        <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-        <script src="index.js" type="module">
-        </script>
-        <script src="func.js" type="module">
-        </script>
-        <script>
-            
-            var editor = ace.edit("editor");
-            editor.setTheme("ace/theme/monokai");
-            editor.session.setMode("ace/mode/javascript");
-            
-            function toggleVisibility() {
-                var editor = document.getElementById("editor");
-                var handle = document.getElementById("drag-handle");
-                if (editor.style.visibility === "hidden") {
-                    editor.style.visibility = "visible";
-                    checkHandleVisibility();
-                } else {
-                    editor.style.visibility = "hidden";
-                    checkHandleVisibility();
-                }
-            }
-
-            function apiDocsToggle() {
-                var docs = document.getElementById("docs");
-                var handle = document.getElementById("drag-handle");
-                if (docs.style.visibility === "hidden") {
-                    docs.style.visibility = "visible";
-                    checkHandleVisibility();
-                } else {
-                    docs.style.visibility = "hidden";
-                    checkHandleVisibility();
-                }
-            }
-
-            function checkHandleVisibility() {
-                var editorC = document.getElementById("editor");
-                var docs = document.getElementById("docs");
-                var handle = document.getElementById("drag-handle");
-
-                if (editorC.style.visibility === "visible" || docs.style.visibility === "visible") {
-                    handle.style.visibility = "visible";
-                } else {
-                    handle.style.visibility = "hidden";
-                }
-            }
-
-            document.addEventListener('DOMContentLoaded', function() {
-                var handle = document.getElementById('drag-handle');
-                var docs = document.getElementById('docs');
-                var editorC = document.getElementById('editor');
-                var isResizing = false;
-                loadCode();
-                handle.addEventListener('mousedown', function(e) {
-                    isResizing = true;
-                    e.preventDefault();
-                });
-
-                document.addEventListener('mousemove', function(e) {
-                    if (!isResizing) return;
-                    var offsetRight = document.body.offsetWidth - e.pageX;
-                    var offsetLeft = e.pageX;
-
-                    handle.style.left = offsetLeft - 50 + 'px';
-                    docs.style.right = offsetRight + 'px';
-                    editorC.style.left = offsetLeft + 'px';
-                });
-
-                document.addEventListener('mouseup', function(e) {
-                    isResizing = false;
-                });
-                var printMargin = document.querySelector('.ace_print-margin');
-                if (printMargin) {
-                    printMargin.style.visibility = 'hidden';
-                }
-            });
-            
-            function applyCodeHandler() {
-                var code = editor.getValue();
-                applyCode(code);
-                setSaveCode(code)
-                saveCode(code);
-            }
-
-            function saveCode(code) {
-                localStorage.setItem('myCodemosCode', code);
-                console.log('코드가 저장되었습니다.');
-            }
-
-            function loadCode() {
-                var code = localStorage.getItem('myCodemosCode');
-                var editorElement = document.getElementById('editor');
-                if (code) {
-                    editor.setValue(code)
-                } else {
-                    editor.setValue('// TODO: \nnewInterval = setInterval(() => {\n    // TODO: \n}, 1);\n// TODO:');
-                }
-            }
-        </script>
-
-        <button class="docs-btn" onclick="apiDocsToggle()">Docs</button>
-        <button class="code-btn" onclick="toggleVisibility()">Code</button>
-        <button class="apply-btn" onclick="applyCodeHandler()">Apply</button>
-        <button class="login-btn" onclick="window.location.href='login.html'">Login</button>
-
-        <!-- <div id="tally" class="topRightCorner">L<span id="landingTotal"></span> C<span id="crashTotal"></span></div> -->
-        <script>
-
-        </script>
+        <script src="login.js"></script>
     </body>
 </html>
