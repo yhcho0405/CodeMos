@@ -57,13 +57,12 @@
             flex-wrap: nowrap;
         }
 
-        @media screen and (max-width: 1080px){
+        @media screen and (max-width: 1080px) {
             .menus {
                 display: flex;
                 flex-wrap: wrap;
             }
         }
-
 
         .buttons {
             width: 100%;
@@ -114,22 +113,39 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+        .iframe-container {
+            display: flex;
+        }
+
+        .iframe-container iframe {
+            width: 50%;
+            border: none;
+        }
+
+        .iframe-container iframe {
+            height: 400px;
+            border-radius: 10px;
+        }
     </style>
     <body>
         <a href="login.html" class="home-login-btn">로그인</a>
         <a style="display: none" onclick="logout()" class="home-logout-btn">로그아웃</a>
         <a style="display: none" href="leader.html" class="home-mypage-btn">마이페이지</a>
-        
+
         <div>
             <div class="mainpage">
-                <img src="images/main-symbol.png" width="100px"/><br>
-                <img src="images/main-logo.png" width="250px"/>
+                <img src="images/main-symbol.png" width="100px" /><br />
+                <img src="images/main-logo.png" width="250px" />
+            </div>
+            <div class="iframe-container">
+                <iframe id="rightIframe" src="https://lottie.host/embed/67e1faa4-2645-461f-a6f0-4952bc6e94c8/9K3VEbwQTX.json"></iframe>
+                <iframe id="leftIframe" src="minigame.html"></iframe>
             </div>
             <div class="menus">
-                <iframe src="minigame.html" width="100%" height="800px" style="border: none; "></iframe>
                 <div class="buttons">
                     <a style="display: none" onclick="logout()" class="button home-logout-btn">로그아웃</a>
-                    <a href="tutorial.html" class="button">게임 설명</a>
+                    <a href="docs.html" class="button">게임 설명</a>
                     <a href="game.html" class="button">게임 시작</a>
                     <a href="leader.html" target="_blank" class="button">리더보드</a>
                 </div>
@@ -139,8 +155,16 @@
                     <script src="leader.js"></script>
                     <script>
                         loadBoard(0, 0);
+                        window.onload = function () {
 
+                        };
                         document.addEventListener("DOMContentLoaded", () => {
+                            var iframeContainer = document.getElementsByClassName("iframe-container");
+                            var leftIframe = document.getElementById("leftIframe");
+
+                            var rightIframeHeight = iframeContainer.style.width / 2 * 0.7;
+
+                            leftIframe.style.height = rightIframeHeight + "px";
                             //로그인 확인
                             setTimeout(() => {
                                 console.log(sessionStorage.getItem("jwtToken"));
@@ -149,7 +173,7 @@
                                     document.querySelector(".home-login-btn").style.display = "block";
                                     document.querySelector(".home-logout-btn").style.display = "none";
                                     document.querySelector(".home-mypage-btn").style.display = "none";
-                                    
+
                                     return;
                                 } else {
                                     document.querySelector(".home-login-btn").style.display = "none";
