@@ -33,13 +33,13 @@
         .button {
             background-color: #0a0f1c;
             color: #fff;
-            padding: 10px 20px;
+            padding: 20px 20px;
             font-size: 20px;
             border: 2px solid #2e9cca;
             border-radius: 4px;
             cursor: pointer;
             display: block;
-            margin: 30px auto 20px auto;
+            margin: 20px auto 20px auto;
             text-decoration: none;
             text-align: center;
             width: 250px;
@@ -64,9 +64,9 @@
             }
         }
 
+
         .buttons {
-            width: 100%;
-            margin: 0px 30px;
+            margin: 0px auto 0px auto;
         }
 
         .mainpage {
@@ -75,15 +75,16 @@
 
         .leader_board {
             width: 100%;
-            margin: 0px 30px;
+
+            margin: 20px auto;
             color: white;
         }
     </style>
     <body>
         <div>
             <div class="mainpage">
-                <img src="images/main-symbol.png" width="100px"/><br>
-                <img src="images/main-logo.png" width="250px"/>
+                <img src="images/favicon-120x120.png" />
+                <h1>CodeMos</h1>
             </div>
             <div class="menus">
                 <div class="buttons">
@@ -135,7 +136,7 @@
                                             console.error("Error Code:", error);
                                         });
                                 }
-                            }, 100);
+                            }, 1000);
                         });
                         function logout() {
                             sessionStorage.removeItem("jwtToken");

@@ -42,11 +42,25 @@
         }
         #docs {
             position: absolute;
-            top: 0;
+            top: 20px;
             right: 50%;
-            bottom: 0;
-            left: 0;
+            bottom: 20px;
+            left: 20px;
             z-index: 2;
+            border: 2px solid rgb(211, 211, 211);
+            border-radius: 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(128, 128, 128, 0.8);
+        }
+        #docs iframe {
+            border: 2px solid rgb(116, 116, 116);
+            width: 95%;
+            height: 95%;
+            border-radius: 20px;
+            box-sizing: border-box; /* Fill the container */
         }
         .code-btn {
             position: fixed;
