@@ -47,7 +47,6 @@
             margin-top: 20px;
         }
         .user-info-block {
-            display: flex; /* Flexbox 사용 */
             align-items: center; /* 수직 중앙 정렬 */
             background-color: #333;
             border-radius: 10px;
@@ -87,6 +86,22 @@
         .user-info-block .small-text {
             font-size: 0.8em; /* 아이디와 역할의 글자 크기를 작게 */
         }
+
+        #deleteAccount{
+            position: relative;
+            background-color: #c31b22;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 10px;
+            border: 0;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 5px;
+        }
+        #deleteAccount:hover{
+            background-color: #801519;
+        }
+
         .code-entities {
             margin-top: 20px;
             /* 동적인 코드 엔티티 목록 스타일링 */
@@ -118,8 +133,8 @@
                         <h2 class="small-text">ID: </h2>
                         <h2 class="small-text">ROLE: </h2>
                     </div>
+                    <button id="deleteAccount">회원탈퇴</button>
                 </div>
-                          
             </div>
             <div class="code-entities">
                 <div id="code-buttons"></div>
@@ -174,23 +189,74 @@
         // 코드 엔티티에 대한 버튼 생성
         function createCodeButtons(leaderboards) {
             codeList = leaderboards
-            var buttonsContainer = document.getElementById('code-buttons');
+            var codeboxesContainer = document.getElementById('code-buttons');
             leaderboards.forEach(board => {
-                var button = document.createElement('div');
-                button.classList.add('code')
-                button.innerText = 'Code ' + board.leaderBoardId;
-                button.addEventListener('click', function(){
+                var row = document.createElement('div');
+                row.style.display = "flex"
+                codeboxesContainer.appendChild(row);
+                var codebox = document.createElement('div');
+                codebox.classList.add('code')
+                codebox.innerText = '[Code ' + board.leaderBoardId + ']';
+                codebox.style.width = "100%"
+                codebox.addEventListener('click', function(){
                     this.classList.toggle("show")
                     if(this.classList.contains("show")){
-                        this.innerHTML += `<pre><code style ="white-space: pre-wrap;
-      overflow-wrap: break-word;"></code></pre>`
+                        this.innerHTML += `<pre><code style ="white-space: pre-wrap;overflow-wrap: break-word;"></code></pre>`
                         this.querySelector('code').innerText = board.code                   
                     } else {
                         this.querySelector('pre').remove()
                     }
+                    event.stopPropagation()
                 })
-                buttonsContainer.appendChild(button);
+                //var regButton = document.createElment()
+                var delButton = document.createElement('button')
+                delButton.style.cssText = `
+                    color: #fff;
+                    right: 10px;
+                    font-size: 20px;
+                    cursor: pointer;
+                    border: none;
+                    background-color: transparent;`
+                delButton.classList.add('close')
+                delButton.innerHTML = '&#215;';
+                delButton.addEventListener('click', registerCode)
+                row.appendChild(codebox);
+                codebox.insertAdjacentElement('afterend', delButton)
             });
         }
+        function registerCode(){
+            var conf = confirm("이 코드를 등록할까요?")
+            var str = this.previousElementSibling.innerText
+            let matches = str.match(/\[Code (\d+)\]/);
+            let codeNumber
+            if (matches) {
+                codeNumber = parseInt(matches[1], 10);
+                console.log(codeNumber);
+            } else {
+                console.log("No code number found");
+                return
+            }
+            var token = sessionStorage.getItem('jwtToken')
+            if(conf){
+                //this.parentNode.parentNode.remove()
+
+                fetch(serverAddress+"/user/updateRanking/"+codeNumber,{
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                })
+                .then((response)=>{
+                    if(!response.ok){
+                        throw new Error(response.status)
+                    }
+                    console.log("등록 완료!")
+                })
+                .catch((error) => {
+                    console.log('Error', error)
+                })      
+            }
+        }
+        function deleteAccount(){}
     </script>
 </html>
