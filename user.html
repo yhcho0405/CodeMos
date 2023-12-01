@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>CodeMos Tutorial</title>
+        <meta property="og:title" content="CodeMos" />
+        <meta name="description" content="Can you successfully pilot the lander to the surface? Play instantly from your phone or computer." />
+        <meta property="og:description" content="Can you successfully pilot the lander to the surface?" />
+        <meta property="og:image:width" content="700" />
+        <meta property="og:image:height" content="700" />
+        <link rel="icon" type="image/png" href="./images/favicon-16x16.png" sizes="16x16" />
+        <link rel="icon" type="image/png" href="./images/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="./images/favicon-180x180.png" sizes="180x180" />
+        <link rel="icon" type="image/png" href="./images/favicon-270x270.png" sizes="270x270" />
+        <link rel="apple-touch-icon" href="./images/favicon-270x270.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link rel="stylesheet" type="text/css" href="./style.css" />
+    </head>
+    <style type="text/css" media="screen">
+        body {
+            margin: 100px;
+            background: #02071e;
+            font: 400 18px/1.5 -apple-system, BlinkMacSystemFont, sans-serif;
+            text-align: center;
+            overflow-y: auto;
+        }
+
+        h1{
+            color: antiquewhite;
+        }
+        h2{
+            color: antiquewhite;
+        }
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            padding: 10px 20px;
+            background-color: #0168a4;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1009;
+        }
+        .home-btn:hover {
+            background-color: #00408e;
+        }
+    </style>
+    <body>
+        <div>
+            <div class="mainpage">
+                <img src="images/favicon-120x120.png" />
+                <h1>CodeMos</h1>
+                <h2>게임 방법</h2>
+            </div>
+            <button class="home-btn" onclick="window.location.href='index.html'">HOME</button>
+        </div>
+    </body>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var currentPath = window.location.pathname;
+            history.replaceState(null, null, currentPath.replace(".html", ""));
+        });
+    </script>
+</html>
