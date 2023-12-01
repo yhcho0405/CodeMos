@@ -57,16 +57,18 @@
             flex-wrap: nowrap;
         }
 
-        @media screen and (max-width: 1080px) {
+        @media screen and (max-width: 1080px){
             .menus {
                 display: flex;
                 flex-wrap: wrap;
             }
         }
 
+
         .buttons {
             width: 100%;
             margin: 0px 30px;
+            
         }
 
         .mainpage {
@@ -81,11 +83,13 @@
         }
         .home-login-btn {
             position: fixed;
-            top: 10px;
-            left: 10px;
-            padding: 10px 20px;
-            background-color: #dc5e07;
+            top: 20px;
+            left: 20px;
+            padding: 8px 16px;
+            font-size: 12px;
             color: #fff;
+            background-color: #0A0A1A; 
+            box-shadow: 0 0 10px #4D4DFF; 
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -93,27 +97,28 @@
         }
         .home-logout-btn {
             position: fixed;
-            top: 10px;
-            left: 10px;
-            padding: 10px 20px;
-            background-color: #dc5e07;
+            top: 20px;
+            left: 100px;
+            padding: 8px 16px;
+            font-size: 12px;
             color: #fff;
+            background-color: #0A0A1A; 
+            box-shadow: 0 0 10px #4D4DFF; 
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
         .home-mypage-btn {
             position: fixed;
-            top: 10px;
-            left: 150px;
+            top: 8px;
+            left: 10px;
             padding: 10px 20px;
-            background-color: #dc5e07;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
-
+        
         .iframe-container {
             display: flex;
         }
@@ -127,17 +132,32 @@
             height: 400px;
             border-radius: 10px;
         }
+
+        .profile-image{
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #4D4DFF; 
+            box-shadow: 0 0 10px #4D4DFF; 
+        }
+        .profile{
+            object-fit: cover;
+            width: 40px; 
+            height: 30px;
+        }
     </style>
     <body>
         <a href="login.html" class="home-login-btn">로그인</a>
+        <a style="display: none" href="leader.html" class="home-mypage-btn">
+            <div class="profile-image" style="background: #BDBDBD;"><img class="profile" src="/images/profile.jpg"/></div>
+        </a>
         <a style="display: none" onclick="logout()" class="home-logout-btn">로그아웃</a>
-        <a style="display: none" href="leader.html" class="home-mypage-btn">마이페이지</a>
-
+        
+        
         <div>
             <div class="mainpage">
-                <img src="images/main-symbol.png" width="100px" /><br />
-                <img src="images/main-logo.png" width="250px" />
-            </div>
+                <img src="images/main-symbol.png" width="100px"/><br>
+                <img src="images/main-logo.png" width="250px"/>
+            </div>     
             <div class="iframe-container">
                 <iframe id="rightIframe" src="https://lottie.host/embed/67e1faa4-2645-461f-a6f0-4952bc6e94c8/9K3VEbwQTX.json"></iframe>
                 <iframe id="leftIframe" src="minigame.html"></iframe>
@@ -159,12 +179,7 @@
 
                         };
                         document.addEventListener("DOMContentLoaded", () => {
-                            var iframeContainer = document.getElementsByClassName("iframe-container");
-                            var leftIframe = document.getElementById("leftIframe");
 
-                            var rightIframeHeight = iframeContainer.style.width / 2 * 0.7;
-
-                            leftIframe.style.height = rightIframeHeight + "px";
                             //로그인 확인
                             setTimeout(() => {
                                 console.log(sessionStorage.getItem("jwtToken"));
@@ -173,7 +188,7 @@
                                     document.querySelector(".home-login-btn").style.display = "block";
                                     document.querySelector(".home-logout-btn").style.display = "none";
                                     document.querySelector(".home-mypage-btn").style.display = "none";
-
+                                    
                                     return;
                                 } else {
                                     document.querySelector(".home-login-btn").style.display = "none";
