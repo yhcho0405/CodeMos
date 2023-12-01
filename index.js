@@ -16,57 +16,94 @@ import { makeChallengeManager } from "./challenge.js";
 import { makeSeededRandom } from "./helpers/seededrandom.js";
 import { makeBonusPointsManager } from "./bonuspoints.js";
 import { makeTheme } from "./theme.js";
-import { TRANSITION_TO_SPACE, VELOCITY_MULTIPLIER  } from "./helpers/constants.js";
+import { TRANSITION_TO_SPACE, VELOCITY_MULTIPLIER } from "./helpers/constants.js";
 import { landingScoreDescription, crashScoreDescription, destroyedDescription } from "./helpers/scoring.js";
 
-var serverAddress = "http://18.179.38.25:8080"
-var checkLoginID
+var serverAddress = "http://18.179.38.25:8080";
+var checkLoginID;
 document.addEventListener("DOMContentLoaded", () => {
     //로그인 확인
-    setTimeout(() => {
-        console.log(sessionStorage.getItem('jwtToken'))
-    if(sessionStorage.getItem('jwtToken') == null){
-        console.log("no token")
-        document.querySelector('.login-btn').style.display = "block"
-        document.querySelector('.logout-btn').style.display = "none"
-        return
+    console.log(sessionStorage.getItem("jwtToken"));
+    if (sessionStorage.getItem("jwtToken") == null) {
+        console.log("no token");
+        document.querySelector(".home-login-btn").style.display = "block";
+        document.querySelector(".home-logout-btn").style.display = "none";
+        document.querySelector(".home-mypage-btn").style.display = "none";
     } else {
-        document.querySelector('.login-btn').style.display = "none"
-        document.querySelector('.logout-btn').style.display = "block"
-        var token = sessionStorage.getItem('jwtToken')
+        document.querySelector(".home-login-btn").style.display = "none";
+        document.querySelector(".home-logout-btn").style.display = "block";
+        document.querySelector(".home-mypage-btn").style.display = "block";
+        var token = sessionStorage.getItem("jwtToken");
         fetch(serverAddress + "/api/verify-token", {
-            method: 'GET',
+            method: "GET",
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
             },
         })
-        .then(response =>{
-            if(!response.ok){
-                throw new Error(response.status)
-            }
-            if (response.text() == "Invalid token.") {
-                sessionStorage.removeItem('jwtToken')
-                document.quereySelector('.login-btn').style.display = "block"
-                document.querySelector('.logout-btn').style.display = "none"
-            }
-            return response.json();
-        })
-        .catch(error => {
-            console.error('Error Code:', error);
-        });
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(response.status);
+                }
+                if (response.text() == "Invalid token.") {
+                    sessionStorage.removeItem("jwtToken");
+                    document.querySelector(".home-login-btn").style.display = "block";
+                    document.querySelector(".home-logout-btn").style.display = "none";
+                    document.querySelector(".home-mypage-btn").style.display = "none";
+                }
+                return response.json();
+            })
+            .catch((error) => {
+                console.error("Error Code:", error);
+            });
     }
-    }, 100);
-})
+    setTimeout(() => {
+        console.log(sessionStorage.getItem("jwtToken"));
+        if (sessionStorage.getItem("jwtToken") == null) {
+            console.log("no token");
+            document.querySelector(".home-login-btn").style.display = "block";
+            document.querySelector(".home-logout-btn").style.display = "none";
+            document.querySelector(".home-mypage-btn").style.display = "none";
+        } else {
+            document.querySelector(".home-login-btn").style.display = "none";
+            document.querySelector(".home-logout-btn").style.display = "block";
+            document.querySelector(".home-mypage-btn").style.display = "block";
+            var token = sessionStorage.getItem("jwtToken");
+            fetch(serverAddress + "/api/verify-token", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(response.status);
+                    }
+                    if (response.text() == "Invalid token.") {
+                        sessionStorage.removeItem("jwtToken");
+                        document.querySelector(".home-login-btn").style.display = "block";
+                        document.querySelector(".home-logout-btn").style.display = "none";
+                        document.querySelector(".home-mypage-btn").style.display = "none";
+                    }
+                    return response.json();
+                })
+                .catch((error) => {
+                    console.error("Error Code:", error);
+                });
+        }
+    }, 2000);
+});
 
-export function logout(){
-    sessionStorage.removeItem('jwtToken')
-    document.querySelector('.login-btn').style.display = "block"
-    document.querySelector('.logout-btn').style.display = "none"
+export function logout() {
+    sessionStorage.removeItem("jwtToken");
+    document.querySelector(".home-login-btn").style.display = "block";
+    document.querySelector(".home-logout-btn").style.display = "none";
+    document.querySelector(".home-mypage-btn").style.display = "none";
 
-    var alertBox = document.createElement('div')
-    alertBox.textContent = "로그아웃됨"
-    alertBox.classList.add('logout-alert')
+    var alertBox = document.createElement("div");
+    alertBox.textContent = "로그아웃됨";
+    alertBox.classList.add("logout-alert");
     alertBox.style.cssText = `display: none;
     position: fixed;
     top: 15px;
@@ -76,7 +113,7 @@ export function logout(){
     color: white;
     padding: 15px;
     border-radius: 5px;
-    animation: fadeInOut 2s ease-in-out;`
+    animation: fadeInOut 2s ease-in-out;`;
     var keyframes = `@keyframes fadeInOut {
         0%, 100% {
             opacity: 0;
@@ -84,15 +121,15 @@ export function logout(){
         20%, 80% {
             opacity: 1;
         }
-    }`
-    var styleElement = document.createElement('style');
+    }`;
+    var styleElement = document.createElement("style");
     document.head.appendChild(styleElement);
     styleElement.sheet.insertRule(keyframes, 0);
 
-    alertBox.style.display = "block"
+    alertBox.style.display = "block";
     setTimeout(() => {
-        alertBox.remove()
-        styleElement.remove()
+        alertBox.remove();
+        styleElement.remove();
     }, 2000);
 }
 window.logout = logout;
@@ -142,11 +179,11 @@ const landerControls = makeControls(appState, lander, audioManager);
 const tally = makeTallyManger();
 
 export function getVelocityX() {
-    return lander.getVelocity().x * VELOCITY_MULTIPLIER
+    return lander.getVelocity().x * VELOCITY_MULTIPLIER;
 }
 
 export function getVelocityY() {
-    return lander.getVelocity().y * VELOCITY_MULTIPLIER
+    return lander.getVelocity().y * VELOCITY_MULTIPLIER;
 }
 
 export function getAngle() {
@@ -186,11 +223,18 @@ export function stopRightRotation() {
 }
 
 export function logging() {
-    console.log("getVelocityX()        : " + getVelocityX()
-    + "\ngetVelocityY()        : " + getVelocityY()
-    + "\ngetAngle()            : " + getAngle()
-    + "\ngetHeight()           : " + getHeight()
-    + "\ngetRotationVelocity() : " + getRotationVelocity());
+    console.log(
+        "getVelocityX()        : " +
+            getVelocityX() +
+            "\ngetVelocityY()        : " +
+            getVelocityY() +
+            "\ngetAngle()            : " +
+            getAngle() +
+            "\ngetHeight()           : " +
+            getHeight() +
+            "\ngetRotationVelocity() : " +
+            getRotationVelocity()
+    );
 }
 /*
 
@@ -293,7 +337,7 @@ function onCloseInstructions() {
 let _code;
 
 export function setSaveCode(code) {
-    _code = code
+    _code = code;
 }
 
 window.setSaveCode = setSaveCode;
@@ -319,51 +363,47 @@ function onGameEnd(data) {
 
     tally.updateDisplay();
 
-    var personalBest = localStorage.getItem('personalBestScore');
-
-    if (!data.isPressKey && !personalBest) {
-        localStorage.setItem('personalBestScore', -9999999);
-    }
-
     // 만약 로그인 된 상태라면
     setTimeout(() => {
-        if (!data.isPressKey) {        
-            console.log(data.landed ? finalScore : -finalScore);
-            if (personalBest < data.landed ? finalScore : -finalScore) {
-                var isConfirm = confirm("개인 최고기록 " + (data.landed ? finalScore : -finalScore) + "점을 리더보드에 등록할까여");
+        console.log(sessionStorage.getItem("jwtToken"));
+        if (sessionStorage.getItem("jwtToken") == null) {
+            return;
+        } else {
+            if (!data.isPressKey) {
+                console.log(data.landed ? finalScore : -finalScore);
+                var isConfirm = confirm((data.landed ? finalScore : -finalScore) + "점 코드를 서버에 저장할까요?");
                 if (isConfirm) {
                     // TODO: 서버로 요청
 
-                    serverAddress = "http://18.179.38.25:8080"
-                    fetch(serverAddress+'/api/v1/leaderBoard/create', {
-                        method: 'POST',
+                    serverAddress = "http://18.179.38.25:8080";
+                    fetch(serverAddress + "/api/v1/leaderBoard/create", {
+                        method: "POST",
                         headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + sessionStorage.getItem("jwtToken"),
                         },
-                        body: JSON.stringify({ 
-                            score: parseInt((data.landed ? finalScore : -finalScore) * 100000), 
+                        body: JSON.stringify({
+                            score: parseInt((data.landed ? finalScore : -finalScore) * 100000),
                             code: _code,
-                            time: data.durationInSeconds.toString()
+                            time: data.durationInSeconds.toString(),
+                        }),
+                    })
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error(response.status);
+                            }
+                            return response.json();
                         })
-                    })
-                    .then((response) => {
-                        if(!response.ok){
-                            throw new Error(response.status)
-                        }
-                        return response.json()
-                    })
-                    .catch((err) => {
-                        console.log("err: ", err)
-                    })
+                        .catch((err) => {
+                            console.log("err: ", err);
+                        });
 
-                    localStorage.setItem('personalBestScore', data.landed ? finalScore : -finalScore);
+                    localStorage.setItem("personalBestScore", data.landed ? finalScore : -finalScore);
                     console.log(data.landed ? finalScore : -finalScore);
                 }
             }
         }
     }, "1500");
-
 }
 
 function onResetGame() {
