@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector('.logout-btn').style.display = "block"
         checkLoginID = setInterval(()=>{
             var token = sessionStorage.getItem('jwtToken')
-            fetch(serverAddress + "/auth/check", {
+            fetch(serverAddress + "/api/ranking", {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -40,17 +40,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
             })
             .then(response =>{
-                if (!response.ok) {
+                if (response.status == 401) {
+                    sessionStorage.removeItem('jwtToken')
+                } else {
                     throw new Error(response.status);
                 }
                 return response.json();
-            })
-            .then(data => {
-                if(!data.valid){
-                    sessionStorage.removeItem('jwtToken')
-                    document.querySelector('.login-btn').style.display = "none"
-                    document.querySelector('.logout-btn').style.display = "block"
-                }
             })
             .catch(error => {
                 console.error('Error Code:', error);
