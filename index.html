@@ -54,11 +54,18 @@
             box-shadow: 0 0 20px #2e9cca;
         }
 
-        .test {
+        .menus {
             display: flex;
             flex-wrap: nowrap;
         }
 
+        @media screen and (max-width: 1080px){
+            .menus {
+                display: flex;
+                flex-wrap: wrap;
+            }
+        }
+        
         .buttons {
             margin: 0px auto 0px auto;
         }
@@ -80,7 +87,7 @@
                 <img src="images/favicon-120x120.png" />
                 <h1>CodeMos</h1>
             </div>
-            <div class="test">
+            <div class="menus">
                 <div class="buttons">
                     <a href="login.html" class="button">로그인</a>
                     <a href="tutorial.html" class="button">게임 설명</a>
