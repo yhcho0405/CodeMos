@@ -82,6 +82,39 @@ export const makeToyLander = (
     CTX.closePath();
     CTX.fill();
 
+    CTX.beginPath();
+    CTX.moveTo(-_toyLanderWidth / 2, -_toyLanderHeight / 2);
+    CTX.lineTo(0, -(_toyLanderHeight * 0.9));
+    CTX.lineTo(_toyLanderWidth / 2, -_toyLanderHeight / 2);
+    CTX.arc(0, 0, Math.sqrt(_toyLanderWidth * _toyLanderWidth + _toyLanderHeight * _toyLanderHeight) / 2, 2 * Math.PI - Math.atan2(_toyLanderHeight, _toyLanderWidth), Math.PI + Math.atan2(_toyLanderHeight, _toyLanderWidth), true);
+    CTX.fillStyle = state.get("theme").threeGradient("#EB8C0C", '#6a3b0c', "#401f1a", _toyLanderWidth, 0, 0.5);
+    CTX.fill();
+
+    CTX.beginPath();
+    CTX.moveTo(-_toyLanderWidth / 2, 0);
+    CTX.lineTo(-_toyLanderWidth , 5 *_toyLanderHeight / 8);
+    CTX.lineTo(-_toyLanderWidth / 2, _toyLanderHeight / 2);
+    CTX.closePath();
+    CTX.fillStyle = state.get("theme").threeGradient("#DFE5E5", "#4A4E6F", "#3D4264", _toyLanderWidth / 2, -3 * _toyLanderWidth / 4, 0.8);
+    CTX.fill();
+
+    CTX.beginPath();
+    CTX.moveTo(_toyLanderWidth / 2, 0);
+    CTX.lineTo(_toyLanderWidth , 5 *_toyLanderHeight / 8);
+    CTX.lineTo(_toyLanderWidth / 2, _toyLanderHeight / 2);
+    CTX.closePath();
+    CTX.fillStyle = state.get("theme").threeGradient("#3D4264", "#4A4E6F", "#DFE5E5", _toyLanderWidth / 2, 3 * _toyLanderWidth / 4, 0.2);
+    CTX.fill();
+
+    CTX.beginPath();
+    CTX.moveTo(0, 0.2 * _toyLanderHeight);
+    CTX.lineTo(- _toyLanderWidth / 4, _toyLanderHeight / 2);
+    CTX.lineTo(0, 0.8 * _toyLanderHeight);
+    CTX.lineTo(_toyLanderWidth / 4, _toyLanderHeight / 2);
+    CTX.closePath();
+    CTX.fillStyle = state.get("theme").threeGradient("#DFE5E5", '#262b4f', "#4A4E6F", _toyLanderWidth / 2, 0, 0.5);
+    CTX.fill();
+
     // Translate to the top-left corner of the lander so engine and booster
     // flames can be drawn from 0, 0
     CTX.translate(-_toyLanderWidth / 2, -_toyLanderHeight / 2);

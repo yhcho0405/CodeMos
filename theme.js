@@ -53,6 +53,13 @@ export const makeTheme = (state) => {
         "#3D4264",
         width
       ),
+    threeGradient: (color1, color2, color3, width, offset, mid) =>{
+        const gradient = CTX.createLinearGradient(-width / 2 + offset, 0, width / 2 + offset, 0);
+        gradient.addColorStop(0, color1);
+        gradient.addColorStop(mid, color2);
+        gradient.addColorStop(1.0, color3)
+        return gradient;
+      },
     asteroid: "#898482",
     star: "#ffffff",
     terrain: "#757579",

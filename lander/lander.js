@@ -349,6 +349,39 @@ export const makeLander = (state, onGameEnd) => {
         CTX.closePath();
         CTX.fillStyle = state.get("theme").landerGradient;
         CTX.fill();
+        
+        CTX.beginPath();
+        CTX.moveTo(-LANDER_WIDTH / 2, -LANDER_HEIGHT / 2);
+        CTX.lineTo(0, -(LANDER_HEIGHT));
+        CTX.lineTo(LANDER_WIDTH / 2, -LANDER_HEIGHT / 2);
+        CTX.arc(0, 0, Math.sqrt(LANDER_WIDTH * LANDER_WIDTH + LANDER_HEIGHT * LANDER_HEIGHT) / 2, 2 * Math.PI - Math.atan2(LANDER_HEIGHT, LANDER_WIDTH), Math.PI + Math.atan2(LANDER_HEIGHT, LANDER_WIDTH), true);
+        CTX.fillStyle = state.get("theme").threeGradient("#EB8C0C", '#6a3b0c', "#401f1a", LANDER_WIDTH, 0, 0.5);
+        CTX.fill();
+
+        CTX.beginPath();
+        CTX.moveTo(-LANDER_WIDTH / 2, 0);
+        CTX.lineTo(-LANDER_WIDTH , 5 *LANDER_HEIGHT / 8);
+        CTX.lineTo(-LANDER_WIDTH / 2, LANDER_HEIGHT / 2);
+        CTX.closePath();
+        CTX.fillStyle = state.get("theme").threeGradient("#DFE5E5", "#4A4E6F", "#3D4264", LANDER_WIDTH / 2, -3 * LANDER_WIDTH / 4, 0.8);
+        CTX.fill();
+
+        CTX.beginPath();
+        CTX.moveTo(LANDER_WIDTH / 2, 0);
+        CTX.lineTo(LANDER_WIDTH , 5 *LANDER_HEIGHT / 8);
+        CTX.lineTo(LANDER_WIDTH / 2, LANDER_HEIGHT / 2);
+        CTX.closePath();
+        CTX.fillStyle = state.get("theme").threeGradient("#3D4264", "#4A4E6F", "#DFE5E5", LANDER_WIDTH / 2, 3 * LANDER_WIDTH / 4, 0.2);
+        CTX.fill();
+
+        CTX.beginPath();
+        CTX.moveTo(0, 0.2 * LANDER_HEIGHT);
+        CTX.lineTo(- LANDER_WIDTH / 4, LANDER_HEIGHT / 2);
+        CTX.lineTo(0, 0.8 * LANDER_HEIGHT);
+        CTX.lineTo(LANDER_WIDTH / 4, LANDER_HEIGHT / 2);
+        CTX.closePath();
+        CTX.fillStyle = state.get("theme").threeGradient("#DFE5E5", '#262b4f', "#4A4E6F", LANDER_WIDTH / 2, 0, 0.5);
+        CTX.fill();
 
         // Translate to the top-left corner of the lander so engine and booster
         // flames can be drawn from 0, 0
