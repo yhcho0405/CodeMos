@@ -19,6 +19,78 @@ import { makeTheme } from "./theme.js";
 import { TRANSITION_TO_SPACE, VELOCITY_MULTIPLIER  } from "./helpers/constants.js";
 import { landingScoreDescription, crashScoreDescription, destroyedDescription } from "./helpers/scoring.js";
 
+var serverAddress = "http://13.114.181.168:8080"
+var checkLoginID
+document.addEventListener("DOMContentLoaded", () => {
+    //로그인 확인
+    if(sessionStorage.getItem('jwtToken') == null){
+        document.querySelector('.login-btn').style.display = "block"
+        document.querySelector('.logout-btn').style.display = "none"
+        return
+    } else {
+        document.querySelector('.login-btn').style.display = "none"
+        document.querySelector('.logout-btn').style.display = "block"
+        checkLoginID = setInterval(()=>{
+            var token = sessionStorage.getItem('jwtToken')
+            fetch(serverAddress + "/api/ranking", {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response =>{
+                if (response.status == 401) {
+                    sessionStorage.removeItem('jwtToken')
+                } else {
+                    throw new Error(response.status);
+                }
+                return response.json();
+            })
+            .catch(error => {
+                console.error('Error Code:', error);
+            });
+        }
+        , 10000);
+    }   
+})
+function logout(){
+    sessionStorage.removeItem('jwtToken')
+    document.querySelector('.login-btn').style.display = "none"
+    document.querySelector('.logout-btn').style.display = "block"
+
+    var alertBox = document.createElement('div')
+    alertBox.textContent = "로그아웃됨"
+    alertBox.classList.add('logout-alert')
+    alertBox.style.cssText = `display: none;
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    animation: fadeInOut 2s ease-in-out;`
+    var keyframes = `@keyframes fadeInOut {
+        0%, 100% {
+            opacity: 0;
+        }
+        20%, 80% {
+            opacity: 1;
+        }
+    }`
+    var styleElement = document.createElement('style');
+    document.head.appendChild(styleElement);
+    styleElement.sheet.insertRule(keyframes, 0);
+
+    alertBox.style.display = "block"
+    setTimeout(() => {
+        alertBox.remove()
+        styleElement.remove()
+    }, 2000);
+}
+
 // SETUP
 
 const audioManager = makeAudioManager();

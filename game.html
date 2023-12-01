@@ -85,8 +85,8 @@
         .docs-btn:hover {
             background-color: #0056b3;
         }
-
-        .login-btn {
+        
+        .login-btn, .logout-btn {
             position: fixed;
             top: 15px;
             right: 15px;
@@ -97,7 +97,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .login-btn:hover {
+        .login-btn:hover, .logout-btn:hover {
             background-color: #95430b;
         }
 
@@ -322,6 +322,7 @@
         <button class="code-btn" onclick="toggleVisibility()">Code</button>
         <button class="apply-btn" onclick="applyCodeHandler()">Apply</button>
         <button class="login-btn" onclick="window.location.href='login.html'">Login</button>
+        <button class="logout-btn" style="display: none;" onclick="logout()">Logout</button>
         <button class="home-btn" onclick="window.location.href='index.html'">HOME</button>
 
         <!-- <div id="tally" class="topRightCorner">L<span id="landingTotal"></span> C<span id="crashTotal"></span></div> -->

@@ -28,6 +28,7 @@ function login(){
     }).then((token) => {
         console.log('Login!')
         sessionStorage.setItem('jwtToken', token.accessToken);
+        history.back()
     })
     .catch((err) => {
         console.log("Cannot register", err)
@@ -58,9 +59,10 @@ function register(){
         document.getElementById('reg-id').value = '';
         document.getElementById('reg-password').value = '';
         pageToggle();
+        showSuccessMessage();
     })
     .catch((err) => {
-        console.log("Cannot login", err)
+        console.log("Cannot register", err)
     })
 
     return false
@@ -71,4 +73,11 @@ function pageToggle(){
     var register = document.querySelector('.register-container')
     login.classList.toggle('hidden')
     register.classList.toggle('hidden')
+}
+
+function showSuccessMessage() {
+    document.getElementById('successMessage').style.display = 'block';
+    setTimeout(() => {
+        document.getElementById('successMessage').style.display = 'none';
+    }, 2000);
 }
