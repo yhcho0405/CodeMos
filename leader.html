@@ -57,9 +57,12 @@
         width: 100%;
         justify-content: center;
     }
-    #board tbody > td, #board th{
+    #board td, #board th{
         width: 20%;
         text-align: center;
+    }
+    #board td p{
+        text-align: initial;
     }
     #board tr{
         border-radius: 8px;
@@ -86,7 +89,7 @@
 </style>
 <body>
     <div>
-        <h1 style="text-align: center;">Leader Board</h1>
+        <h1 style="text-align: center;">리더보드</h1>
     </div>
     <div id="board"></div>
     <div class="btns">
@@ -94,7 +97,7 @@
         <button class="page-rbtn" onclick="loadBoard(1, 1)">&gt;&gt;</button>
     </div>
     <div class="btns load" style="margin: 30px 2px;">
-        <div><button class="load-btn" onclick="loadBoard(1, 0)">Reload</button></div>
+        <div><button class="load-btn" onclick="loadBoard(1, 0)">새로고침</button></div>
     </div>
     
     <script src="leader.js"></script>

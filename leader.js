@@ -19,7 +19,9 @@ var tbody = document.createElement('tbody')
 table.appendChild(thead)
 table.appendChild(tbody)
 
-thead.innerHTML = "<tr><td>Rank</td><td>Name</td><td>Score</td><td>Time</td></tr>"
+thead.innerHTML = "<tr><td>순위</td><td>이름</td><td>점수</td><td>걸린 시간</td></tr>"
+
+loadBoard(page, 0)
 
 document.addEventListener('DOMContentLoaded', function () {
     var currentPath = window.location.pathname
@@ -124,7 +126,7 @@ function setBoard(boardData, reset){
                 }
                 getBoard(urls[2] + codeID).then(result => {
                     details.innerHTML = `<td colspan = "4">
-                    <p>Codes</p>
+                    <p>코드</p>
                     <pre><code class='language-javascript'>${result}</code></pre>
                     </td>`
                     /*var detail = document.createElement('td')
@@ -165,5 +167,3 @@ function loadBoard(urlOp, pageMoveBy){
         console.log('Error', error)
     })   
 }
-
-loadBoard(page, 0)
