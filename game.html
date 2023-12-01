@@ -18,13 +18,27 @@
         <link rel="stylesheet" type="text/css" href="./style.css" />
     </head>
     <style type="text/css" media="screen">
-        #editor {
+        #editorWrap {
             position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
+            top: 20px;
+            right: 20px;
+            bottom: 20px;
             left: 50%;
-            z-index: 1;
+            z-index: 2;
+            border: 2px solid rgb(211, 211, 211);
+            border-radius: 20px;
+            box-sizing: border-box;
+            background-color: rgba(128, 128, 128, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #editor {
+            border: 2px solid rgb(116, 116, 116);
+            width: 95%;
+            height: 95%;
+            border-radius: 20px;
+            box-sizing: border-box;
         }
         #docs {
             position: absolute;
@@ -32,6 +46,7 @@
             right: 50%;
             bottom: 0;
             left: 0;
+            z-index: 2;
         }
         .code-btn {
             position: fixed;
@@ -83,8 +98,9 @@
         .docs-btn:hover {
             background-color: #0056b3;
         }
-        
-        .login-btn, .logout-btn {
+
+        .login-btn,
+        .logout-btn {
             position: fixed;
             top: 15px;
             right: 15px;
@@ -95,7 +111,8 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .login-btn:hover, .logout-btn:hover {
+        .login-btn:hover,
+        .logout-btn:hover {
             background-color: #95430b;
         }
 
@@ -109,7 +126,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            z-index: 1009;
+            z-index: 1;
         }
         .home-btn:hover {
             background-color: #00408e;
@@ -211,7 +228,10 @@
         <div id="drag-handle"></div>
 
         <!-- 코드 에디터 -->
-        <div id="editor" style="visibility: hidden"></div>
+
+        <div id="editorWrap" style="visibility: hidden">
+            <div id="editor"></div>
+        </div>
 
         <div id="docs" style="visibility: hidden">
             <iframe src="docs.html" width="100%" height="100%"></iframe>
@@ -222,11 +242,11 @@
         <script src="func.js" type="module"></script>
         <script>
             var editor = ace.edit("editor");
-            editor.setTheme("ace/theme/monokai");
+            editor.setTheme("ace/theme/ambiance");
             editor.session.setMode("ace/mode/javascript");
 
             function toggleVisibility() {
-                var editor = document.getElementById("editor");
+                var editor = document.getElementById("editorWrap");
                 var handle = document.getElementById("drag-handle");
                 if (editor.style.visibility === "hidden") {
                     editor.style.visibility = "visible";
@@ -250,7 +270,7 @@
             }
 
             function checkHandleVisibility() {
-                var editorC = document.getElementById("editor");
+                var editorC = document.getElementById("editorWrap");
                 var docs = document.getElementById("docs");
                 var handle = document.getElementById("drag-handle");
 
@@ -264,7 +284,7 @@
             document.addEventListener("DOMContentLoaded", function () {
                 var handle = document.getElementById("drag-handle");
                 var docs = document.getElementById("docs");
-                var editorC = document.getElementById("editor");
+                var editorC = document.getElementById("editorWrap");
                 var isResizing = false;
                 loadCode();
                 handle.addEventListener("mousedown", function (e) {
@@ -320,7 +340,7 @@
         <button class="code-btn" onclick="toggleVisibility()">Code</button>
         <button class="apply-btn" onclick="applyCodeHandler()">Apply</button>
         <button class="login-btn" onclick="window.location.href='login.html'">Login</button>
-        <button class="logout-btn" style="display: none;" onclick="logout()">Logout</button>
+        <button class="logout-btn" style="display: none" onclick="logout()">Logout</button>
         <button class="home-btn" onclick="window.location.href='index.html'">HOME</button>
 
         <!-- <div id="tally" class="topRightCorner">L<span id="landingTotal"></span> C<span id="crashTotal"></span></div> -->
