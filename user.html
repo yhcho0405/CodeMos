@@ -26,6 +26,20 @@
             padding: 0;
             overflow-y: auto;
         }
+        .home-btn{
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .home-btn:hover{
+            background-color: #0056b3;
+        }
 
         .container {
             width: 80%;
@@ -87,6 +101,10 @@
             font-size: 0.8em; /* 아이디와 역할의 글자 크기를 작게 */
         }
 
+        .reg-btn:hover{
+            background-color: #158d25;
+        }
+
         #deleteAccount{
             position: relative;
             background-color: #c31b22;
@@ -120,6 +138,7 @@
         }
     </style>
     <body>
+        <button class="home-btn" onclick="window.location.href='index.html'">메인 페이지</button>
         <div class="container">
             <div class="logo">
                 <!-- 로고 이미지 경로를 'logo.png'로 가정합니다. 실제 경로로 변경하세요. -->
@@ -133,7 +152,7 @@
                         <h2 class="small-text">ID: </h2>
                         <h2 class="small-text">ROLE: </h2>
                     </div>
-                    <button id="deleteAccount">회원탈퇴</button>
+                    <!--<button id="deleteAccount">회원탈퇴</button>-->
                 </div>
             </div>
             <div class="code-entities">
@@ -195,9 +214,11 @@
                 row.style.display = "flex"
                 codeboxesContainer.appendChild(row);
                 var codebox = document.createElement('div');
+                row.appendChild(codebox);
                 codebox.classList.add('code')
                 codebox.innerText = '[Code ' + board.leaderBoardId + ']';
-                codebox.style.width = "100%"
+                codebox.style.width = "90%"
+                codebox.style.margin = "5px"
                 codebox.addEventListener('click', function(){
                     this.classList.toggle("show")
                     if(this.classList.contains("show")){
@@ -208,20 +229,35 @@
                     }
                     event.stopPropagation()
                 })
-                //var regButton = document.createElment()
-                var delButton = document.createElement('button')
+                var regButton = document.createElement('button')
+                regButton.classList.add("reg-btn")
+                regButton.style.cssText=`
+                    align-items: center;
+                    margin: 10px 0;
+                    justify-content: center;
+                    height: 40px;
+                    width: 50px;
+                    color: #fff;
+                    font-size: 12px;
+                    cursor: pointer;
+                    border: none;
+                    background-color: #1cca33;
+                    border-radius: 2px;
+                    padding: 0 4px;`
+                regButton.innerText = '등록'
+                regButton.addEventListener('click', registerCode)
+                codebox.insertAdjacentElement('afterend', regButton)
+                /*var delButton = document.createElement('button')
                 delButton.style.cssText = `
                     color: #fff;
-                    right: 10px;
                     font-size: 20px;
                     cursor: pointer;
                     border: none;
                     background-color: transparent;`
                 delButton.classList.add('close')
-                delButton.innerHTML = '&#215;';
-                delButton.addEventListener('click', registerCode)
-                row.appendChild(codebox);
-                codebox.insertAdjacentElement('afterend', delButton)
+                delButton.innerText = '&#215;';
+                delButton.addEventListener('click', deleteCode)  
+                codebox.insertAdjacentElement('afterend', delButton)*/
             });
         }
         function registerCode(){
@@ -238,8 +274,6 @@
             }
             var token = sessionStorage.getItem('jwtToken')
             if(conf){
-                //this.parentNode.parentNode.remove()
-
                 fetch(serverAddress+"/user/updateRanking/"+codeNumber,{
                     method: "POST",
                     headers: {
@@ -255,6 +289,13 @@
                 .catch((error) => {
                     console.log('Error', error)
                 })      
+            }
+        }
+        function deleteCode(){
+            var conf = confirm("이 코드를 삭제할까요?")
+            if(conf){
+                this.parentNode.parentNode.remove()
+                //fetch(삭제~~)
             }
         }
         function deleteAccount(){}
