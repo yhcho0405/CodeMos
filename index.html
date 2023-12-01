@@ -33,8 +33,8 @@
         }
 
         .button {
-            background-color: #0a0f1c; 
-            color: #fff; 
+            background-color: #0a0f1c;
+            color: #fff;
             padding: 20px 20px;
             font-size: 20px;
             border: 2px solid #2e9cca;
@@ -45,40 +45,39 @@
             text-decoration: none;
             text-align: center;
             width: 250px;
-            box-shadow: 0 0 10px #2e9cca; 
-            transition: background-color 0.3s, box-shadow 0.3s; 
+            box-shadow: 0 0 10px #2e9cca;
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
 
         .button:hover {
-            background-color: #2e9cca; 
-            box-shadow: 0 0 20px #2e9cca; 
+            background-color: #2e9cca;
+            box-shadow: 0 0 20px #2e9cca;
         }
 
         .test {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
 
-        .buttons{
+        .buttons {
             margin: 0px auto 0px auto;
         }
 
-        .mainpage{
+        .mainpage {
             margin: 0px auto;
         }
 
         .leader_board {
-            background: green;
-            width: 200px;
-            
-            margin: 0px auto;
+            width: 100%;
+
+            margin: 20px auto;
             color: white;
         }
     </style>
     <body>
         <div>
             <div class="mainpage">
-                <img src="images/favicon-120x120.png"/>
+                <img src="images/favicon-120x120.png" />
                 <h1>CodeMos</h1>
             </div>
             <div class="test">
@@ -89,12 +88,16 @@
                     <a href="leader.html" target="_blank" class="button">리더보드</a>
                 </div>
                 <div class="leader_board">
-                    여기 글씨 있어요
+                    <div class="btns load" style="margin: 30px 2px"></div>
+                    <div id="board"></div>
+                    <script src="leader.js"></script>
+                    <script>
+                        loadBoard(1, 0);
+                    </script>
                 </div>
             </div>
-            
+
             <script src="login.js"></script>
         </div>
-        
     </body>
 </html>
