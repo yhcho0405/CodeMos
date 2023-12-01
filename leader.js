@@ -24,7 +24,7 @@ var tbody = document.createElement('tbody')
 table.appendChild(thead)
 table.appendChild(tbody)
 
-thead.innerHTML = "<tr><td>순위</td><td>이름</td><td>점수</td><td>걸린 시간</td></tr>"
+thead.innerHTML = "<tr><td>순위</td><td>이름</td><td>점수</td><td>착륙 시간</td></tr>"
 var ths = thead.getElementsByTagName("td");
 for (var i = 0; i < ths.length; i++) {
     ths[i].style.border = "1px solid #2e9cca"; // 네온 스타일 테두리
