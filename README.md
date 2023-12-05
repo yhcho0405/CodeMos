@@ -39,7 +39,9 @@ newInterval = setInterval(() => {
     // TODO: 
 }, 1); // 1ms loop
 // TODO: 
+```
 
+```javascript
 // Incorrect Example
 
 setInterval(() => {
@@ -75,6 +77,8 @@ newInterval = setInterval(() => { // main loop
 ```
 
 #### Well-Written Landing Algorithm Example
+
+![landing_sample (1)](https://github.com/yhcho0405/CodeMos/assets/52823519/810e5e11-3fce-47ae-a23d-5cb1460d4d6a)
 
 ```javascript
 // 비밀 ~
