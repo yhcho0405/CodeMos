@@ -1,8 +1,6 @@
 
 ## CodeMos API Documentation
 ### INDEX
-
-- [Description](#description)
 - [Tip](#tip)
 - [Getting Started](#getting-started)
 - [Get Methods](#get-methods)
@@ -21,28 +19,19 @@
 - [Utility Methods](#utility-methods)
 - [TMI](#tmi)
 
-### Description
-
-- You can open and close the API page and code editor with the buttons at the bottom.
-- After writing all the code, press the Apply button to inject the landing algorithm into the spaceship.
-- Landing is considered successful when the landing speed is below 12.0 MPH and the landing angle is less than 11.0°.
-- If you crash, the crash score is converted into a negative score, which can also be listed on the leaderboard.
-- You can operate the spaceship with the keyboard arrow keys.
-- If keyboard input is detected, it will not be recognized as a score. Only the results of the spaceship operated by the algorithm after pressing the Apply button are stored on the server.
-- When the game is over, you will be asked whether to save the code. If you confirm, you can check the code in your personal profile.
-- Only one game result per account can be registered on the leaderboard. Choose the code you want to register in your personal profile.
-
 ### Tip
 
-1. You can write the CodeMos spaceship algorithm using all the syntax of JS ES6.
-2. If the algorithm does not work, consider whether you have written the code incorrectly.
-3. If a bug is found, consider it an Easter egg.
+1. JS ES6의 모든 문법을 사용해 CodeMos 우주선 알고리즘을 작성할 수 있습니다.
+2. 알고리즘이 작동하지 않는다면 코드를 잘못 짠게 아닐지 고민해 보세요.
+3. 버그가 발견되었다면 이스터에그입니다.
 
 ### Getting Started
 
 #### main loop
 
-In the CodeMos algorithm, the main loop should be assigned to "newInterval" as follows. If you call setInterval without assigning it to "newInterval," an initialization error may occur. You can modify the interval gap.
+CodeMos 알고리즘에서 main loop는 아래와 같이 "newInterval"에 할당되어야 합니다.
+"newInterval"에 할당하지 않고 setInterval을 호출할 시 초기화 오류가 발생할 수 있습니다.
+interval 간격은 수정할 수 있습니다.
 
 ```javascript
 // TODO: 
@@ -60,7 +49,8 @@ setInterval(() => {
 
 #### Algorithm Writing Example
 
-You can define functions and variables in the global scope. Below is an example of a landing algorithm (not for high scores):
+전역 스코프에서 함수와 변수를 정의할 수 있습니다.
+아래는 착륙 알고리즘 예제 입니다.(고득점 불가)
 
 ```javascript
 var targetHeight = 0; // Landing altitude
@@ -87,16 +77,16 @@ newInterval = setInterval(() => { // main loop
 #### Well-Written Landing Algorithm Example
 
 ```javascript
-// Secret~
+// 비밀 ~
 ```
 
 ### Get Methods
 
 #### getVelocityX
 
-This function returns the current horizontal velocity of the spaceship as a float.
-  - Negative: The spaceship is moving left
-  - Positive: The spaceship is moving right
+이 함수는 우주선의 현재 수평 속도를 실수형으로 반환합니다.
+  - 음수 : 우주선이 좌로 이동 중
+  - 양수 : 우주선이 우로 이동 중
 
 ```javascript
 getVelocityX()
@@ -104,9 +94,9 @@ getVelocityX()
 
 #### getVelocityY
 
-This function returns the current vertical velocity of the spaceship as a float.
-  - Negative: The spaceship is moving up
-  - Positive: The spaceship is moving down
+이 함수는 우주선의 현재 수직 속도를 실수형으로 반환합니다.
+  - 음수 : 우주선이 위로 이동 중
+  - 양수 : 우주선이 아래로 이동 중
 
 ```javascript
 getVelocityY()
@@ -114,7 +104,7 @@ getVelocityY()
 
 #### getAngle
 
-This function returns the current angle of the spaceship as a float (-180.0 to +180.0).
+이 함수는 우주선의 현재 각도를 실수형으로 반환합니다.(-180.0 ~ +180.0)
 
 ```javascript
 getAngle()
@@ -122,7 +112,8 @@ getAngle()
 
 #### getHeight
 
-This function returns the current altitude of the spaceship in feet (ft). The altitude at the landing site is 0ft.
+이 함수는 우주선의 현재 고도(ft, 피트)를 정수형으로 반환합니다.
+착륙지점의 고도는 0ft 입니다.
 
 ```javascript
 getHeight()
@@ -130,9 +121,9 @@ getHeight()
 
 #### getRotationVelocity
 
-This function returns the current rotational velocity of the spaceship as a float.
-  - Negative: The spaceship is rotating counterclockwise
-  - Positive: The spaceship is rotating clockwise
+이 함수는 우주선의 현재 각속도를 실수형으로 반환합니다.
+  - 음수 : 우주선이 반시계 방향으로 회전 중
+  - 양수 : 우주선이 시계 방향으로 회전 중
 
 ```javascript
 getRotationVelocity()
@@ -142,7 +133,9 @@ getRotationVelocity()
 
 #### engineOn
 
-Calling this function activates the main engine of the spaceship.
+이 함수를 호출하면 우주선의 주 엔진을 작동시킵니다.
+
+<img width="146" alt="image" src="https://github.com/yhcho0405/CodeMos/assets/52823519/11c23e42-aeef-4f39-a701-50d467291200">
 
 ```javascript
 engineOn()
@@ -150,7 +143,7 @@ engineOn()
 
 #### engineOff
 
-Calling this function stops the main engine of the spaceship.
+이 함수를 호출하면 우주선의 주 엔진을 정지합니다.
 
 ```javascript
 engineOff()
@@ -158,7 +151,10 @@ engineOff()
 
 #### rotateLeft
 
-Calling this function activates the left thruster of the spaceship (increases the rotational velocity).
+이 함수를 호출하면 우주선의 좌측 추진체을 작동합니다.
+(우주선의 각속도가 증가합니다.)
+
+<img width="166" alt="image" src="https://github.com/yhcho0405/CodeMos/assets/52823519/67b018c5-8f0f-4e06-b624-9df2a7a6e254">
 
 ```javascript
 rotateLeft()
@@ -166,7 +162,7 @@ rotateLeft()
 
 #### stopLeftRotation
 
-Calling this function stops the left thruster of the spaceship.
+이 함수를 호출하면 우주선의 좌측 추진체을 정지합니다.
 
 ```javascript
 stopLeftRotation()
@@ -174,7 +170,10 @@ stopLeftRotation()
 
 #### rotateRight
 
-Calling this function activates the right thruster of the spaceship (decreases the rotational velocity).
+이 함수를 호출하면 우주선의 우측 추진체을 작동합니다.
+(우주선의 각속도가 감소합니다.)
+
+<img width="155" alt="image" src="https://github.com/yhcho0405/CodeMos/assets/52823519/c0205ad5-8a7d-4986-a6d3-cc828732b079">
 
 ```javascript
 rotateRight()
@@ -182,9 +181,7 @@ rotateRight()
 
 #### stopRightRotation
 
-Calling this function stops the right
-
- thruster of the spaceship.
+이 함수를 호출하면 우주선의 우측 추진체을 정지합니다.
 
 ```javascript
 stopRightRotation()
@@ -194,7 +191,7 @@ stopRightRotation()
 
 #### logging
 
-This function displays the return values of the Get Methods in the console.
+이 함수는 Get Method 들의 반환값을 console에 표시합니다.
 
 ```javascript
 logging()
@@ -212,7 +209,7 @@ getRotationVelocity() : 0.37505750000014804
 
 ### TMI
 
-1. CodeMos planet is unaffected by any forces other than gravity (4.29158 m/s²).
-2. Main engine thrust: Δ10.729 m/s
-3. Left and right engine thrust: Δ1.2 rotational velocity/s
-4. When landing speed is 0.0 MPH and landing angle is 0.0°, you score 100 points.
+1. CodeMos 행성은 중력(4.29158 m/s²) 외에는 어떠한 힘도 작용하지 않습니다.
+2. 주 엔진 thrust : Δ10.729 m/s
+3. 좌, 우측 엔진 thrust: Δ1.2 rotational velocity/s
+4. 착륙 속도 0.0 MPH, 착륙 각도 0.0° 일 때, 100점을 획득합니다.
