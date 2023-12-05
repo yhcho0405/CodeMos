@@ -19,6 +19,8 @@
 - [Utility Methods](#utility-methods)
 - [TMI](#tmi)
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AM9rDd-U9FY?si=5uXxDUUrcad83hTT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 ### Tip
 
 1. JS ES6의 모든 문법을 사용해 CodeMos 우주선 알고리즘을 작성할 수 있습니다.
