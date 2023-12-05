@@ -34,6 +34,10 @@ $> npx http-server
 ## 실행 영상
 [![Video Label](http://img.youtube.com/vi/AM9rDd-U9FY/0.jpg)](https://youtu.be/AM9rDd-U9FY)
 
+
+## API Documentation Wiki
+[API Docs](https://github.com/yhcho0405/CodeMos/wiki/CodeMos-API-Documentation)
+
 ## How to play
 
 ### **게임 입장 화면**
@@ -41,20 +45,10 @@ $> npx http-server
 ![image](https://github.com/yhcho0405/CodeMos/assets/49319275/7f23af5d-5bf4-44af-89c9-4b1267c7768b)
 
 
-게임에 입장하면 다음과 같은 화면이 뜹니다.
-
-게임 시작 버튼을 누르면 게임을 시작하는 화면으로 이동합니다.
-
-게임 설명 버튼을 누르면 게임을 진행하는 방법을 소개합니다.
-
 ### **게임 시작 화면**
 
 ![image](https://github.com/yhcho0405/CodeMos/assets/49319275/e93567b1-a1b0-4375-b0e3-434a60b922fb)
 
-
-게임 시작 버튼을 누르면 다음과 같이 우주선을 조작하는 튜토리얼이 주어집니다.
-
-방향키로 우주선을 조작하면 모두 체크 표시되어 다음 게임으로 이어집니다.
 
 ### API Docs와 Code Editor
 
@@ -93,12 +87,6 @@ $> npx http-server
 
 
 - 초과한 상태로 지면에 닿는다면 추락으로 간주합니다. 추락일 경우에는 점수가 음수로 환산되어 리더보드에 등록됩니다. 
-
-## API Documentation Wiki
-<img style="width:600px" src="https://github.com/yhcho0405/CodeMos/assets/49319275/1c8050df-f0da-431f-b94d-acaf4d45b46c">
-
-자세한 내용은 다음 링크를 참고해주세요
-[API Docs](https://github.com/yhcho0405/CodeMos/wiki/CodeMos-API-Documentation)
 
 
 ## Reference
