@@ -38,7 +38,7 @@ $> npx http-server
 
 ### **게임 입장 화면**
 
-![image](https://github.com/yhcho0405/CodeMos/assets/49319275/8065b433-dc1d-4c07-b844-375808a0131d)
+![image](https://github.com/yhcho0405/CodeMos/assets/49319275/7f23af5d-5bf4-44af-89c9-4b1267c7768b)
 
 
 게임에 입장하면 다음과 같은 화면이 뜹니다.
@@ -49,7 +49,7 @@ $> npx http-server
 
 ### **게임 시작 화면**
 
-![image](https://github.com/yhcho0405/CodeMos/assets/49319275/f0553d8a-0777-41b8-92ba-560ade24ce2a)
+![image](https://github.com/yhcho0405/CodeMos/assets/49319275/e93567b1-a1b0-4375-b0e3-434a60b922fb)
 
 
 게임 시작 버튼을 누르면 다음과 같이 우주선을 조작하는 튜토리얼이 주어집니다.
@@ -58,36 +58,39 @@ $> npx http-server
 
 ### API Docs와 Code Editor
 
-![image](https://github.com/yhcho0405/CodeMos/assets/49319275/585f9bcf-fb65-4c4a-8e7c-b98d6b8d8740)
+![image](https://github.com/yhcho0405/CodeMos/assets/49319275/2a0eb70c-87cc-48b1-ac66-5ed7408c6209)
+
 
 - 좌측 하단의 Docs 버튼을 누르면 우주선의 상태를 받아오고 엔진을 조작하는 API 함수에 대한 설명을 제공합니다.
 
+![image](https://github.com/yhcho0405/CodeMos/assets/49319275/ce55fea1-7742-4661-b6f1-a4123faf191f)
 
-![image](https://github.com/yhcho0405/CodeMos/assets/49319275/598e3505-31a6-47f5-8995-d9f4144d4649)
 
 - 우측 하단의 Code 버튼을 누르면 코드 에디터가 열립니다. 코드 에디터에 우주선 착륙 알고리즘을 작성할 수 있습니다.
 
+![image](https://github.com/yhcho0405/CodeMos/assets/49319275/de1335da-07b0-4d08-b42b-905630fc6bd5)
 
-![image](https://github.com/yhcho0405/CodeMos/assets/49319275/197062fb-773a-4e20-9922-82b2e7657e0d)
 
 - 경계선을 드래그하여 크기를 조절할 수 있습니다.
 
 ### Code Apply
 
-![image](https://github.com/yhcho0405/CodeMos/assets/49319275/7f419c91-cd35-4ad4-a940-954db9317c6d)
+![image](https://github.com/yhcho0405/CodeMos/assets/49319275/f237d303-8597-46c1-b7d1-de42fb01fe87)
+
 
 - Apply 버튼을 클릭해 코드 에디터에 작성한 코드를 우주선에 적용할 수 있습니다. 이후부터 우주선은 적용된 알고리즘에 따라 제어됩니다.
 
-![image](https://github.com/yhcho0405/CodeMos/assets/49319275/cc13b331-ff0a-4dee-97e0-70c4234b923e)
+![image](https://github.com/yhcho0405/CodeMos/assets/49319275/f89bf930-7275-4884-bfa1-f50fb17924c2)
 
 
 ### 게임 결과 화면
 
-![image](https://github.com/yhcho0405/CodeMos/assets/49319275/230b579b-84d2-41e7-b542-07cbd42123e1)
+![image](https://github.com/yhcho0405/CodeMos/assets/49319275/d0ea4bb1-24f7-40d7-b151-4c36db827e61)
 
 - 착륙 속도 12.0 MPH, 착륙 각도 11.0° 미만일 때 착륙으로 간주합니다.
 
-![image](https://github.com/yhcho0405/CodeMos/assets/49319275/d29625e1-3f8d-441d-8025-7cdcaa669f4e)
+![image](https://github.com/yhcho0405/CodeMos/assets/49319275/f9507fec-5df0-488a-a243-7ddc27303c43)
+
 
 - 초과한 상태로 지면에 닿는다면 추락으로 간주합니다. 추락일 경우에는 점수가 음수로 환산되어 리더보드에 등록됩니다. 
 
