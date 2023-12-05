@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=header&text=CodeMos&fontSize=90&animation=fadeIn&fontAlignY=38&desc=Try%20writing%20an%20algorithm%20that%20can%20land%20safely%20in%20any%20situation.&descAlignY=51&descAlign=50)
+![header](https://capsule-render.vercel.app/api?type=waving&color=0:000,40:02071e,80:030928&height=300&section=header&text=CodeMos&fontSize=90&fontColor=fff&animation=fadeIn&fontAlignY=38&desc=Try%20writing%20an%20algorithm%20that%20can%20land%20safely%20in%20any%20situation.&descAlignY=51&descAlign=50)
 
 # CodeMos - 우주선 착륙 게임
 
