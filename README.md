@@ -1,9 +1,5 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=header&text=CodeMos&fontSize=90&animation=fadeIn&fontAlignY=38&desc=Try%20writing%20an%20algorithm%20that%20can%20land%20safely%20in%20any%20situation.&descAlignY=51&descAlign=50)
 
-
-## 실행 영상
-[![Video Label](http://img.youtube.com/vi/AM9rDd-U9FY/0.jpg)](https://youtu.be/AM9rDd-U9FY)
-
 # CodeMos - 우주선 착륙 게임
 
 CodeMos는 추락하는 우주선 :rocket: 을 직접 코드를 작성하여 안전하게 착륙시키는 게임입니다.
@@ -29,13 +25,14 @@ CodeMos는 추락하는 우주선 :rocket: 을 직접 코드를 작성하여 안
 - Prerequisites
     - Chromium 기반 웹 브라우저
 
-## 실행 영상
-
 ## Running on LocalHost
 
 ```bash
 $> npx http-server
 ```
+
+## 실행 영상
+[![Video Label](http://img.youtube.com/vi/AM9rDd-U9FY/0.jpg)](https://youtu.be/AM9rDd-U9FY)
 
 ## How to play
 
