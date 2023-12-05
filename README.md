@@ -94,6 +94,13 @@ $> npx http-server
 
 - 초과한 상태로 지면에 닿는다면 추락으로 간주합니다. 추락일 경우에는 점수가 음수로 환산되어 리더보드에 등록됩니다. 
 
+## API Documentation Wiki
+<img style="width:600px" src="https://github.com/yhcho0405/CodeMos/assets/49319275/1c8050df-f0da-431f-b94d-acaf4d45b46c">
+
+자세한 내용은 다음 링크를 참고해주세요
+[API Docs](https://github.com/yhcho0405/CodeMos/wiki/CodeMos-API-Documentation)
+
+
 ## Reference
 
 - https://github.com/ehmorris/lunar-lander
