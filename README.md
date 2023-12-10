@@ -1,11 +1,12 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=0:000,40:02071e,80:030928&height=300&section=header&text=CodeMos&fontSize=90&fontColor=fff&animation=fadeIn&fontAlignY=38&desc=Try%20writing%20an%20algorithm%20that%20can%20land%20safely%20in%20any%20situation.&descAlignY=51&descAlign=50)
 
-# CodeMos - 우주선 착륙 게임
+# CodeMos - 착륙 알고리즘(PS) 게임
 
-CodeMos는 추락하는 우주선을 안전하게 착륙시키는 착륙 알고리즘을 작성하는 게임입니다. :rocket:
-우주선의 착륙 안정성과, 착륙 시간으로 다른 유저들과 경쟁할 수 있습니다.
-우주선은 매 판 랜덤하게 추락하기 때문에 어떠한 상황에서도 안전하게 착륙하는 범용적인 알고리즘을 작성해보세요.
-
+- CodeMos는 추락하는 우주선을 안전하게 착륙시키는 착륙 알고리즘을 작성하는 게임입니다. :rocket:
+- 우주선의 착륙 안정성과, 착륙 시간으로 다른 유저들과 경쟁할 수 있습니다.
+- 우주선은 매 판 랜덤하게 추락하기 때문에 어떠한 상황에서도 안전하게 착륙하는 범용적인 알고리즘을 작성해보세요.
+- [lunar-lander프로젝트](https://github.com/ehmorris/lunar-lander)와 [Elevator Saga](https://play.elevatorsaga.com/), 그리고 [BoJ](https://www.acmicpc.net/)로 부터 영감을 얻었습니다.
+  
 ## Table of Contents
 
 1. [Getting Started](#getting-started)
