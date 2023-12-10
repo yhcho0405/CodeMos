@@ -88,7 +88,7 @@ $> npx http-server
 
 
 ## API Function Docs
-[API Docs](https://github.com/yhcho0405/CodeMos/wiki/CodeMos-API-Documentation)
+게임 내에서 우주선 착륙 알고리즘을 작성 할 때 사용 가능한 함수들에 대한 설명입니다.[API Docs](https://github.com/yhcho0405/CodeMos/wiki/CodeMos-API-Documentation)
 
 ### Tip
 
