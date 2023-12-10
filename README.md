@@ -16,8 +16,9 @@ CodeMos는 추락하는 우주선 :rocket: 을 직접 코드를 작성하여 안
     4. [Code Apply](#code-apply)
     5. [게임 결과 화면](#게임-결과-화면)
 4. [API Function Docs](#API-Function-Docs)
-5. [Reference](#reference)
-6. [License](#license)
+5. [기술 스택](#기술-스택)
+6. [Reference](#reference)
+7. [License](#license)
 
 ## Getting Started
 
@@ -95,7 +96,6 @@ $> npx http-server
 2. 알고리즘이 작동하지 않는다면 코드를 잘못 짠게 아닐지 고민해 보세요.
 3. 버그가 발견되었다면 이스터에그입니다.
 
-### Getting Started
 
 #### main loop
 
@@ -288,7 +288,11 @@ getRotationVelocity() : 0.37505750000014804
 3. 좌, 우측 엔진 thrust: Δ1.2 rotational velocity/s
 4. 착륙 속도 0.0 MPH, 착륙 각도 0.0° 일 때, 100점을 획득합니다.
 
----
+
+## 기술 스택
+
+<img width="481" alt="image" src="https://github.com/yhcho0405/CodeMos/assets/52823519/f8c8e058-3236-4a8b-9e89-30084cbcf021">
+
 
 ## Reference
 
