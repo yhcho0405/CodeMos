@@ -95,6 +95,29 @@ $> npx http-server
 - 초과한 상태로 지면에 닿는다면 추락으로 간주합니다. 추락일 경우에는 점수가 음수로 환산되어 리더보드에 등록됩니다. 
 
 
+### 리더보드
+
+![image](https://github.com/yhcho0405/CodeMos/assets/49319275/ecf24444-8640-425f-b262-739071e9386f)
+
+- 게임이 끝날때마다 코드를 서버에 저장할지를 결정하는 알림창이 뜨고, 사용자는 이를 저장할지 말지 직접 정합니다.
+- 코드를 저장한다고 하면 해당 코드를 서버에 저장되고 프로필에서 코드들을 볼 수 있습니다.
+
+![image](https://github.com/yhcho0405/CodeMos/assets/49319275/a5786f3d-9991-48cd-bda6-6af88f14ff41)
+
+- 프로필에 있는 코드 중 마음에 드는 코드를 리더보드에 등록할 수 있습니다.
+
+
+![image](https://github.com/yhcho0405/CodeMos/assets/49319275/f88bc75b-46fd-4cbf-a118-cde53a2d633e)
+
+- 리더보드는 플레이어가 등록한 인게임에서의 점수 순위를 표시합니다.
+- 1등부터 10등까지는 코드가 비공개됩니다.
+
+
+![image](https://github.com/yhcho0405/CodeMos/assets/49319275/a700b735-8fba-49d8-8bf1-c4ebd2dde338)
+
+- 11등 이후부터는 어떤 코드가 작성되었는지 직접 확인할 수 있습니다.
+
+
 ## API Function Docs
 게임 내에서 우주선 착륙 알고리즘을 작성 할 때 사용 가능한 함수들에 대한 설명입니다.[API Docs](https://github.com/yhcho0405/CodeMos/wiki/CodeMos-API-Documentation)
 
