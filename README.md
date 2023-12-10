@@ -42,24 +42,14 @@ $> npx http-server
 
 ![image](https://github.com/yhcho0405/CodeMos/assets/49319275/7f23af5d-5bf4-44af-89c9-4b1267c7768b)
 
-- 게임 첫 화면의 가운데 위에는 로고가 배치되어 있습니다.  
-- 그 아래에는 코드를 작성하는 gif 파일과 인게임의 우주선이 떨어지는 모습을 보여줍니다.
-- 맨 아래에는 게임 버튼들이 배치되어 있고 게임의 순위를 나타내는 리더보드가 있습니다.
 
 ### **게임 시작 화면**
 
 ![image](https://github.com/yhcho0405/CodeMos/assets/49319275/e93567b1-a1b0-4375-b0e3-434a60b922fb)
 
-- 게임 시작 화면에는 Home, 로그인, Docs, Apply, Code 등 버튼들이 모서리에 배치됩니다.
-- Home : 게임 입장 화면으로 돌아가기
-- 로그인 : 리더보드에 기록하기 위한 로그인
-- Docs : 게임의 코드를 작성하는 방법을 알려주는 가이드 페이지
-- Apply, Code : Code 버튼을 누르면 코드를 작성할 수 있는 에디터 파일이 나타납니다. Apply를 눌러 코드를 적용합니다.
-
 ### API Docs와 Code Editor
 
 ![image](https://github.com/yhcho0405/CodeMos/assets/49319275/2a0eb70c-87cc-48b1-ac66-5ed7408c6209)
-
 
 - 좌측 하단의 Docs 버튼을 누르면 우주선의 상태를 받아오고 엔진을 조작하는 API 함수에 대한 설명을 제공합니다.
 
@@ -77,7 +67,6 @@ $> npx http-server
 
 ![image](https://github.com/yhcho0405/CodeMos/assets/49319275/f237d303-8597-46c1-b7d1-de42fb01fe87)
 
-
 - Apply 버튼을 클릭해 코드 에디터에 작성한 코드를 우주선에 적용할 수 있습니다. 이후부터 우주선은 적용된 알고리즘에 따라 제어됩니다.
 
 ![image](https://github.com/yhcho0405/CodeMos/assets/49319275/f89bf930-7275-4884-bfa1-f50fb17924c2)
@@ -91,7 +80,6 @@ $> npx http-server
 
 ![image](https://github.com/yhcho0405/CodeMos/assets/49319275/f9507fec-5df0-488a-a243-7ddc27303c43)
 
-
 - 초과한 상태로 지면에 닿는다면 추락으로 간주합니다. 추락일 경우에는 점수가 음수로 환산되어 리더보드에 등록됩니다. 
 
 
@@ -99,23 +87,24 @@ $> npx http-server
 
 ![image](https://github.com/yhcho0405/CodeMos/assets/49319275/ecf24444-8640-425f-b262-739071e9386f)
 
-- 게임이 끝날때마다 코드를 서버에 저장할지를 결정하는 알림창이 뜨고, 사용자는 이를 저장할지 말지 직접 정합니다.
-- 코드를 저장한다고 하면 해당 코드를 서버에 저장되고 프로필에서 코드들을 볼 수 있습니다.
+- 게임이 끝나면 이번 게임에 적용된 알고리즘과 결과를 서버에 저장할지 선택할 수 있습니다.(알고리즘을 통해 조작된 결과만 가능, 키보드 조작시 저장 불가)
+- 저장하면 해당 코드와 결과는 서버에 저장되고, 내 프로필에서 코드들을 볼 수 있습니다.
 
 ![image](https://github.com/yhcho0405/CodeMos/assets/49319275/a5786f3d-9991-48cd-bda6-6af88f14ff41)
 
-- 프로필에 있는 코드 중 마음에 드는 코드를 리더보드에 등록할 수 있습니다.
+- 프로필에 들어가면 저장한 알고리즘 들을 확인 할 수 있습니다.
+- 이 중 마음에 드는 결과를 리더보드에 계정당 한 개 등록할 수 있습니다.
 
 
 ![image](https://github.com/yhcho0405/CodeMos/assets/49319275/f88bc75b-46fd-4cbf-a118-cde53a2d633e)
 
-- 리더보드는 플레이어가 등록한 인게임에서의 점수 순위를 표시합니다.
-- 1등부터 10등까지는 코드가 비공개됩니다.
+- 리더보드에는 플레이어가 등록한 알고리즘과 점수 순위를 표시합니다.
+- 1등부터 10등까지는 알고리즘이 비공개됩니다.
 
 
 ![image](https://github.com/yhcho0405/CodeMos/assets/49319275/a700b735-8fba-49d8-8bf1-c4ebd2dde338)
 
-- 11등 이후부터는 어떤 코드가 작성되었는지 직접 확인할 수 있습니다.
+- 11등 이후 기록은 어떤 알고리즘인지 직접 확인할 수 있습니다.
 
 
 ## API Function Docs
