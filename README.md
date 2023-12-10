@@ -23,7 +23,7 @@ CodeMos는 추락하는 우주선 :rocket: 을 직접 코드를 작성하여 안
 ## Getting Started
 
 - Web Link
-    - http://codemos.site/
+    - http://codemos.site
 - Prerequisites
     - Chromium 기반 웹 브라우저
 
