@@ -42,11 +42,19 @@ $> npx http-server
 
 ![image](https://github.com/yhcho0405/CodeMos/assets/49319275/7f23af5d-5bf4-44af-89c9-4b1267c7768b)
 
+- 게임 첫 화면의 가운데 위에는 로고가 배치되어 있습니다.  
+- 그 아래에는 코드를 작성하는 gif 파일과 인게임의 우주선이 떨어지는 모습을 보여줍니다.
+- 맨 아래에는 게임 버튼들이 배치되어 있고 게임의 순위를 나타내는 리더보드가 있습니다.
 
 ### **게임 시작 화면**
 
 ![image](https://github.com/yhcho0405/CodeMos/assets/49319275/e93567b1-a1b0-4375-b0e3-434a60b922fb)
 
+- 게임 시작 화면에는 Home, 로그인, Docs, Apply, Code 등 버튼들이 모서리에 배치됩니다.
+- Home : 게임 입장 화면으로 돌아가기
+- 로그인 : 리더보드에 기록하기 위한 로그인
+- Docs : 게임의 코드를 작성하는 방법을 알려주는 가이드 페이지
+- Apply, Code : Code 버튼을 누르면 코드를 작성할 수 있는 에디터 파일이 나타납니다. Apply를 눌러 코드를 적용합니다.
 
 ### API Docs와 Code Editor
 
