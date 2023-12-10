@@ -20,14 +20,14 @@ CodeMos는 추락하는 우주선 :rocket: 을 직접 코드를 작성하여 안
 6. [Reference](#reference)
 7. [License](#license)
 
-## Getting Started
+### Getting Started
 
 - Web Link
     - http://codemos.site
 - Prerequisites
     - Chromium 기반 웹 브라우저
 
-## Running on LocalHost
+### Running on LocalHost
 
 ```bash
 $> npx http-server
@@ -92,7 +92,7 @@ $> npx http-server
 
 ![image](https://github.com/yhcho0405/CodeMos/assets/49319275/a5786f3d-9991-48cd-bda6-6af88f14ff41)
 
-- 프로필에 들어가면 저장한 알고리즘 들을 확인 할 수 있습니다.
+- 프로필에 들어가면 저장한 알고리즘들을 확인할 수 있습니다.
 - 이 중 마음에 드는 결과를 리더보드에 계정당 한 개 등록할 수 있습니다.
 
 
